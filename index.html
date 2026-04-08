@@ -96,8 +96,64 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 .photo-label:hover{border-color:var(--accent);color:var(--accent)}
 .photo-label input{display:none}
 .photo-label svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.5}
-.photo-grid{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
-.photo-grid img{width:52px;height:52px;object-fit:cover;border-radius:8px}
+.photo-grid{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.photo-thumb{position:relative;width:56px;height:56px;border-radius:8px;overflow:hidden;flex-shrink:0}
+.photo-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.photo-thumb .photo-del{position:absolute;top:-1px;right:-1px;width:20px;height:20px;
+  border-radius:50%;background:rgba(0,0,0,.6);color:#fff;border:none;cursor:pointer;
+  font-size:13px;line-height:20px;text-align:center;display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .2s}
+.photo-thumb:hover .photo-del,.photo-thumb:active .photo-del{opacity:1}
+@media(hover:none){.photo-thumb .photo-del{opacity:1;background:rgba(0,0,0,.5)}}
+
+/* Photo Recognition Modal */
+.recog-overlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.55);
+  display:flex;align-items:flex-end;justify-content:center;animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.recog-panel{background:var(--bg);border-radius:18px 18px 0 0;width:100%;max-width:520px;
+  max-height:85vh;overflow-y:auto;padding:24px 20px env(safe-area-inset-bottom);
+  animation:slideUp .3s ease}
+.recog-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.recog-header h3{font-size:16px;font-weight:800;letter-spacing:-.3px}
+.recog-close{background:none;border:none;cursor:pointer;padding:4px;color:var(--text2)}
+.recog-close svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2}
+.recog-photo{width:100%;max-height:200px;object-fit:cover;border-radius:var(--radius);margin-bottom:16px}
+.recog-status{display:flex;align-items:center;gap:8px;padding:12px;background:var(--surface2);
+  border-radius:var(--radius-sm);margin-bottom:14px;font-size:12px;font-weight:600;color:var(--text2)}
+.recog-spinner{width:16px;height:16px;border:2px solid var(--text4);border-top-color:var(--accent);
+  border-radius:50%;animation:spin .6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.recog-results{margin-bottom:14px}
+.recog-results-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;
+  color:var(--text3);margin-bottom:8px}
+.recog-food-item{display:flex;align-items:center;justify-content:space-between;
+  padding:10px 12px;background:var(--surface);border:1.5px solid rgba(0,0,0,.06);
+  border-radius:var(--radius-sm);margin-bottom:6px;cursor:pointer;transition:var(--transition)}
+.recog-food-item:hover{border-color:var(--accent)}
+.recog-food-item.selected{border-color:var(--accent);background:var(--accent-soft)}
+.recog-food-name{font-size:13px;font-weight:700;color:var(--text)}
+.recog-food-cat{font-size:10px;color:var(--text3);margin-top:1px}
+.recog-food-check{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--text4);
+  display:flex;align-items:center;justify-content:center;transition:var(--transition);flex-shrink:0}
+.recog-food-item.selected .recog-food-check{background:var(--accent);border-color:var(--accent)}
+.recog-food-item.selected .recog-food-check::after{content:'✓';color:#fff;font-size:11px;font-weight:700}
+.recog-manual{margin-bottom:14px}
+.recog-manual-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;
+  color:var(--text3);margin-bottom:6px}
+.recog-manual-row{display:flex;gap:6px}
+.recog-manual-input{flex:1;padding:10px 14px;border:1.5px solid var(--text4);border-radius:var(--radius-sm);
+  font-size:13px;font-family:var(--font);color:var(--text);background:var(--bg);outline:none}
+.recog-manual-input:focus{border-color:var(--accent)}
+.recog-add-btn{padding:10px 20px;background:var(--accent);color:#fff;border:none;
+  border-radius:var(--radius-sm);font-size:13px;font-weight:700;cursor:pointer;
+  font-family:var(--font);transition:var(--transition)}
+.recog-add-btn:hover{background:var(--accent2)}
+.recog-add-btn:disabled{opacity:.3;cursor:not-allowed}
+.recog-confirm{width:100%;padding:14px;background:var(--accent);color:#fff;border:none;
+  border-radius:var(--radius);font-size:14px;font-weight:800;cursor:pointer;
+  font-family:var(--font);transition:var(--transition)}
+.recog-confirm:hover{background:var(--accent2)}
+.recog-confirm:disabled{opacity:.3;cursor:not-allowed}
 
 /* Quick foods */
 .quick-grid{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
@@ -492,6 +548,9 @@ zh: {
   tip_fiber_low:"膳食纤维仅 {cur}g，增加全谷物和蔬果。",
   tip_defense_low:"仅覆盖 {n}/5 防御系统，试试增加食物种类。",
   tip_great:"今天的饮食搭配非常棒！继续保持。",
+  recog_title:"识别食物",recog_analyzing:"正在分析照片中的食物…",recog_found:"识别到以下食物，点击选择：",
+  recog_manual:"手动输入食物",recog_confirm:"添加选中食物",recog_none:"未能自动识别，请手动输入食物名称",
+  recog_add:"添加",photo_delete_confirm:"删除这张照片？",
   lang_btn:"EN",gender_f:"女",gender_m:"男",score:"评分",add:"添加",items:"项",
   months:["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"],
   weekdays:["一","二","三","四","五","六","日"]
@@ -531,6 +590,9 @@ en: {
   tip_fiber_low:"Fiber only {cur}g. Eat more whole grains and veggies.",
   tip_defense_low:"Only {n}/5 defense systems covered. Add more variety.",
   tip_great:"Your diet today is excellent! Keep it up.",
+  recog_title:"Identify Food",recog_analyzing:"Analyzing food in photo…",recog_found:"Foods detected, tap to select:",
+  recog_manual:"Enter food manually",recog_confirm:"Add Selected",recog_none:"Could not auto-detect. Please enter food name manually.",
+  recog_add:"Add",photo_delete_confirm:"Delete this photo?",
   lang_btn:"中文",gender_f:"F",gender_m:"M",score:"score",add:"Add",items:"items",
   months:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
   weekdays:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]
@@ -671,8 +733,256 @@ function removeFood(mid,idx){mealRecords[mid].splice(idx,1);save();renderQuick(m
 function guessFood(name){for(const k of Object.keys(FOODS)){if(name.includes(k)||k.includes(name))return{...FOODS[k],matchedAs:k};}return{cal:80,protein:3,fat:3,carb:12,fiber:1,cat:"other",defense:[],benefits:"",benefitsEn:"",goals:[],portion:"适量",portionEn:"moderate",unknown:true};}
 function renderTags(mid){const el=document.getElementById('tags-'+mid);el.innerHTML=mealRecords[mid].map((f,i)=>{const cat=f.nutrition?.cat||'other';return`<span class="ftag ${CAT_CLS[cat]||'ftag-other'}">${catLabel(cat)} · ${f.name}${f.nutrition?.unknown?' ?':''}<span class="x" onclick="removeFood('${mid}',${i})">×</span></span>`;}).join('');}
 function updateSub(mid){const el=document.getElementById('sub-'+mid);const foods=mealRecords[mid];if(!foods.length){el.innerHTML='';return;}let cal=0,p=0,f=0,c=0;foods.forEach(fd=>{const n=fd.nutrition||{};cal+=n.cal||0;p+=n.protein||0;f+=n.fat||0;c+=n.carb||0;});el.innerHTML=`${foods.length} ${t('items')} · ~${Math.round(cal)} kcal · P ${p.toFixed(1)}g · F ${f.toFixed(1)}g · C ${c.toFixed(1)}g`;}
-function handlePhoto(mid,input){if(!input.files.length)return;if(!window._ph)window._ph={};if(!window._ph[mid])window._ph[mid]=[];for(const file of input.files){const r=new FileReader();r.onload=e=>{window._ph[mid].push(e.target.result);renderPhotos(mid);};r.readAsDataURL(file);}}
-function renderPhotos(mid){const el=document.getElementById('photos-'+mid);el.innerHTML=(window._ph?.[mid]||[]).map(s=>`<img src="${s}">`).join('');}
+function handlePhoto(mid,input){if(!input.files.length)return;if(!window._ph)window._ph={};if(!window._ph[mid])window._ph[mid]=[];for(const file of input.files){const r=new FileReader();r.onload=e=>{const imgData=e.target.result;window._ph[mid].push(imgData);renderPhotos(mid);showRecognition(mid,imgData);};r.readAsDataURL(file);}input.value='';}
+function deletePhoto(mid,idx){window._ph[mid].splice(idx,1);renderPhotos(mid);}
+function renderPhotos(mid){const el=document.getElementById('photos-'+mid);el.innerHTML=(window._ph?.[mid]||[]).map((s,i)=>`<div class="photo-thumb"><img src="${s}"><button class="photo-del" onclick="deletePhoto('${mid}',${i})">×</button></div>`).join('');}
+
+// ═══════════════════════════════════════════
+// Food Recognition from Photo
+// ═══════════════════════════════════════════
+let _recogMid=null;
+let _recogSelected=new Set();
+
+function showRecognition(mid, imgData){
+  _recogMid=mid;
+  _recogSelected=new Set();
+  // Build modal
+  let h=`<div class="recog-overlay" id="recogOverlay" onclick="if(event.target===this)closeRecog()">
+    <div class="recog-panel">
+      <div class="recog-header">
+        <h3>${t('recog_title')}</h3>
+        <button class="recog-close" onclick="closeRecog()"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <img class="recog-photo" src="${imgData}" alt="photo">
+      <div class="recog-status" id="recogStatus">
+        <div class="recog-spinner"></div>
+        <span>${t('recog_analyzing')}</span>
+      </div>
+      <div class="recog-results" id="recogResults"></div>
+      <div class="recog-manual">
+        <div class="recog-manual-label">${t('recog_manual')}</div>
+        <div class="recog-manual-row">
+          <input class="recog-manual-input" id="recogManualInput" placeholder="${t('input_placeholder')}" onkeydown="if(event.key==='Enter')addManualRecog()">
+          <button class="btn btn-accent btn-sm" onclick="addManualRecog()">${t('recog_add')}</button>
+        </div>
+      </div>
+      <button class="recog-confirm" id="recogConfirmBtn" onclick="confirmRecog()" disabled>${t('recog_confirm')}</button>
+    </div>
+  </div>`;
+  const div=document.createElement('div');
+  div.id='recogWrap';
+  div.innerHTML=h;
+  document.body.appendChild(div);
+  // Run recognition
+  setTimeout(()=>recognizeFood(imgData), 600);
+}
+
+function closeRecog(){
+  const el=document.getElementById('recogWrap');
+  if(el)el.remove();
+  _recogMid=null;
+  _recogSelected=new Set();
+}
+
+function recognizeFood(imgData){
+  // Client-side food recognition via image color/brightness analysis + common food matching
+  const img=new Image();
+  img.onload=function(){
+    const canvas=document.createElement('canvas');
+    const size=64; // downscale for analysis
+    canvas.width=size;canvas.height=size;
+    const ctx=canvas.getContext('2d');
+    ctx.drawImage(img,0,0,size,size);
+    const data=ctx.getImageData(0,0,size,size).data;
+    
+    // Analyze color distribution
+    let rSum=0,gSum=0,bSum=0,count=0;
+    const colorBuckets={red:0,orange:0,yellow:0,green:0,brown:0,white:0,beige:0,pink:0,purple:0,dark:0};
+    
+    for(let i=0;i<data.length;i+=4){
+      const r=data[i],g=data[i+1],b=data[i+2],a=data[i+3];
+      if(a<128)continue;
+      rSum+=r;gSum+=g;bSum+=b;count++;
+      const max=Math.max(r,g,b),min=Math.min(r,g,b);
+      const lum=(r+g+b)/3;
+      
+      if(lum<50)colorBuckets.dark++;
+      else if(lum>200&&max-min<30)colorBuckets.white++;
+      else if(r>180&&g>150&&b>100&&max-min<60)colorBuckets.beige++;
+      else if(r>150&&g<80&&b<80)colorBuckets.red++;
+      else if(r>180&&g>100&&g<180&&b<80)colorBuckets.orange++;
+      else if(r>180&&g>180&&b<100)colorBuckets.yellow++;
+      else if(g>100&&r<g&&b<g)colorBuckets.green++;
+      else if(r>100&&g<80&&b>80)colorBuckets.purple++;
+      else if(r>150&&g>100&&b<100)colorBuckets.brown++;
+      else if(r>180&&g>120&&b>120)colorBuckets.pink++;
+    }
+    
+    // Normalize
+    if(count>0){
+      Object.keys(colorBuckets).forEach(k=>colorBuckets[k]=colorBuckets[k]/count);
+    }
+    
+    // Score each food based on its category and typical color profile
+    const foodColorMap={
+      // Fruits
+      "蓝莓":{colors:["purple","dark"],weight:2},
+      "草莓":{colors:["red","pink"],weight:2},
+      "苹果":{colors:["red","green","yellow"],weight:1.5},
+      "香蕉":{colors:["yellow","beige"],weight:2},
+      "番茄":{colors:["red","orange"],weight:2},
+      "牛油果":{colors:["green","dark","beige"],weight:1.5},
+      "橙子":{colors:["orange","yellow"],weight:2},
+      "芒果":{colors:["orange","yellow"],weight:1.5},
+      "西瓜":{colors:["red","green","pink"],weight:1.5},
+      "石榴":{colors:["red","dark","pink"],weight:1.5},
+      "猕猴桃":{colors:["green","brown","beige"],weight:1.5},
+      "樱桃":{colors:["red","dark"],weight:1.5},
+      "红葡萄":{colors:["purple","red","dark"],weight:1.5},
+      "柠檬":{colors:["yellow"],weight:1.5},
+      // Vegetables
+      "西兰花":{colors:["green","dark"],weight:2},
+      "菠菜":{colors:["green","dark"],weight:1.5},
+      "胡萝卜":{colors:["orange"],weight:2},
+      "红薯":{colors:["orange","brown","beige"],weight:1.5},
+      "南瓜":{colors:["orange","yellow","beige"],weight:1.5},
+      "沙拉":{colors:["green","red","yellow","white"],weight:1.5},
+      "花椰菜":{colors:["white","beige","green"],weight:1.5},
+      "甜椒":{colors:["red","orange","green","yellow"],weight:1.5},
+      // Grains
+      "米饭":{colors:["white","beige"],weight:2},
+      "面条":{colors:["white","beige","yellow"],weight:1.5},
+      "面包":{colors:["brown","beige","yellow"],weight:2},
+      "燕麦":{colors:["beige","brown","white"],weight:1.5},
+      "包子":{colors:["white","beige"],weight:1.5},
+      "饺子":{colors:["white","beige"],weight:1.5},
+      "炒饭":{colors:["yellow","brown","beige","orange"],weight:1.5},
+      // Protein
+      "三文鱼":{colors:["orange","pink","red"],weight:2},
+      "鸡蛋":{colors:["white","yellow","beige","brown"],weight:2},
+      "鸡胸肉":{colors:["white","beige","brown"],weight:1.5},
+      "豆腐":{colors:["white","beige"],weight:1.5},
+      "牛肉":{colors:["brown","red","dark"],weight:1.5},
+      "虾":{colors:["pink","orange","red","white"],weight:1.5},
+      // Dairy
+      "酸奶":{colors:["white","beige","pink"],weight:1.5},
+      "牛奶":{colors:["white"],weight:1.5},
+      // Nuts
+      "核桃":{colors:["brown","beige","dark"],weight:1.5},
+      "杏仁":{colors:["brown","beige"],weight:1.5},
+      // Beverages
+      "绿茶":{colors:["green","yellow","beige"],weight:1.5},
+      "咖啡":{colors:["brown","dark","beige"],weight:2},
+      // Others
+      "黑巧克力":{colors:["dark","brown"],weight:1.5},
+      "蘑菇":{colors:["brown","beige","white"],weight:1.5},
+    };
+    
+    const scores=[];
+    for(const[fname,mapping]of Object.entries(foodColorMap)){
+      let sc=0;
+      mapping.colors.forEach(col=>{
+        sc+=(colorBuckets[col]||0)*mapping.weight;
+      });
+      scores.push({name:fname,score:sc});
+    }
+    scores.sort((a,b)=>b.score-a.score);
+    
+    // Take top 4-6 candidates
+    const candidates=scores.slice(0,6).filter(s=>s.score>0.02);
+    
+    showRecogResults(candidates);
+  };
+  img.src=imgData;
+}
+
+function showRecogResults(candidates){
+  const statusEl=document.getElementById('recogStatus');
+  const resultsEl=document.getElementById('recogResults');
+  
+  if(candidates.length===0){
+    statusEl.innerHTML=`<span style="color:var(--text3)">${t('recog_none')}</span>`;
+    resultsEl.innerHTML='';
+    return;
+  }
+  
+  statusEl.innerHTML=`<span style="color:var(--green-dark)">✓</span><span>${t('recog_found')}</span>`;
+  
+  let h='';
+  candidates.forEach(c=>{
+    const food=FOODS[c.name];
+    const cat=food?catLabel(food.cat):'';
+    h+=`<div class="recog-food-item" data-name="${c.name}" onclick="toggleRecogItem(this)">
+      <div><div class="recog-food-name">${c.name}</div>${cat?`<div class="recog-food-cat">${cat}</div>`:''}</div>
+      <div class="recog-food-check"></div>
+    </div>`;
+  });
+  resultsEl.innerHTML=h;
+  
+  // Auto-select the top candidate
+  const firstItem=resultsEl.querySelector('.recog-food-item');
+  if(firstItem){
+    firstItem.classList.add('selected');
+    _recogSelected.add(firstItem.dataset.name);
+    updateRecogConfirmBtn();
+  }
+}
+
+function toggleRecogItem(el){
+  const name=el.dataset.name;
+  el.classList.toggle('selected');
+  if(el.classList.contains('selected')){
+    _recogSelected.add(name);
+  }else{
+    _recogSelected.delete(name);
+  }
+  updateRecogConfirmBtn();
+}
+
+function addManualRecog(){
+  const inp=document.getElementById('recogManualInput');
+  const raw=inp.value.trim();
+  if(!raw)return;
+  raw.split(/[,，、\s]+/).filter(Boolean).forEach(name=>{
+    _recogSelected.add(name);
+  });
+  inp.value='';
+  // Show added items in results
+  const resultsEl=document.getElementById('recogResults');
+  _recogSelected.forEach(name=>{
+    if(!resultsEl.querySelector(`[data-name="${name}"]`)){
+      const food=FOODS[name];
+      const cat=food?catLabel(food.cat):'';
+      const div=document.createElement('div');
+      div.className='recog-food-item selected';
+      div.dataset.name=name;
+      div.onclick=function(){toggleRecogItem(this);};
+      div.innerHTML=`<div><div class="recog-food-name">${name}</div>${cat?`<div class="recog-food-cat">${cat}</div>`:''}</div><div class="recog-food-check"></div>`;
+      resultsEl.appendChild(div);
+    }
+  });
+  updateRecogConfirmBtn();
+}
+
+function updateRecogConfirmBtn(){
+  const btn=document.getElementById('recogConfirmBtn');
+  if(btn)btn.disabled=_recogSelected.size===0;
+}
+
+function confirmRecog(){
+  if(!_recogMid||_recogSelected.size===0)return;
+  const mid=_recogMid;
+  _recogSelected.forEach(name=>{
+    if(!mealRecords[mid].some(f=>f.name===name)){
+      mealRecords[mid].push({name,nutrition:FOODS[name]||guessFood(name)});
+    }
+  });
+  save();
+  renderQuick(mid);
+  renderTags(mid);
+  updateSub(mid);
+  closeRecog();
+}
 
 // ═══════════════════════════════════════════
 // Calendar
