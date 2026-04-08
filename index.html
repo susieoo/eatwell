@@ -711,19 +711,20 @@ function refreshApp(){updateProfileBar();renderRecordDateTabs();renderMeals();sa
 // Date Tabs
 // ═══════════════════════════════════════════
 function getDateRange(centerDate, count){
-  // Generate an array of date strings centered roughly on centerDate, going back `count` days from today
   const dates=[];
-  const today=new Date(TODAY+'T00:00:00');
+  const today=new Date();
+  today.setHours(0,0,0,0);
   for(let i=count-1;i>=0;i--){
     const d=new Date(today);
     d.setDate(d.getDate()-i);
-    dates.push(d.toISOString().slice(0,10));
+    dates.push(toLocalDateStr(d));
   }
   return dates;
 }
 
 function formatDateTab(ds){
-  const d=new Date(ds+'T00:00:00');
+  const parts=ds.split('-');
+  const d=new Date(+parts[0], +parts[1]-1, +parts[2]);
   const dayOfWeek=d.getDay(); // 0=Sun
   const wdIdx=dayOfWeek===0?6:dayOfWeek-1; // Mon=0...Sun=6
   const wdShort=t('dt_weekdays_short')[wdIdx];
@@ -803,7 +804,8 @@ const CAT_CLS={fruit:"ftag-fruit",vegetable:"ftag-vegetable",grain:"ftag-grain",
 // ═══════════════════════════════════════════
 function getMeals(){return[{id:"breakfast",name:t('meal_breakfast'),time:t('meal_time_b')},{id:"lunch",name:t('meal_lunch'),time:t('meal_time_l')},{id:"snack",name:t('meal_snack'),time:t('meal_time_s')},{id:"dinner",name:t('meal_dinner'),time:t('meal_time_d')}];}
 let mealRecords={breakfast:[],lunch:[],snack:[],dinner:[]};
-const TODAY=new Date().toISOString().slice(0,10);
+function toLocalDateStr(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+const TODAY=toLocalDateStr(new Date());
 let currentRecordDate=TODAY;
 let currentRecDate=TODAY; // for recommend page — synced with currentRecordDate
 
@@ -1126,7 +1128,7 @@ function confirmRecog(){
 // ═══════════════════════════════════════════
 function generateSummary(){save();saveDayToHistory(currentRecordDate);selectedDate=currentRecordDate;document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab-btn')[1].classList.add('active');document.getElementById('page-summary').classList.add('active');renderCalendar();}
 
-function renderCalendar(){const container=document.getElementById('summaryContent');const history=getHistory();const wd=t('weekdays');const first=new Date(calYear,calMonth,1);let sd=first.getDay()-1;if(sd<0)sd=6;const dim=new Date(calYear,calMonth+1,0).getDate();const pd=new Date(calYear,calMonth,0).getDate();const mn=t('months');let h=`<div class="cal-nav"><button class="cal-nav-btn" onclick="navMonth(-1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button><span class="cal-month">${mn[calMonth]} ${calYear}</span><button class="cal-nav-btn" onclick="navMonth(1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button></div>`;h+=`<div class="legend"><div class="legend-item"><div class="legend-dot" style="background:#3a9a5c"></div>${t('legend_great')}</div><div class="legend-item"><div class="legend-dot" style="background:#e8973a"></div>${t('legend_ok')}</div><div class="legend-item"><div class="legend-dot" style="background:#d4483a"></div>${t('legend_low')}</div></div>`;h+=`<div class="cal-grid">`;wd.forEach(w=>{h+=`<div class="cal-weekday">${w}</div>`;});for(let i=sd-1;i>=0;i--)h+=`<div class="cal-day other-month"><span class="day-num">${pd-i}</span><span class="day-dot"></span></div>`;const ts=new Date().toISOString().slice(0,10);for(let d=1;d<=dim;d++){const ds=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;const rec=history[ds];const it=ds===ts;const is=ds===selectedDate;const hr=!!rec;const sc=rec?.score||0;const dc=sc>=80?'#3a9a5c':sc>=50?'#e8973a':'#d4483a';h+=`<div class="cal-day${it?' today':''}${is?' selected':''}${hr?' has-record':''}" onclick="selectDate('${ds}')"><span class="day-num">${d}</span><span class="day-dot" style="background:${dc}"></span></div>`;}const tc2=sd+dim;const rem=tc2%7===0?0:7-tc2%7;for(let i=1;i<=rem;i++)h+=`<div class="cal-day other-month"><span class="day-num">${i}</span><span class="day-dot"></span></div>`;h+=`</div>`;h+=`<div id="dayDetail">${renderDayDetail(selectedDate)}</div>`;container.innerHTML=h;}
+function renderCalendar(){const container=document.getElementById('summaryContent');const history=getHistory();const wd=t('weekdays');const first=new Date(calYear,calMonth,1);let sd=first.getDay()-1;if(sd<0)sd=6;const dim=new Date(calYear,calMonth+1,0).getDate();const pd=new Date(calYear,calMonth,0).getDate();const mn=t('months');let h=`<div class="cal-nav"><button class="cal-nav-btn" onclick="navMonth(-1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button><span class="cal-month">${mn[calMonth]} ${calYear}</span><button class="cal-nav-btn" onclick="navMonth(1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button></div>`;h+=`<div class="legend"><div class="legend-item"><div class="legend-dot" style="background:#3a9a5c"></div>${t('legend_great')}</div><div class="legend-item"><div class="legend-dot" style="background:#e8973a"></div>${t('legend_ok')}</div><div class="legend-item"><div class="legend-dot" style="background:#d4483a"></div>${t('legend_low')}</div></div>`;h+=`<div class="cal-grid">`;wd.forEach(w=>{h+=`<div class="cal-weekday">${w}</div>`;});for(let i=sd-1;i>=0;i--)h+=`<div class="cal-day other-month"><span class="day-num">${pd-i}</span><span class="day-dot"></span></div>`;const ts=TODAY;for(let d=1;d<=dim;d++){const ds=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;const rec=history[ds];const it=ds===ts;const is=ds===selectedDate;const hr=!!rec;const sc=rec?.score||0;const dc=sc>=80?'#3a9a5c':sc>=50?'#e8973a':'#d4483a';h+=`<div class="cal-day${it?' today':''}${is?' selected':''}${hr?' has-record':''}" onclick="selectDate('${ds}')"><span class="day-num">${d}</span><span class="day-dot" style="background:${dc}"></span></div>`;}const tc2=sd+dim;const rem=tc2%7===0?0:7-tc2%7;for(let i=1;i<=rem;i++)h+=`<div class="cal-day other-month"><span class="day-num">${i}</span><span class="day-dot"></span></div>`;h+=`</div>`;h+=`<div id="dayDetail">${renderDayDetail(selectedDate)}</div>`;container.innerHTML=h;}
 function navMonth(d){calMonth+=d;if(calMonth>11){calMonth=0;calYear++;}if(calMonth<0){calMonth=11;calYear--;}renderCalendar();}
 function selectDate(ds){selectedDate=ds;renderCalendar();}
 
