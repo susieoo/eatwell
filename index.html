@@ -227,15 +227,128 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 .legend-item{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--text3)}
 .legend-dot{width:8px;height:8px;border-radius:50%}
 
+/* ── Onboarding Overlay ── */
+.onboard-overlay{position:fixed;inset:0;z-index:999;background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  overflow-y:auto;padding:0 20px env(safe-area-inset-bottom)}
+.onboard-inner{max-width:460px;width:100%;padding:60px 0 40px}
+.onboard-logo{text-align:center;margin-bottom:8px}
+.onboard-logo h1{font-size:32px;font-weight:800;letter-spacing:-.5px}
+.onboard-logo h1 span{font-weight:300;color:var(--text3)}
+.onboard-welcome{text-align:center;font-size:14px;color:var(--text2);margin-bottom:36px;line-height:1.6}
+.ob-section{margin-bottom:28px}
+.ob-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--text3);margin-bottom:10px}
+.ob-row{display:flex;gap:8px;flex-wrap:wrap}
+.ob-choice{padding:10px 20px;border:1.5px solid var(--text4);border-radius:100px;
+  font-size:13px;font-weight:500;background:var(--surface);cursor:pointer;
+  color:var(--text2);transition:var(--transition);font-family:var(--font);text-align:center}
+.ob-choice:hover{border-color:var(--text);color:var(--text)}
+.ob-choice.selected{background:var(--text);color:#fff;border-color:var(--text)}
+.ob-input{width:100%;padding:12px 16px;border:1.5px solid var(--text4);border-radius:var(--radius-sm);
+  font-size:15px;font-family:var(--font);color:var(--text);background:var(--bg);
+  outline:none;transition:var(--transition)}
+.ob-input:focus{border-color:var(--text);background:var(--surface)}
+.ob-input::placeholder{color:var(--text4)}
+.ob-input-row{display:flex;gap:10px}
+.ob-input-row .ob-field{flex:1}
+.ob-field label{display:block;font-size:12px;font-weight:600;color:var(--text2);margin-bottom:6px}
+.ob-field .ob-unit{font-size:12px;color:var(--text3);margin-top:4px}
+.ob-goals-grid{display:flex;flex-wrap:wrap;gap:8px}
+.ob-goals-grid .ob-choice{padding:8px 16px;font-size:12px}
+.ob-submit{width:100%;padding:16px;background:var(--text);color:#fff;border:none;border-radius:var(--radius);
+  font-size:16px;font-weight:700;cursor:pointer;font-family:var(--font);
+  transition:var(--transition);letter-spacing:.3px;margin-top:16px}
+.ob-submit:hover{background:#44403c}
+.ob-submit:active{transform:scale(.98)}
+.ob-submit:disabled{opacity:.3;cursor:not-allowed}
+
+/* ── Profile Page ── */
+.profile-section{margin-bottom:24px}
+.profile-section-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--text3);margin-bottom:12px}
+.profile-field{margin-bottom:16px}
+.profile-field label{display:block;font-size:12px;font-weight:600;color:var(--text2);margin-bottom:6px}
+.profile-field input{width:100%;padding:11px 16px;border:1.5px solid var(--text4);border-radius:var(--radius-sm);
+  font-size:14px;font-family:var(--font);color:var(--text);background:var(--bg);outline:none;transition:var(--transition)}
+.profile-field input:focus{border-color:var(--text);background:var(--surface)}
+.profile-choices{display:flex;flex-wrap:wrap;gap:8px}
+.profile-choices .ob-choice{padding:8px 16px;font-size:12px}
+.profile-save{width:100%;padding:14px;background:var(--text);color:#fff;border:none;border-radius:var(--radius);
+  font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font);transition:var(--transition);margin-top:8px}
+.profile-save:hover{background:#44403c}
+.profile-save:active{transform:scale(.97)}
+.profile-saved{text-align:center;padding:12px;font-size:13px;color:var(--green-dark);font-weight:600;
+  background:var(--green-soft);border-radius:var(--radius-sm);margin-top:12px;animation:fadeUp .3s ease}
+.profile-reset{width:100%;padding:12px;background:none;color:var(--red);border:1.5px solid var(--red-soft);
+  border-radius:var(--radius);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);
+  transition:var(--transition);margin-top:12px}
+.profile-reset:hover{background:var(--red-soft)}
+
 /* Responsive */
 @media(max-width:380px){
   .stats-row{grid-template-columns:repeat(2,1fr)}
   .header h1{font-size:24px}
   .profile-pill{font-size:10px;padding:4px 10px}
+  .onboard-inner{padding:40px 0 30px}
 }
 </style>
 </head>
 <body>
+
+<!-- ── Onboarding Overlay ── -->
+<div class="onboard-overlay" id="onboarding" style="display:none">
+  <div class="onboard-inner">
+    <div class="onboard-logo"><h1>Eat<span>Well</span></h1></div>
+    <div class="onboard-welcome">Welcome! Let's set up your profile<br>so we can personalize your nutrition plan.</div>
+
+    <div class="ob-section">
+      <div class="ob-label">Gender</div>
+      <div class="ob-row" id="ob-gender">
+        <button class="ob-choice" data-val="female" onclick="obSelect('gender',this)">Female</button>
+        <button class="ob-choice" data-val="male" onclick="obSelect('gender',this)">Male</button>
+      </div>
+    </div>
+
+    <div class="ob-section">
+      <div class="ob-label">Age</div>
+      <input class="ob-input" id="ob-age" type="number" placeholder="e.g. 28" min="10" max="120" inputmode="numeric">
+    </div>
+
+    <div class="ob-section">
+      <div class="ob-input-row">
+        <div class="ob-field">
+          <label>Height</label>
+          <input class="ob-input" id="ob-height" type="number" placeholder="165" min="100" max="250" inputmode="decimal">
+          <div class="ob-unit">cm</div>
+        </div>
+        <div class="ob-field">
+          <label>Weight</label>
+          <input class="ob-input" id="ob-weight" type="number" placeholder="55" min="20" max="300" inputmode="decimal">
+          <div class="ob-unit">kg</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ob-section">
+      <div class="ob-label">Health Goals (select all that apply)</div>
+      <div class="ob-goals-grid" id="ob-goals">
+        <button class="ob-choice" data-val="immunity" onclick="obToggle('goals',this)">Immunity</button>
+        <button class="ob-choice" data-val="gut" onclick="obToggle('goals',this)">Gut Health</button>
+        <button class="ob-choice" data-val="energy" onclick="obToggle('goals',this)">Energy</button>
+        <button class="ob-choice" data-val="antioxidant" onclick="obToggle('goals',this)">Anti-aging</button>
+        <button class="ob-choice" data-val="weight" onclick="obToggle('goals',this)">Weight Mgmt</button>
+        <button class="ob-choice" data-val="cardiovascular" onclick="obToggle('goals',this)">Heart Health</button>
+        <button class="ob-choice" data-val="anticancer" onclick="obToggle('goals',this)">Cancer Prevention</button>
+        <button class="ob-choice" data-val="brain" onclick="obToggle('goals',this)">Brain Function</button>
+        <button class="ob-choice" data-val="skin" onclick="obToggle('goals',this)">Skin Health</button>
+        <button class="ob-choice" data-val="inflammation" onclick="obToggle('goals',this)">Anti-inflammation</button>
+        <button class="ob-choice" data-val="sleep" onclick="obToggle('goals',this)">Better Sleep</button>
+        <button class="ob-choice" data-val="bone" onclick="obToggle('goals',this)">Bone Health</button>
+      </div>
+    </div>
+
+    <button class="ob-submit" id="ob-submit" onclick="submitOnboarding()" disabled>Start My Journey</button>
+  </div>
+</div>
 
 <header class="header">
   <h1>Eat<span>Well</span></h1>
@@ -266,6 +379,64 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
   <div id="recommendContent"></div>
 </div>
 
+<!-- ── Profile Page ── -->
+<div class="page" id="page-profile">
+  <div style="font-size:20px;font-weight:800;letter-spacing:-.3px;margin-bottom:4px">Profile</div>
+  <div style="font-size:12px;color:var(--text3);margin-bottom:24px">Manage your personal information</div>
+
+  <div class="card">
+    <div class="profile-section">
+      <div class="profile-section-title">Basic Info</div>
+      <div class="profile-field">
+        <label>Gender</label>
+        <div class="profile-choices" id="pf-gender">
+          <button class="ob-choice" data-val="female" onclick="pfSelect('gender',this)">Female</button>
+          <button class="ob-choice" data-val="male" onclick="pfSelect('gender',this)">Male</button>
+        </div>
+      </div>
+      <div class="profile-field">
+        <label>Age</label>
+        <input id="pf-age" type="number" placeholder="28" min="10" max="120" inputmode="numeric">
+      </div>
+      <div style="display:flex;gap:12px">
+        <div class="profile-field" style="flex:1">
+          <label>Height (cm)</label>
+          <input id="pf-height" type="number" placeholder="165" min="100" max="250" inputmode="decimal">
+        </div>
+        <div class="profile-field" style="flex:1">
+          <label>Weight (kg)</label>
+          <input id="pf-weight" type="number" placeholder="55" min="20" max="300" inputmode="decimal">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="profile-section">
+      <div class="profile-section-title">Health Goals</div>
+      <div class="profile-choices" id="pf-goals">
+        <button class="ob-choice" data-val="immunity" onclick="pfToggle('goals',this)">Immunity</button>
+        <button class="ob-choice" data-val="gut" onclick="pfToggle('goals',this)">Gut Health</button>
+        <button class="ob-choice" data-val="energy" onclick="pfToggle('goals',this)">Energy</button>
+        <button class="ob-choice" data-val="antioxidant" onclick="pfToggle('goals',this)">Anti-aging</button>
+        <button class="ob-choice" data-val="weight" onclick="pfToggle('goals',this)">Weight Mgmt</button>
+        <button class="ob-choice" data-val="cardiovascular" onclick="pfToggle('goals',this)">Heart Health</button>
+        <button class="ob-choice" data-val="anticancer" onclick="pfToggle('goals',this)">Cancer Prevention</button>
+        <button class="ob-choice" data-val="brain" onclick="pfToggle('goals',this)">Brain Function</button>
+        <button class="ob-choice" data-val="skin" onclick="pfToggle('goals',this)">Skin Health</button>
+        <button class="ob-choice" data-val="inflammation" onclick="pfToggle('goals',this)">Anti-inflammation</button>
+        <button class="ob-choice" data-val="sleep" onclick="pfToggle('goals',this)">Better Sleep</button>
+        <button class="ob-choice" data-val="bone" onclick="pfToggle('goals',this)">Bone Health</button>
+      </div>
+    </div>
+  </div>
+
+  <button class="profile-save" onclick="saveProfile()">Save Changes</button>
+  <div id="pf-saved" style="display:none" class="profile-saved">Profile updated!</div>
+
+  <button class="profile-reset" onclick="resetProfile()">Reset Profile & Start Over</button>
+</div>
+
 <!-- ── Bottom Tab Bar ── -->
 <nav class="tab-bar">
   <button class="tab-btn active" data-page="record">
@@ -280,21 +451,143 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
     <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
     <span>For You</span>
   </button>
+  <button class="tab-btn" data-page="profile">
+    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <span>Profile</span>
+  </button>
 </nav>
 
 <script>
 // ═══════════════════════════════════════════
-// Profile & Config
+// Profile & Config (dynamic from localStorage)
 // ═══════════════════════════════════════════
-const PROFILE = {
-  age:34,gender:"female",weight:45,height:164,
+const DEFAULT_PROFILE = {
+  age:28,gender:"female",weight:55,height:165,
   exercise:"moderate",
   goals:["immunity","gut","energy","antioxidant"],
   diet_type:"normal",allergies:[]
 };
-const BMI = (PROFILE.weight/((PROFILE.height/100)**2)).toFixed(1);
-const BMI_STATUS = BMI<18.5?"偏瘦":BMI<24?"正常":BMI<28?"偏胖":"肥胖";
-const DAILY_CAL = BMI<18.5?1800:BMI<24?1600:1400;
+
+function loadProfile(){
+  try{const s=localStorage.getItem('ew_profile');if(s)return JSON.parse(s);}catch(e){}
+  return null;
+}
+function saveProfileData(p){
+  try{localStorage.setItem('ew_profile',JSON.stringify(p));}catch(e){}
+}
+function isProfileSet(){return !!loadProfile();}
+
+let PROFILE = loadProfile() || {...DEFAULT_PROFILE};
+function recalcDerived(){
+  window.BMI = (PROFILE.weight/((PROFILE.height/100)**2)).toFixed(1);
+  window.BMI_STATUS = BMI<18.5?"偏瘦":BMI<24?"正常":BMI<28?"偏胖":"肥胖";
+  window.DAILY_CAL = BMI<18.5?1800:BMI<24?1600:1400;
+}
+recalcDerived();
+
+// ═══════════════════════════════════════════
+// Onboarding Logic
+// ═══════════════════════════════════════════
+const obState = {gender:null, goals:[]};
+
+function obSelect(field, el){
+  document.querySelectorAll('#ob-'+field+' .ob-choice').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+  obState[field]=el.dataset.val;
+  checkObReady();
+}
+function obToggle(field, el){
+  el.classList.toggle('selected');
+  const container=document.getElementById('ob-'+field);
+  obState[field]=[...container.querySelectorAll('.ob-choice.selected')].map(b=>b.dataset.val);
+  checkObReady();
+}
+function checkObReady(){
+  const age=document.getElementById('ob-age').value;
+  const h=document.getElementById('ob-height').value;
+  const w=document.getElementById('ob-weight').value;
+  const ok=obState.gender && age && h && w && obState.goals.length>0;
+  document.getElementById('ob-submit').disabled=!ok;
+}
+// Listen for input changes
+document.addEventListener('DOMContentLoaded',()=>{
+  ['ob-age','ob-height','ob-weight'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el)el.addEventListener('input',checkObReady);
+  });
+});
+
+function submitOnboarding(){
+  PROFILE.gender=obState.gender;
+  PROFILE.age=parseInt(document.getElementById('ob-age').value)||28;
+  PROFILE.height=parseFloat(document.getElementById('ob-height').value)||165;
+  PROFILE.weight=parseFloat(document.getElementById('ob-weight').value)||55;
+  PROFILE.goals=obState.goals.length?obState.goals:['immunity'];
+  saveProfileData(PROFILE);
+  recalcDerived();
+  document.getElementById('onboarding').style.display='none';
+  refreshApp();
+}
+
+// ═══════════════════════════════════════════
+// Profile Page Logic
+// ═══════════════════════════════════════════
+let pfState = {gender:null, goals:[]};
+
+function pfSelect(field, el){
+  document.querySelectorAll('#pf-'+field+' .ob-choice').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+  pfState[field]=el.dataset.val;
+}
+function pfToggle(field, el){
+  el.classList.toggle('selected');
+  const container=document.getElementById('pf-'+field);
+  pfState[field]=[...container.querySelectorAll('.ob-choice.selected')].map(b=>b.dataset.val);
+}
+
+function loadProfilePage(){
+  pfState.gender=PROFILE.gender;
+  pfState.goals=[...PROFILE.goals];
+  // Set gender buttons
+  document.querySelectorAll('#pf-gender .ob-choice').forEach(b=>{
+    b.classList.toggle('selected',b.dataset.val===PROFILE.gender);
+  });
+  // Set input values
+  document.getElementById('pf-age').value=PROFILE.age||'';
+  document.getElementById('pf-height').value=PROFILE.height||'';
+  document.getElementById('pf-weight').value=PROFILE.weight||'';
+  // Set goal buttons
+  document.querySelectorAll('#pf-goals .ob-choice').forEach(b=>{
+    b.classList.toggle('selected',PROFILE.goals.includes(b.dataset.val));
+  });
+  document.getElementById('pf-saved').style.display='none';
+}
+
+function saveProfile(){
+  PROFILE.gender=pfState.gender||PROFILE.gender;
+  PROFILE.age=parseInt(document.getElementById('pf-age').value)||PROFILE.age;
+  PROFILE.height=parseFloat(document.getElementById('pf-height').value)||PROFILE.height;
+  PROFILE.weight=parseFloat(document.getElementById('pf-weight').value)||PROFILE.weight;
+  PROFILE.goals=pfState.goals.length?pfState.goals:PROFILE.goals;
+  saveProfileData(PROFILE);
+  recalcDerived();
+  refreshApp();
+  const el=document.getElementById('pf-saved');
+  el.style.display='block';
+  setTimeout(()=>el.style.display='none',2000);
+}
+
+function resetProfile(){
+  if(!confirm('This will reset your profile. You will see the setup screen again. Continue?'))return;
+  localStorage.removeItem('ew_profile');
+  location.reload();
+}
+
+function refreshApp(){
+  updateProfileBar();
+  renderMeals();
+  saveDayToHistory(TODAY);
+}
 
 const GOAL_NAMES = {
   immunity:"增强免疫力",antioxidant:"抗氧化抗衰老",gut:"改善肠道",
@@ -489,13 +782,21 @@ function calcStats(allFoods){
 // ═══════════════════════════════════════════
 let calYear,calMonth,selectedDate=TODAY;
 
-function init(){
+function updateProfileBar(){
   const g=PROFILE.gender==='female'?'女':'男';
-  const gs=PROFILE.goals.map(g=>GOAL_NAMES[g]||g).join(' / ');
   document.getElementById('profileBar').innerHTML=`
     <span class="profile-pill">${g} ${PROFILE.age}岁</span>
     <span class="profile-pill">${PROFILE.height}cm / ${PROFILE.weight}kg</span>
     <span class="profile-pill">BMI ${BMI} ${BMI_STATUS}</span>`;
+}
+
+function init(){
+  // Check if first time — show onboarding
+  if(!isProfileSet()){
+    document.getElementById('onboarding').style.display='flex';
+  }
+
+  updateProfileBar();
 
   document.querySelectorAll('.tab-btn').forEach(btn=>{
     btn.onclick=()=>{
@@ -505,6 +806,7 @@ function init(){
       document.getElementById('page-'+btn.dataset.page).classList.add('active');
       if(btn.dataset.page==='summary') renderCalendar();
       if(btn.dataset.page==='recommend') renderRecommend();
+      if(btn.dataset.page==='profile') loadProfilePage();
     };
   });
 
