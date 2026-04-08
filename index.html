@@ -7,1233 +7,735 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>EatWell</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#fafaf9;--surface:#fff;--surface2:#f5f5f4;
-  --text:#1c1917;--text2:#57534e;--text3:#a8a29e;--text4:#d6d3d1;
-  --accent:#292524;--accent2:#78716c;
-  --green:#22c55e;--green-soft:#dcfce7;--green-dark:#16a34a;
-  --orange:#f59e0b;--orange-soft:#fef3c7;
-  --red:#ef4444;--red-soft:#fee2e2;
-  --blue:#3b82f6;--blue-soft:#dbeafe;
-  --purple:#a855f7;--purple-soft:#f3e8ff;
-  --radius:16px;--radius-sm:10px;
-  --font:'Inter',-apple-system,BlinkMacSystemFont,'PingFang SC','Helvetica Neue',sans-serif;
+  --bg:#fffdf7;--surface:#fff;--surface2:#f8f5ee;--surface3:#f0eddf;
+  --text:#1a1a19;--text2:#5a5a4f;--text3:#9a9a8a;--text4:#c8c8b8;
+  --accent:#e85d26;--accent2:#cc4a14;--accent-soft:#fef0ea;
+  --green:#3a9a5c;--green-soft:#e8f5ec;--green-dark:#2d7a48;
+  --orange:#e8973a;--orange-soft:#fef5e7;
+  --red:#d4483a;--red-soft:#fceae8;
+  --blue:#3a6fd4;--blue-soft:#e8eff8;
+  --purple:#7a4ad4;--purple-soft:#f0e8f8;
+  --radius:14px;--radius-sm:10px;
+  --font:'DM Sans',-apple-system,BlinkMacSystemFont,'PingFang SC','Helvetica Neue',sans-serif;
   --transition:all .3s cubic-bezier(.4,0,.2,1);
 }
 html{font-size:16px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.5;
-  min-height:100vh;min-height:100dvh;padding-bottom:90px;overflow-x:hidden}
+  min-height:100vh;min-height:100dvh;padding-bottom:80px;overflow-x:hidden}
 
-/* ── Header ── */
-.header{padding:48px 24px 20px;text-align:center}
-.header h1{font-size:28px;font-weight:800;letter-spacing:-.5px;color:var(--text)}
-.header h1 span{font-weight:300;color:var(--text3)}
-.header-sub{font-size:13px;color:var(--text3);margin-top:4px;font-weight:400;letter-spacing:.3px}
-.profile-pills{display:flex;justify-content:center;gap:8px;margin-top:14px;flex-wrap:wrap}
-.profile-pill{padding:5px 14px;border-radius:100px;font-size:11px;font-weight:500;
-  background:var(--surface2);color:var(--text2);letter-spacing:.2px}
+/* Header */
+.header{padding:52px 24px 16px;text-align:left;max-width:520px;margin:0 auto}
+.header-top{display:flex;align-items:center;justify-content:space-between}
+.header h1{font-size:26px;font-weight:800;letter-spacing:-.8px;color:var(--text)}
+.header h1 span{color:var(--accent)}
+.lang-toggle{padding:5px 12px;border-radius:100px;border:1.5px solid var(--text4);background:none;
+  font-size:11px;font-weight:600;cursor:pointer;color:var(--text2);font-family:var(--font);transition:var(--transition)}
+.lang-toggle:hover{border-color:var(--text);color:var(--text)}
+.header-sub{font-size:12px;color:var(--text3);margin-top:2px;font-weight:400;letter-spacing:.2px}
+.profile-pills{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.profile-pill{padding:4px 12px;border-radius:100px;font-size:10px;font-weight:600;
+  background:var(--surface2);color:var(--text2);letter-spacing:.3px;text-transform:uppercase}
 
-/* ── Tab Bar (bottom) ── */
+/* Tab Bar */
 .tab-bar{position:fixed;bottom:0;left:0;right:0;
-  display:flex;background:rgba(255,255,255,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  border-top:1px solid rgba(0,0,0,.06);z-index:200;padding-bottom:env(safe-area-inset-bottom)}
+  display:flex;background:rgba(255,253,247,.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-top:1.5px solid rgba(0,0,0,.06);z-index:200;padding-bottom:env(safe-area-inset-bottom)}
 .tab-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;
-  padding:10px 0 8px;border:none;background:none;cursor:pointer;
-  font-family:var(--font);font-size:10px;font-weight:500;color:var(--text3);
-  transition:var(--transition)}
-.tab-btn svg{width:22px;height:22px;stroke:currentColor;stroke-width:1.8;fill:none}
-.tab-btn.active{color:var(--text)}
+  padding:10px 0 7px;border:none;background:none;cursor:pointer;
+  font-family:var(--font);font-size:9px;font-weight:600;color:var(--text3);
+  transition:var(--transition);letter-spacing:.5px;text-transform:uppercase}
+.tab-btn svg{width:21px;height:21px;stroke:currentColor;stroke-width:1.8;fill:none}
+.tab-btn.active{color:var(--accent)}
 .tab-btn.active svg{stroke-width:2.2}
 
-/* ── Pages ── */
+/* Pages */
 .page{display:none;padding:0 20px 24px;max-width:520px;margin:0 auto}
-.page.active{display:block;animation:fadeUp .4s ease}
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.page.active{display:block;animation:fadeUp .35s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
-/* ── Cards ── */
-.card{background:var(--surface);border-radius:var(--radius);padding:20px;margin-bottom:12px;
-  border:1px solid rgba(0,0,0,.04);transition:var(--transition)}
-.card-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:12px}
+/* Cards */
+.card{background:var(--surface);border-radius:var(--radius);padding:20px;margin-bottom:10px;
+  border:1.5px solid rgba(0,0,0,.05);transition:var(--transition)}
+.card-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--text3);margin-bottom:12px}
 
-/* ── Meal sections ── */
-.meal-card{background:var(--surface);border-radius:var(--radius);padding:20px;margin-bottom:12px;
-  border:1px solid rgba(0,0,0,.04)}
-.meal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.meal-title{font-size:15px;font-weight:700;color:var(--text)}
-.meal-time{font-size:11px;color:var(--text3);font-weight:400}
-.meal-count{font-size:11px;font-weight:600;color:var(--text3);
-  background:var(--surface2);padding:3px 10px;border-radius:100px}
+/* Meals */
+.meal-card{background:var(--surface);border-radius:var(--radius);padding:18px;margin-bottom:10px;
+  border:1.5px solid rgba(0,0,0,.05)}
+.meal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.meal-title{font-size:14px;font-weight:700;color:var(--text)}
+.meal-time{font-size:10px;color:var(--text3);font-weight:500;margin-left:8px}
+.meal-count{font-size:10px;font-weight:700;color:var(--accent);
+  background:var(--accent-soft);padding:3px 10px;border-radius:100px}
 
 /* Input */
-.input-row{display:flex;gap:8px;margin-bottom:10px}
-.text-input{flex:1;padding:11px 16px;border:1.5px solid var(--text4);border-radius:var(--radius-sm);
-  font-size:14px;font-family:var(--font);color:var(--text);background:var(--bg);
+.input-row{display:flex;gap:6px;margin-bottom:8px}
+.text-input{flex:1;padding:10px 14px;border:1.5px solid var(--text4);border-radius:var(--radius-sm);
+  font-size:13px;font-family:var(--font);color:var(--text);background:var(--bg);
   outline:none;transition:var(--transition)}
-.text-input:focus{border-color:var(--text);background:var(--surface)}
+.text-input:focus{border-color:var(--accent);background:var(--surface)}
 .text-input::placeholder{color:var(--text4)}
-.btn{padding:11px 18px;border:none;border-radius:var(--radius-sm);font-size:13px;font-weight:600;
-  cursor:pointer;transition:var(--transition);font-family:var(--font)}
+.btn{padding:10px 16px;border:none;border-radius:var(--radius-sm);font-size:12px;font-weight:700;
+  cursor:pointer;transition:var(--transition);font-family:var(--font);letter-spacing:.3px}
 .btn:active{transform:scale(.96)}
-.btn-dark{background:var(--text);color:#fff}
-.btn-dark:hover{background:#44403c}
+.btn-accent{background:var(--accent);color:#fff}
+.btn-accent:hover{background:var(--accent2)}
 .btn-outline{background:transparent;color:var(--text);border:1.5px solid var(--text4)}
-.btn-outline:hover{border-color:var(--text)}
-.btn-sm{padding:7px 14px;font-size:12px}
-.btn-xs{padding:4px 10px;font-size:11px;border-radius:8px}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.btn-sm{padding:7px 14px;font-size:11px}
+.btn-xs{padding:4px 10px;font-size:10px;border-radius:8px;font-weight:700}
 
 /* Photo */
-.photo-area{margin-bottom:10px}
-.photo-label{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;
+.photo-area{margin-bottom:8px}
+.photo-label{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;
   border:1.5px dashed var(--text4);border-radius:var(--radius-sm);cursor:pointer;
-  font-size:12px;color:var(--text3);transition:var(--transition)}
-.photo-label:hover{border-color:var(--text2);color:var(--text2)}
+  font-size:11px;color:var(--text3);transition:var(--transition);font-weight:500}
+.photo-label:hover{border-color:var(--accent);color:var(--accent)}
 .photo-label input{display:none}
-.photo-label svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.5}
-.photo-grid{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
-.photo-grid img{width:56px;height:56px;object-fit:cover;border-radius:10px}
+.photo-label svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.5}
+.photo-grid{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+.photo-grid img{width:52px;height:52px;object-fit:cover;border-radius:8px}
 
 /* Quick foods */
-.quick-grid{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
-.quick-btn{padding:6px 14px;border:1.5px solid var(--text4);border-radius:100px;
-  font-size:12px;font-weight:500;background:var(--surface);cursor:pointer;
+.quick-grid{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+.quick-btn{padding:5px 12px;border:1.5px solid var(--surface3);border-radius:100px;
+  font-size:11px;font-weight:600;background:var(--surface);cursor:pointer;
   color:var(--text2);transition:var(--transition);font-family:var(--font)}
-.quick-btn:hover{border-color:var(--text);color:var(--text)}
-.quick-btn.added{background:var(--text);color:#fff;border-color:var(--text)}
+.quick-btn:hover{border-color:var(--accent);color:var(--accent)}
+.quick-btn.added{background:var(--accent);color:#fff;border-color:var(--accent)}
 
-/* Food tags */
-.tags-wrap{display:flex;flex-wrap:wrap;gap:6px}
-.ftag{display:inline-flex;align-items:center;gap:4px;padding:5px 12px;border-radius:100px;
-  font-size:12px;font-weight:500;animation:tagPop .25s ease}
+/* Tags */
+.tags-wrap{display:flex;flex-wrap:wrap;gap:5px}
+.ftag{display:inline-flex;align-items:center;gap:3px;padding:4px 10px;border-radius:100px;
+  font-size:11px;font-weight:600;animation:tagPop .25s ease}
 @keyframes tagPop{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
-.ftag .x{cursor:pointer;opacity:.4;font-size:13px;transition:opacity .2s}
+.ftag .x{cursor:pointer;opacity:.4;font-size:12px;transition:opacity .2s}
 .ftag .x:hover{opacity:1}
-.ftag-fruit{background:#fef2f2;color:#b91c1c}
-.ftag-vegetable{background:#f0fdf4;color:#15803d}
-.ftag-grain{background:#fefce8;color:#92400e}
-.ftag-protein{background:#eff6ff;color:#1d4ed8}
-.ftag-nut{background:#fdf4ff;color:#7e22ce}
-.ftag-beverage{background:#f0f9ff;color:#0369a1}
+.ftag-fruit{background:#fef0ea;color:#c04a20}
+.ftag-vegetable{background:#e8f5ec;color:#2d7a48}
+.ftag-grain{background:#fef5e7;color:#8a6020}
+.ftag-protein{background:#e8eff8;color:#2a5db0}
+.ftag-nut{background:#f0e8f8;color:#6a3ab0}
+.ftag-beverage{background:#e8f4f8;color:#2a7a9a}
 .ftag-other{background:var(--surface2);color:var(--text2)}
 
-/* Meal subtotal */
-.meal-sub{font-size:11px;color:var(--text3);margin-top:10px;padding-top:10px;border-top:1px solid var(--surface2)}
+.meal-sub{font-size:10px;color:var(--text3);margin-top:8px;padding-top:8px;border-top:1px solid var(--surface2);font-weight:500}
 
-/* ── Summary / Calendar ── */
-.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.cal-nav-btn{background:none;border:none;cursor:pointer;padding:8px;color:var(--text2);transition:var(--transition)}
-.cal-nav-btn:hover{color:var(--text)}
-.cal-nav-btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2}
-.cal-month{font-size:18px;font-weight:700;color:var(--text);letter-spacing:-.3px}
+/* Calendar */
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.cal-nav-btn{background:none;border:none;cursor:pointer;padding:8px;color:var(--text2);transition:var(--transition);border-radius:8px}
+.cal-nav-btn:hover{background:var(--surface2);color:var(--text)}
+.cal-nav-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2}
+.cal-month{font-size:17px;font-weight:800;color:var(--text);letter-spacing:-.3px}
 
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:20px}
-.cal-weekday{text-align:center;font-size:10px;font-weight:600;color:var(--text4);
-  padding:4px 0;text-transform:uppercase;letter-spacing:.5px}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:16px}
+.cal-weekday{text-align:center;font-size:9px;font-weight:700;color:var(--text4);
+  padding:4px 0;text-transform:uppercase;letter-spacing:.8px}
 .cal-day{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  border-radius:12px;cursor:pointer;transition:var(--transition);position:relative;gap:2px}
+  border-radius:10px;cursor:pointer;transition:var(--transition);position:relative;gap:2px}
 .cal-day:hover{background:var(--surface2)}
-.cal-day.other-month{opacity:.2}
-.cal-day .day-num{font-size:13px;font-weight:600;color:var(--text);line-height:1}
-.cal-day .day-dot{width:6px;height:6px;border-radius:50%}
-.cal-day.today{background:var(--text);border-radius:12px}
+.cal-day.other-month{opacity:.15}
+.cal-day .day-num{font-size:12px;font-weight:600;color:var(--text);line-height:1}
+.cal-day .day-dot{width:5px;height:5px;border-radius:50%}
+.cal-day.today{background:var(--accent);border-radius:10px}
 .cal-day.today .day-num{color:#fff}
-.cal-day.selected{outline:2px solid var(--text);outline-offset:-2px;border-radius:12px}
+.cal-day.selected{outline:2px solid var(--accent);outline-offset:-2px;border-radius:10px}
 .cal-day.has-record .day-dot{display:block}
 .cal-day:not(.has-record) .day-dot{display:none}
 
-/* Day detail panel */
+/* Day detail */
 .day-detail{animation:fadeUp .3s ease}
-.day-score-ring{display:flex;justify-content:center;margin:16px 0}
-.ring-wrap{position:relative;width:88px;height:88px}
+.day-score-ring{display:flex;justify-content:center;margin:14px 0}
+.ring-wrap{position:relative;width:84px;height:84px}
 .ring-wrap svg{transform:rotate(-90deg)}
 .ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.ring-num{font-size:26px;font-weight:800;line-height:1}
-.ring-label{font-size:10px;color:var(--text3);margin-top:2px}
+.ring-num{font-size:24px;font-weight:800;line-height:1}
+.ring-label{font-size:9px;color:var(--text3);margin-top:2px;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
 
-/* Stats row */
-.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
-.stat-box{text-align:center;padding:12px 8px;background:var(--surface2);border-radius:var(--radius-sm)}
-.stat-val{font-size:20px;font-weight:700;line-height:1.2}
-.stat-label{font-size:10px;color:var(--text3);margin-top:4px}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px}
+.stat-box{text-align:center;padding:10px 6px;background:var(--surface2);border-radius:var(--radius-sm)}
+.stat-val{font-size:18px;font-weight:800;line-height:1.2}
+.stat-label{font-size:9px;color:var(--text3);margin-top:3px;font-weight:600;text-transform:uppercase;letter-spacing:.3px}
 
-/* Progress bars */
-.prog-item{margin-bottom:10px}
-.prog-head{display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px}
-.prog-name{font-weight:600;color:var(--text)}
-.prog-val{color:var(--text3)}
-.prog-bar{height:5px;background:var(--surface2);border-radius:3px;overflow:hidden}
-.prog-fill{height:100%;border-radius:3px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.prog-item{margin-bottom:8px}
+.prog-head{display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px}
+.prog-name{font-weight:700;color:var(--text)}
+.prog-val{color:var(--text3);font-weight:500}
+.prog-bar{height:4px;background:var(--surface2);border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;border-radius:2px;transition:width .6s cubic-bezier(.4,0,.2,1)}
 
-/* Defense pills */
-.def-pills{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
-.def-pill{padding:4px 12px;border-radius:100px;font-size:11px;font-weight:600;transition:var(--transition)}
+.def-pills{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0}
+.def-pill{padding:4px 10px;border-radius:100px;font-size:10px;font-weight:700;transition:var(--transition);letter-spacing:.2px}
 
-/* Goal bars */
-.goal-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.goal-name{font-size:12px;font-weight:500;color:var(--text);min-width:80px}
-.goal-bar{flex:1;height:5px;background:var(--surface2);border-radius:3px;overflow:hidden}
-.goal-fill{height:100%;border-radius:3px;transition:width .6s ease}
-.goal-count{font-size:11px;font-weight:600;min-width:32px;text-align:right}
+.goal-row{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.goal-name{font-size:11px;font-weight:600;color:var(--text);min-width:72px}
+.goal-bar{flex:1;height:4px;background:var(--surface2);border-radius:2px;overflow:hidden}
+.goal-fill{height:100%;border-radius:2px;transition:width .6s ease}
+.goal-count{font-size:10px;font-weight:700;min-width:28px;text-align:right}
 
-/* Tips */
-.tips-box{background:var(--surface2);border-radius:var(--radius-sm);padding:16px;margin-top:12px}
-.tips-title{font-size:12px;font-weight:700;color:var(--text);margin-bottom:8px;letter-spacing:.3px}
-.tips-item{font-size:12px;color:var(--text2);line-height:1.7}
+.tips-box{background:var(--surface2);border-radius:var(--radius-sm);padding:14px;margin-top:10px;border-left:3px solid var(--accent)}
+.tips-title{font-size:11px;font-weight:700;color:var(--text);margin-bottom:6px;letter-spacing:.3px}
+.tips-item{font-size:11px;color:var(--text2);line-height:1.7}
 
-/* ── Recommend ── */
-.rec-section{margin-bottom:16px}
-.rec-section-title{font-size:13px;font-weight:700;letter-spacing:.5px;color:var(--text);
-  margin-bottom:10px;display:flex;align-items:center;gap:6px}
-.rec-item{display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-bottom:1px solid var(--surface2)}
+/* Recommend */
+.rec-section{margin-bottom:14px}
+.rec-section-title{font-size:12px;font-weight:800;letter-spacing:.8px;color:var(--text);text-transform:uppercase;
+  margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.rec-item{display:flex;align-items:flex-start;gap:10px;padding:12px 0;border-bottom:1px solid var(--surface2)}
 .rec-item:last-child{border-bottom:none}
 .rec-info{flex:1}
-.rec-name{font-size:14px;font-weight:600;color:var(--text)}
-.rec-desc{font-size:11px;color:var(--text3);margin-top:2px;line-height:1.5}
-.rec-pills{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
-.rec-pill{padding:2px 8px;border-radius:6px;font-size:10px;font-weight:600}
+.rec-name{font-size:13px;font-weight:700;color:var(--text)}
+.rec-desc{font-size:10px;color:var(--text3);margin-top:2px;line-height:1.5}
+.rec-pills{display:flex;flex-wrap:wrap;gap:3px;margin-top:5px}
+.rec-pill{padding:2px 7px;border-radius:6px;font-size:9px;font-weight:700}
 .rec-add{flex-shrink:0}
 
-/* Summary action button */
-.summary-trigger{text-align:center;margin-top:20px}
-.summary-trigger .btn{padding:14px 36px;font-size:15px;font-weight:700;border-radius:var(--radius);letter-spacing:.3px}
-
-/* Timeline in day detail */
-.timeline{margin-top:14px;border-left:2px solid var(--surface2);margin-left:8px;padding-left:18px}
-.tl-item{position:relative;margin-bottom:14px}
-.tl-item::before{content:'';position:absolute;left:-23px;top:6px;width:8px;height:8px;
-  border-radius:50%;border:2px solid var(--text4);background:var(--surface)}
-.tl-item.has-food::before{background:var(--text);border-color:var(--text)}
-.tl-label{font-size:12px;font-weight:600;color:var(--text2)}
-.tl-foods{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
-.tl-kcal{font-size:10px;color:var(--text3);margin-top:3px}
-
-/* Generate btn on record page */
-.gen-btn-wrap{text-align:center;margin:24px 0 8px}
-.gen-btn{padding:14px 40px;background:var(--text);color:#fff;border:none;border-radius:var(--radius);
-  font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font);
+.gen-btn-wrap{text-align:center;margin:20px 0 8px}
+.gen-btn{padding:13px 36px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);
+  font-size:14px;font-weight:800;cursor:pointer;font-family:var(--font);
   transition:var(--transition);letter-spacing:.3px}
-.gen-btn:hover{background:#44403c}
+.gen-btn:hover{background:var(--accent2)}
 .gen-btn:active{transform:scale(.97)}
 
-/* Empty state */
-.empty{text-align:center;padding:48px 20px;color:var(--text3)}
-.empty-icon{font-size:40px;margin-bottom:12px;opacity:.5}
-.empty p{font-size:13px;line-height:1.7}
+.timeline{margin-top:12px;border-left:2px solid var(--surface3);margin-left:6px;padding-left:16px}
+.tl-item{position:relative;margin-bottom:12px}
+.tl-item::before{content:'';position:absolute;left:-21px;top:5px;width:7px;height:7px;
+  border-radius:50%;border:2px solid var(--text4);background:var(--surface)}
+.tl-item.has-food::before{background:var(--accent);border-color:var(--accent)}
+.tl-label{font-size:11px;font-weight:700;color:var(--text2)}
+.tl-foods{display:flex;flex-wrap:wrap;gap:3px;margin-top:3px}
+.tl-kcal{font-size:9px;color:var(--text3);margin-top:2px;font-weight:500}
 
-/* Legend */
-.legend{display:flex;justify-content:center;gap:16px;margin-bottom:16px}
-.legend-item{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--text3)}
-.legend-dot{width:8px;height:8px;border-radius:50%}
+.empty{text-align:center;padding:40px 20px;color:var(--text3)}
+.empty-icon{font-size:36px;margin-bottom:10px;opacity:.4}
+.empty p{font-size:12px;line-height:1.7}
 
-/* ── Onboarding Overlay ── */
+.legend{display:flex;justify-content:center;gap:14px;margin-bottom:14px}
+.legend-item{display:flex;align-items:center;gap:4px;font-size:9px;color:var(--text3);font-weight:600}
+.legend-dot{width:7px;height:7px;border-radius:50%}
+
+/* Onboarding */
 .onboard-overlay{position:fixed;inset:0;z-index:999;background:var(--bg);
   display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
   overflow-y:auto;padding:0 20px env(safe-area-inset-bottom)}
 .onboard-inner{max-width:460px;width:100%;padding:60px 0 40px}
-.onboard-logo{text-align:center;margin-bottom:8px}
-.onboard-logo h1{font-size:32px;font-weight:800;letter-spacing:-.5px}
-.onboard-logo h1 span{font-weight:300;color:var(--text3)}
-.onboard-welcome{text-align:center;font-size:14px;color:var(--text2);margin-bottom:36px;line-height:1.6}
-.ob-section{margin-bottom:28px}
-.ob-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--text3);margin-bottom:10px}
+.onboard-logo{text-align:center;margin-bottom:6px}
+.onboard-logo h1{font-size:36px;font-weight:800;letter-spacing:-1px}
+.onboard-logo h1 span{color:var(--accent)}
+.onboard-welcome{text-align:center;font-size:13px;color:var(--text2);margin-bottom:32px;line-height:1.6}
+.ob-section{margin-bottom:24px}
+.ob-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--text3);margin-bottom:8px}
 .ob-row{display:flex;gap:8px;flex-wrap:wrap}
-.ob-choice{padding:10px 20px;border:1.5px solid var(--text4);border-radius:100px;
-  font-size:13px;font-weight:500;background:var(--surface);cursor:pointer;
+.ob-choice{padding:9px 18px;border:1.5px solid var(--text4);border-radius:100px;
+  font-size:12px;font-weight:600;background:var(--surface);cursor:pointer;
   color:var(--text2);transition:var(--transition);font-family:var(--font);text-align:center}
-.ob-choice:hover{border-color:var(--text);color:var(--text)}
-.ob-choice.selected{background:var(--text);color:#fff;border-color:var(--text)}
-.ob-input{width:100%;padding:12px 16px;border:1.5px solid var(--text4);border-radius:var(--radius-sm);
-  font-size:15px;font-family:var(--font);color:var(--text);background:var(--bg);
+.ob-choice:hover{border-color:var(--accent);color:var(--accent)}
+.ob-choice.selected{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ob-input{width:100%;padding:11px 14px;border:1.5px solid var(--text4);border-radius:var(--radius-sm);
+  font-size:14px;font-family:var(--font);color:var(--text);background:var(--bg);
   outline:none;transition:var(--transition)}
-.ob-input:focus{border-color:var(--text);background:var(--surface)}
+.ob-input:focus{border-color:var(--accent);background:var(--surface)}
 .ob-input::placeholder{color:var(--text4)}
 .ob-input-row{display:flex;gap:10px}
 .ob-input-row .ob-field{flex:1}
-.ob-field label{display:block;font-size:12px;font-weight:600;color:var(--text2);margin-bottom:6px}
-.ob-field .ob-unit{font-size:12px;color:var(--text3);margin-top:4px}
-.ob-goals-grid{display:flex;flex-wrap:wrap;gap:8px}
-.ob-goals-grid .ob-choice{padding:8px 16px;font-size:12px}
-.ob-submit{width:100%;padding:16px;background:var(--text);color:#fff;border:none;border-radius:var(--radius);
-  font-size:16px;font-weight:700;cursor:pointer;font-family:var(--font);
-  transition:var(--transition);letter-spacing:.3px;margin-top:16px}
-.ob-submit:hover{background:#44403c}
+.ob-field label{display:block;font-size:11px;font-weight:600;color:var(--text2);margin-bottom:5px}
+.ob-field .ob-unit{font-size:10px;color:var(--text3);margin-top:3px;font-weight:500}
+.ob-goals-grid{display:flex;flex-wrap:wrap;gap:6px}
+.ob-goals-grid .ob-choice{padding:7px 14px;font-size:11px}
+.ob-submit{width:100%;padding:15px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);
+  font-size:15px;font-weight:800;cursor:pointer;font-family:var(--font);
+  transition:var(--transition);letter-spacing:.3px;margin-top:12px}
+.ob-submit:hover{background:var(--accent2)}
 .ob-submit:active{transform:scale(.98)}
-.ob-submit:disabled{opacity:.3;cursor:not-allowed}
+.ob-submit:disabled{opacity:.25;cursor:not-allowed}
 
-/* ── Profile Page ── */
-.profile-section{margin-bottom:24px}
-.profile-section-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--text3);margin-bottom:12px}
-.profile-field{margin-bottom:16px}
-.profile-field label{display:block;font-size:12px;font-weight:600;color:var(--text2);margin-bottom:6px}
-.profile-field input{width:100%;padding:11px 16px;border:1.5px solid var(--text4);border-radius:var(--radius-sm);
-  font-size:14px;font-family:var(--font);color:var(--text);background:var(--bg);outline:none;transition:var(--transition)}
-.profile-field input:focus{border-color:var(--text);background:var(--surface)}
-.profile-choices{display:flex;flex-wrap:wrap;gap:8px}
-.profile-choices .ob-choice{padding:8px 16px;font-size:12px}
-.profile-save{width:100%;padding:14px;background:var(--text);color:#fff;border:none;border-radius:var(--radius);
-  font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font);transition:var(--transition);margin-top:8px}
-.profile-save:hover{background:#44403c}
+/* Profile Page */
+.profile-section{margin-bottom:20px}
+.profile-section-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--text3);margin-bottom:10px}
+.profile-field{margin-bottom:14px}
+.profile-field label{display:block;font-size:11px;font-weight:600;color:var(--text2);margin-bottom:5px}
+.profile-field input{width:100%;padding:10px 14px;border:1.5px solid var(--text4);border-radius:var(--radius-sm);
+  font-size:13px;font-family:var(--font);color:var(--text);background:var(--bg);outline:none;transition:var(--transition)}
+.profile-field input:focus{border-color:var(--accent);background:var(--surface)}
+.profile-choices{display:flex;flex-wrap:wrap;gap:6px}
+.profile-choices .ob-choice{padding:7px 14px;font-size:11px}
+.profile-save{width:100%;padding:13px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);
+  font-size:14px;font-weight:800;cursor:pointer;font-family:var(--font);transition:var(--transition);margin-top:6px}
+.profile-save:hover{background:var(--accent2)}
 .profile-save:active{transform:scale(.97)}
-.profile-saved{text-align:center;padding:12px;font-size:13px;color:var(--green-dark);font-weight:600;
-  background:var(--green-soft);border-radius:var(--radius-sm);margin-top:12px;animation:fadeUp .3s ease}
-.profile-reset{width:100%;padding:12px;background:none;color:var(--red);border:1.5px solid var(--red-soft);
-  border-radius:var(--radius);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);
-  transition:var(--transition);margin-top:12px}
+.profile-saved{text-align:center;padding:10px;font-size:12px;color:var(--green-dark);font-weight:700;
+  background:var(--green-soft);border-radius:var(--radius-sm);margin-top:10px;animation:fadeUp .3s ease}
+.profile-reset{width:100%;padding:11px;background:none;color:var(--red);border:1.5px solid var(--red-soft);
+  border-radius:var(--radius);font-size:12px;font-weight:700;cursor:pointer;font-family:var(--font);
+  transition:var(--transition);margin-top:10px}
 .profile-reset:hover{background:var(--red-soft)}
 
-/* Responsive */
+/* ── Food Assistant (Chat) ── */
+.chat-fab{position:fixed;bottom:88px;right:16px;width:48px;height:48px;border-radius:50%;
+  background:var(--accent);color:#fff;border:none;cursor:pointer;z-index:190;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 16px rgba(232,93,38,.35);transition:var(--transition)}
+.chat-fab:hover{transform:scale(1.08)}
+.chat-fab:active{transform:scale(.95)}
+.chat-fab svg{width:22px;height:22px;fill:#fff}
+.chat-panel{position:fixed;bottom:0;left:0;right:0;top:0;z-index:300;display:none;flex-direction:column;
+  background:var(--bg);animation:slideUp .3s ease}
+.chat-panel.open{display:flex}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:none}}
+.chat-top{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;
+  border-bottom:1.5px solid rgba(0,0,0,.06);background:var(--surface)}
+.chat-top h2{font-size:15px;font-weight:800;letter-spacing:-.3px}
+.chat-close{background:none;border:none;cursor:pointer;padding:6px;color:var(--text2)}
+.chat-close svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2}
+.chat-msgs{flex:1;overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:10px}
+.chat-msg{max-width:88%;padding:10px 14px;border-radius:14px;font-size:12px;line-height:1.6;font-weight:500}
+.chat-msg.bot{background:var(--surface2);color:var(--text);align-self:flex-start;border-bottom-left-radius:4px}
+.chat-msg.user{background:var(--accent);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.chat-msg .food-card{background:var(--surface);border:1.5px solid rgba(0,0,0,.06);border-radius:10px;
+  padding:12px;margin-top:8px}
+.chat-msg .fc-name{font-size:14px;font-weight:800;margin-bottom:4px}
+.chat-msg .fc-row{display:flex;justify-content:space-between;font-size:10px;padding:2px 0;color:var(--text2)}
+.chat-msg .fc-row span:first-child{font-weight:600;color:var(--text)}
+.chat-msg .fc-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:6px}
+.chat-msg .fc-tag{padding:2px 8px;border-radius:6px;font-size:9px;font-weight:700}
+.chat-msg .fc-section{margin-top:8px;padding-top:8px;border-top:1px solid var(--surface2)}
+.chat-msg .fc-section-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);margin-bottom:3px}
+.chat-msg .fc-text{font-size:11px;color:var(--text2);line-height:1.5}
+.chat-bottom{display:flex;gap:6px;padding:12px 16px;border-top:1.5px solid rgba(0,0,0,.06);
+  background:var(--surface);padding-bottom:max(12px,env(safe-area-inset-bottom))}
+.chat-input{flex:1;padding:10px 14px;border:1.5px solid var(--text4);border-radius:100px;
+  font-size:13px;font-family:var(--font);color:var(--text);background:var(--bg);outline:none}
+.chat-input:focus{border-color:var(--accent)}
+.chat-input::placeholder{color:var(--text4)}
+.chat-send{width:38px;height:38px;border-radius:50%;background:var(--accent);border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:var(--transition);flex-shrink:0}
+.chat-send:hover{background:var(--accent2)}
+.chat-send svg{width:16px;height:16px;fill:#fff}
+.chat-quick-row{display:flex;flex-wrap:wrap;gap:4px;padding:0 16px 8px}
+.chat-quick{padding:5px 12px;border-radius:100px;border:1.5px solid var(--surface3);background:var(--surface);
+  font-size:10px;font-weight:600;cursor:pointer;color:var(--text2);font-family:var(--font);transition:var(--transition)}
+.chat-quick:hover{border-color:var(--accent);color:var(--accent)}
+
 @media(max-width:380px){
   .stats-row{grid-template-columns:repeat(2,1fr)}
-  .header h1{font-size:24px}
-  .profile-pill{font-size:10px;padding:4px 10px}
+  .header h1{font-size:22px}
+  .profile-pill{font-size:9px;padding:3px 9px}
   .onboard-inner{padding:40px 0 30px}
 }
 </style>
 </head>
 <body>
 
-<!-- ── Onboarding Overlay ── -->
+<!-- Onboarding -->
 <div class="onboard-overlay" id="onboarding" style="display:none">
   <div class="onboard-inner">
     <div class="onboard-logo"><h1>Eat<span>Well</span></h1></div>
-    <div class="onboard-welcome">Welcome! Let's set up your profile<br>so we can personalize your nutrition plan.</div>
-
+    <div class="onboard-welcome" id="ob-welcome"></div>
     <div class="ob-section">
-      <div class="ob-label">Gender</div>
+      <div class="ob-label" id="ob-lbl-gender"></div>
       <div class="ob-row" id="ob-gender">
-        <button class="ob-choice" data-val="female" onclick="obSelect('gender',this)">Female</button>
-        <button class="ob-choice" data-val="male" onclick="obSelect('gender',this)">Male</button>
+        <button class="ob-choice" data-val="female" onclick="obSelect('gender',this)" id="ob-btn-f"></button>
+        <button class="ob-choice" data-val="male" onclick="obSelect('gender',this)" id="ob-btn-m"></button>
       </div>
     </div>
-
     <div class="ob-section">
-      <div class="ob-label">Age</div>
-      <input class="ob-input" id="ob-age" type="number" placeholder="e.g. 28" min="10" max="120" inputmode="numeric">
+      <div class="ob-label" id="ob-lbl-age"></div>
+      <input class="ob-input" id="ob-age" type="number" min="10" max="120" inputmode="numeric">
     </div>
-
     <div class="ob-section">
       <div class="ob-input-row">
-        <div class="ob-field">
-          <label>Height</label>
-          <input class="ob-input" id="ob-height" type="number" placeholder="165" min="100" max="250" inputmode="decimal">
-          <div class="ob-unit">cm</div>
-        </div>
-        <div class="ob-field">
-          <label>Weight</label>
-          <input class="ob-input" id="ob-weight" type="number" placeholder="55" min="20" max="300" inputmode="decimal">
-          <div class="ob-unit">kg</div>
-        </div>
+        <div class="ob-field"><label id="ob-lbl-h"></label><input class="ob-input" id="ob-height" type="number" min="100" max="250" inputmode="decimal"><div class="ob-unit">cm</div></div>
+        <div class="ob-field"><label id="ob-lbl-w"></label><input class="ob-input" id="ob-weight" type="number" min="20" max="300" inputmode="decimal"><div class="ob-unit">kg</div></div>
       </div>
     </div>
-
     <div class="ob-section">
-      <div class="ob-label">Health Goals (select all that apply)</div>
-      <div class="ob-goals-grid" id="ob-goals">
-        <button class="ob-choice" data-val="immunity" onclick="obToggle('goals',this)">Immunity</button>
-        <button class="ob-choice" data-val="gut" onclick="obToggle('goals',this)">Gut Health</button>
-        <button class="ob-choice" data-val="energy" onclick="obToggle('goals',this)">Energy</button>
-        <button class="ob-choice" data-val="antioxidant" onclick="obToggle('goals',this)">Anti-aging</button>
-        <button class="ob-choice" data-val="weight" onclick="obToggle('goals',this)">Weight Mgmt</button>
-        <button class="ob-choice" data-val="cardiovascular" onclick="obToggle('goals',this)">Heart Health</button>
-        <button class="ob-choice" data-val="anticancer" onclick="obToggle('goals',this)">Cancer Prevention</button>
-        <button class="ob-choice" data-val="brain" onclick="obToggle('goals',this)">Brain Function</button>
-        <button class="ob-choice" data-val="skin" onclick="obToggle('goals',this)">Skin Health</button>
-        <button class="ob-choice" data-val="inflammation" onclick="obToggle('goals',this)">Anti-inflammation</button>
-        <button class="ob-choice" data-val="sleep" onclick="obToggle('goals',this)">Better Sleep</button>
-        <button class="ob-choice" data-val="bone" onclick="obToggle('goals',this)">Bone Health</button>
-      </div>
+      <div class="ob-label" id="ob-lbl-goals"></div>
+      <div class="ob-goals-grid" id="ob-goals"></div>
     </div>
-
-    <button class="ob-submit" id="ob-submit" onclick="submitOnboarding()" disabled>Start My Journey</button>
+    <button class="ob-submit" id="ob-submit" onclick="submitOnboarding()" disabled></button>
   </div>
 </div>
 
 <header class="header">
-  <h1>Eat<span>Well</span></h1>
-  <div class="header-sub">your daily nutrition companion</div>
+  <div class="header-top">
+    <h1>Eat<span>Well</span></h1>
+    <button class="lang-toggle" onclick="toggleLang()" id="langBtn"></button>
+  </div>
+  <div class="header-sub" id="headerSub"></div>
   <div class="profile-pills" id="profileBar"></div>
 </header>
 
-<!-- ── Record Page ── -->
+<!-- Record -->
 <div class="page active" id="page-record">
   <div id="mealSections"></div>
-  <div class="gen-btn-wrap">
-    <button class="gen-btn" onclick="generateSummary()">Generate Summary</button>
-  </div>
+  <div class="gen-btn-wrap"><button class="gen-btn" onclick="generateSummary()" id="genBtn"></button></div>
 </div>
 
-<!-- ── Summary Page (Calendar) ── -->
+<!-- Calendar -->
 <div class="page" id="page-summary">
-  <div id="summaryContent">
-    <div class="empty">
-      <div class="empty-icon">&#9776;</div>
-      <p>No records yet.<br>Add food in Record tab first.</p>
-    </div>
-  </div>
+  <div id="summaryContent"><div class="empty"><div class="empty-icon">&#9776;</div><p id="emptyMsg"></p></div></div>
 </div>
 
-<!-- ── Recommend Page ── -->
-<div class="page" id="page-recommend">
-  <div id="recommendContent"></div>
-</div>
+<!-- For You -->
+<div class="page" id="page-recommend"><div id="recommendContent"></div></div>
 
-<!-- ── Profile Page ── -->
+<!-- Profile -->
 <div class="page" id="page-profile">
-  <div style="font-size:20px;font-weight:800;letter-spacing:-.3px;margin-bottom:4px">Profile</div>
-  <div style="font-size:12px;color:var(--text3);margin-bottom:24px">Manage your personal information</div>
-
+  <div style="font-size:18px;font-weight:800;letter-spacing:-.3px;margin-bottom:2px" id="pfTitle"></div>
+  <div style="font-size:11px;color:var(--text3);margin-bottom:20px" id="pfSubtitle"></div>
   <div class="card">
     <div class="profile-section">
-      <div class="profile-section-title">Basic Info</div>
-      <div class="profile-field">
-        <label>Gender</label>
+      <div class="profile-section-title" id="pf-lbl-basic"></div>
+      <div class="profile-field"><label id="pf-lbl-gender"></label>
         <div class="profile-choices" id="pf-gender">
-          <button class="ob-choice" data-val="female" onclick="pfSelect('gender',this)">Female</button>
-          <button class="ob-choice" data-val="male" onclick="pfSelect('gender',this)">Male</button>
+          <button class="ob-choice" data-val="female" onclick="pfSelect('gender',this)" id="pf-btn-f"></button>
+          <button class="ob-choice" data-val="male" onclick="pfSelect('gender',this)" id="pf-btn-m"></button>
         </div>
       </div>
-      <div class="profile-field">
-        <label>Age</label>
-        <input id="pf-age" type="number" placeholder="28" min="10" max="120" inputmode="numeric">
-      </div>
-      <div style="display:flex;gap:12px">
-        <div class="profile-field" style="flex:1">
-          <label>Height (cm)</label>
-          <input id="pf-height" type="number" placeholder="165" min="100" max="250" inputmode="decimal">
-        </div>
-        <div class="profile-field" style="flex:1">
-          <label>Weight (kg)</label>
-          <input id="pf-weight" type="number" placeholder="55" min="20" max="300" inputmode="decimal">
-        </div>
+      <div class="profile-field"><label id="pf-lbl-age"></label><input id="pf-age" type="number" min="10" max="120" inputmode="numeric"></div>
+      <div style="display:flex;gap:10px">
+        <div class="profile-field" style="flex:1"><label id="pf-lbl-h"></label><input id="pf-height" type="number" min="100" max="250" inputmode="decimal"></div>
+        <div class="profile-field" style="flex:1"><label id="pf-lbl-w"></label><input id="pf-weight" type="number" min="20" max="300" inputmode="decimal"></div>
       </div>
     </div>
   </div>
-
   <div class="card">
     <div class="profile-section">
-      <div class="profile-section-title">Health Goals</div>
-      <div class="profile-choices" id="pf-goals">
-        <button class="ob-choice" data-val="immunity" onclick="pfToggle('goals',this)">Immunity</button>
-        <button class="ob-choice" data-val="gut" onclick="pfToggle('goals',this)">Gut Health</button>
-        <button class="ob-choice" data-val="energy" onclick="pfToggle('goals',this)">Energy</button>
-        <button class="ob-choice" data-val="antioxidant" onclick="pfToggle('goals',this)">Anti-aging</button>
-        <button class="ob-choice" data-val="weight" onclick="pfToggle('goals',this)">Weight Mgmt</button>
-        <button class="ob-choice" data-val="cardiovascular" onclick="pfToggle('goals',this)">Heart Health</button>
-        <button class="ob-choice" data-val="anticancer" onclick="pfToggle('goals',this)">Cancer Prevention</button>
-        <button class="ob-choice" data-val="brain" onclick="pfToggle('goals',this)">Brain Function</button>
-        <button class="ob-choice" data-val="skin" onclick="pfToggle('goals',this)">Skin Health</button>
-        <button class="ob-choice" data-val="inflammation" onclick="pfToggle('goals',this)">Anti-inflammation</button>
-        <button class="ob-choice" data-val="sleep" onclick="pfToggle('goals',this)">Better Sleep</button>
-        <button class="ob-choice" data-val="bone" onclick="pfToggle('goals',this)">Bone Health</button>
-      </div>
+      <div class="profile-section-title" id="pf-lbl-goals"></div>
+      <div class="profile-choices" id="pf-goals"></div>
     </div>
   </div>
-
-  <button class="profile-save" onclick="saveProfile()">Save Changes</button>
-  <div id="pf-saved" style="display:none" class="profile-saved">Profile updated!</div>
-
-  <button class="profile-reset" onclick="resetProfile()">Reset Profile & Start Over</button>
+  <button class="profile-save" onclick="saveProfile()" id="pfSaveBtn"></button>
+  <div id="pf-saved" style="display:none" class="profile-saved"></div>
+  <button class="profile-reset" onclick="resetProfile()" id="pfResetBtn"></button>
 </div>
 
-<!-- ── Bottom Tab Bar ── -->
+<!-- Tab Bar -->
 <nav class="tab-bar">
   <button class="tab-btn active" data-page="record">
     <svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-    <span>Record</span>
+    <span data-i18n="tab_record"></span>
   </button>
   <button class="tab-btn" data-page="summary">
     <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-    <span>Calendar</span>
+    <span data-i18n="tab_calendar"></span>
   </button>
   <button class="tab-btn" data-page="recommend">
     <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-    <span>For You</span>
+    <span data-i18n="tab_foryou"></span>
   </button>
   <button class="tab-btn" data-page="profile">
     <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-    <span>Profile</span>
+    <span data-i18n="tab_profile"></span>
   </button>
 </nav>
 
+<!-- Chat FAB -->
+<button class="chat-fab" onclick="openChat()" id="chatFab">
+  <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+</button>
+
+<!-- Chat Panel -->
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-top">
+    <h2 id="chatTitle"></h2>
+    <button class="chat-close" onclick="closeChat()"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <div class="chat-msgs" id="chatMsgs"></div>
+  <div class="chat-quick-row" id="chatQuickRow"></div>
+  <div class="chat-bottom">
+    <input class="chat-input" id="chatInput" onkeydown="if(event.key==='Enter')sendChat()">
+    <button class="chat-send" onclick="sendChat()"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
+  </div>
+</div>
 <script>
-// ═══════════════════════════════════════════
-// Profile & Config (dynamic from localStorage)
-// ═══════════════════════════════════════════
-const DEFAULT_PROFILE = {
-  age:28,gender:"female",weight:55,height:165,
-  exercise:"moderate",
-  goals:["immunity","gut","energy","antioxidant"],
-  diet_type:"normal",allergies:[]
-};
 
-function loadProfile(){
-  try{const s=localStorage.getItem('ew_profile');if(s)return JSON.parse(s);}catch(e){}
-  return null;
+// ═══════════════════════════════════════════
+// i18n
+// ═══════════════════════════════════════════
+const I18N = {
+zh: {
+  header_sub:"你的每日营养伙伴",tab_record:"记录",tab_calendar:"日历",tab_foryou:"推荐",tab_profile:"我的",
+  ob_welcome:"欢迎！先设置你的个人信息，<br>我们会为你定制营养方案。",
+  ob_gender:"性别",ob_female:"女",ob_male:"男",ob_age:"年龄",ob_height:"身高",ob_weight:"体重",
+  ob_goals:"健康诉求（可多选）",ob_submit:"开始我的健康之旅",
+  goal_immunity:"增强免疫",goal_gut:"肠道健康",goal_energy:"提升精力",goal_antioxidant:"抗氧化抗衰",
+  goal_weight:"体重管理",goal_cardiovascular:"心血管",goal_anticancer:"癌症预防",goal_brain:"脑功能",
+  goal_skin:"皮肤健康",goal_inflammation:"抗炎",goal_sleep:"改善睡眠",goal_bone:"骨骼健康",
+  pf_title:"个人信息",pf_subtitle:"管理你的基本信息和健康诉求",pf_basic:"基本信息",pf_goals:"健康诉求",
+  pf_save:"保存修改",pf_saved:"已保存！",pf_reset:"重置信息并重新设置",pf_reset_confirm:"确定要重置吗？将重新显示设置页面。",
+  gen_summary:"生成总结",empty_msg:"暂无记录<br>先在「记录」页添加食物吧",
+  photo_upload:"拍照上传",input_placeholder:"输入食物名称，如 蓝莓、鸡蛋…",
+  bmi_thin:"偏瘦",bmi_normal:"正常",bmi_overweight:"偏胖",bmi_obese:"肥胖",
+  nutrients:"营养素",defense:"防御系统",health_goals:"健康目标",meals_label:"餐次",suggestions:"建议",
+  no_record:"该日无记录",foryou:"为你推荐",foryou_sub:"基于你的个人信息定制",daily_tips:"每日提示",
+  legend_great:"优秀(80+)",legend_ok:"良好(50-79)",legend_low:"待提升(<50)",
+  def_angio:"血管生成",def_regen:"细胞再生",def_micro:"微生物组",def_dna:"DNA保护",def_immune:"免疫系统",
+  cat_fruit:"水果",cat_vegetable:"蔬菜",cat_grain:"谷物",cat_protein:"蛋白质",cat_nut:"坚果",cat_beverage:"饮品",cat_other:"其他",
+  meal_breakfast:"早餐",meal_lunch:"午餐",meal_snack:"加餐",meal_dinner:"晚餐",
+  meal_time_b:"7:00-9:00",meal_time_l:"11:30-13:00",meal_time_s:"15:00-16:00",meal_time_d:"18:00-20:00",
+  chat_title:"食物小助手",chat_placeholder:"输入食物名称，如「蓝莓」…",chat_welcome:"你好！我是你的食物小助手。输入任何食物名称，我会告诉你它的营养价值、功效、建议摄入量和禁忌。",
+  chat_q1:"蓝莓",chat_q2:"三文鱼",chat_q3:"西兰花",chat_q4:"燕麦",
+  chat_not_found:"抱歉，我暂时不了解「{name}」。试试其他食物吧！",
+  chat_cal:"热量",chat_protein:"蛋白质",chat_fat:"脂肪",chat_carb:"碳水",chat_fiber:"膳食纤维",
+  chat_portion:"建议份量",chat_benefits:"功效与价值",chat_defense:"防御系统",chat_goals_match:"匹配你的健康诉求",
+  chat_freq:"建议食用频率",chat_caution:"注意事项",
+  freq_daily:"可每日食用",freq_often:"建议经常食用（每周3-5次）",freq_moderate:"适量食用（每周2-3次）",
+  caution_none:"无特殊禁忌，适合大多数人。",
+  tip_bmi:"BMI {bmi}（{status}），每日建议 {cal} kcal",tip_protein:"蛋白质目标 {target}g/天",
+  tip_variety:"每天吃 5+ 种不同颜色的蔬果",tip_thin:"偏瘦体质多吃坚果、牛油果等健康脂肪",
+  tip_cal_low:"热量仅 {cur} kcal，距目标差 {diff} kcal。建议增加坚果、牛油果等。",
+  tip_protein_low:"蛋白质偏低（{cur}g / {target}g），补充鸡蛋、鱼虾或豆类。",
+  tip_fiber_low:"膳食纤维仅 {cur}g，增加全谷物和蔬果。",
+  tip_defense_low:"仅覆盖 {n}/5 防御系统，试试增加食物种类。",
+  tip_great:"今天的饮食搭配非常棒！继续保持。",
+  lang_btn:"EN",gender_f:"女",gender_m:"男",score:"评分",add:"添加",items:"项",
+  months:["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"],
+  weekdays:["一","二","三","四","五","六","日"]
+},
+en: {
+  header_sub:"your daily nutrition companion",tab_record:"Record",tab_calendar:"Calendar",tab_foryou:"For You",tab_profile:"Profile",
+  ob_welcome:"Welcome! Let's set up your profile<br>to personalize your nutrition plan.",
+  ob_gender:"Gender",ob_female:"Female",ob_male:"Male",ob_age:"Age",ob_height:"Height",ob_weight:"Weight",
+  ob_goals:"Health Goals (select all that apply)",ob_submit:"Start My Journey",
+  goal_immunity:"Immunity",goal_gut:"Gut Health",goal_energy:"Energy",goal_antioxidant:"Anti-aging",
+  goal_weight:"Weight Mgmt",goal_cardiovascular:"Heart Health",goal_anticancer:"Cancer Prev.",goal_brain:"Brain",
+  goal_skin:"Skin",goal_inflammation:"Anti-inflam.",goal_sleep:"Sleep",goal_bone:"Bone Health",
+  pf_title:"Profile",pf_subtitle:"Manage your personal information",pf_basic:"Basic Info",pf_goals:"Health Goals",
+  pf_save:"Save Changes",pf_saved:"Saved!",pf_reset:"Reset Profile & Start Over",pf_reset_confirm:"Reset your profile? The setup screen will appear again.",
+  gen_summary:"Generate Summary",empty_msg:"No records yet.<br>Add food in Record tab first.",
+  photo_upload:"Upload Photo",input_placeholder:"Enter food, e.g. blueberry, egg…",
+  bmi_thin:"Underweight",bmi_normal:"Normal",bmi_overweight:"Overweight",bmi_obese:"Obese",
+  nutrients:"Nutrients",defense:"Defense Systems",health_goals:"Health Goals",meals_label:"Meals",suggestions:"Suggestions",
+  no_record:"No records for this day",foryou:"For You",foryou_sub:"Personalized picks based on your profile",daily_tips:"Daily Tips",
+  legend_great:"Great (80+)",legend_ok:"OK (50-79)",legend_low:"Low (<50)",
+  def_angio:"Angiogenesis",def_regen:"Regeneration",def_micro:"Microbiome",def_dna:"DNA Protect",def_immune:"Immune",
+  cat_fruit:"Fruit",cat_vegetable:"Vegetable",cat_grain:"Grain",cat_protein:"Protein",cat_nut:"Nut",cat_beverage:"Beverage",cat_other:"Other",
+  meal_breakfast:"Breakfast",meal_lunch:"Lunch",meal_snack:"Snack",meal_dinner:"Dinner",
+  meal_time_b:"7-9am",meal_time_l:"11:30am-1pm",meal_time_s:"3-4pm",meal_time_d:"6-8pm",
+  chat_title:"Food Assistant",chat_placeholder:"Enter a food name, e.g. 'blueberry'…",chat_welcome:"Hi! I'm your food assistant. Enter any food name and I'll tell you about its nutrition, benefits, portion size, and cautions.",
+  chat_q1:"Blueberry",chat_q2:"Salmon",chat_q3:"Broccoli",chat_q4:"Oats",
+  chat_not_found:"Sorry, I don't have info on \"{name}\" yet. Try another food!",
+  chat_cal:"Calories",chat_protein:"Protein",chat_fat:"Fat",chat_carb:"Carbs",chat_fiber:"Fiber",
+  chat_portion:"Suggested Portion",chat_benefits:"Benefits",chat_defense:"Defense Systems",chat_goals_match:"Matches Your Goals",
+  chat_freq:"Suggested Frequency",chat_caution:"Caution",
+  freq_daily:"Can be consumed daily",freq_often:"Recommended often (3-5x/week)",freq_moderate:"In moderation (2-3x/week)",
+  caution_none:"No special cautions. Suitable for most people.",
+  tip_bmi:"BMI {bmi} ({status}), recommended {cal} kcal/day",tip_protein:"Protein target {target}g/day",
+  tip_variety:"Eat 5+ different colored fruits & veggies daily",tip_thin:"Underweight: eat more nuts, avocado & healthy fats",
+  tip_cal_low:"Only {cur} kcal, {diff} kcal below target. Add nuts or avocado.",
+  tip_protein_low:"Protein low ({cur}g / {target}g). Add eggs, fish, or beans.",
+  tip_fiber_low:"Fiber only {cur}g. Eat more whole grains and veggies.",
+  tip_defense_low:"Only {n}/5 defense systems covered. Add more variety.",
+  tip_great:"Your diet today is excellent! Keep it up.",
+  lang_btn:"中文",gender_f:"F",gender_m:"M",score:"score",add:"Add",items:"items",
+  months:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+  weekdays:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]
+}};
+
+let LANG = localStorage.getItem('ew_lang')||'zh';
+function t(k){return I18N[LANG]?.[k]||I18N.zh[k]||k}
+function toggleLang(){LANG=LANG==='zh'?'en':'zh';localStorage.setItem('ew_lang',LANG);applyI18n();refreshApp();}
+
+function applyI18n(){
+  document.querySelectorAll('[data-i18n]').forEach(el=>el.textContent=t(el.dataset.i18n));
+  document.getElementById('langBtn').textContent=t('lang_btn');
+  document.getElementById('headerSub').textContent=t('header_sub');
+  document.getElementById('ob-welcome').innerHTML=t('ob_welcome');
+  document.getElementById('ob-lbl-gender').textContent=t('ob_gender');
+  document.getElementById('ob-btn-f').textContent=t('ob_female');
+  document.getElementById('ob-btn-m').textContent=t('ob_male');
+  document.getElementById('ob-lbl-age').textContent=t('ob_age');
+  document.getElementById('ob-age').placeholder=LANG==='zh'?'例如 28':'e.g. 28';
+  document.getElementById('ob-lbl-h').textContent=t('ob_height');
+  document.getElementById('ob-lbl-w').textContent=t('ob_weight');
+  document.getElementById('ob-lbl-goals').textContent=t('ob_goals');
+  document.getElementById('ob-submit').textContent=t('ob_submit');
+  document.getElementById('genBtn').textContent=t('gen_summary');
+  document.getElementById('emptyMsg').innerHTML=t('empty_msg');
+  document.getElementById('pfTitle').textContent=t('pf_title');
+  document.getElementById('pfSubtitle').textContent=t('pf_subtitle');
+  document.getElementById('pf-lbl-basic').textContent=t('pf_basic');
+  document.getElementById('pf-lbl-gender').textContent=t('ob_gender');
+  document.getElementById('pf-btn-f').textContent=t('ob_female');
+  document.getElementById('pf-btn-m').textContent=t('ob_male');
+  document.getElementById('pf-lbl-age').textContent=t('ob_age');
+  document.getElementById('pf-lbl-h').textContent=t('ob_height')+' (cm)';
+  document.getElementById('pf-lbl-w').textContent=t('ob_weight')+' (kg)';
+  document.getElementById('pf-lbl-goals').textContent=t('pf_goals');
+  document.getElementById('pfSaveBtn').textContent=t('pf_save');
+  document.getElementById('pfResetBtn').textContent=t('pf_reset');
+  document.getElementById('chatTitle').textContent=t('chat_title');
+  document.getElementById('chatInput').placeholder=t('chat_placeholder');
+  // Build goal buttons in onboarding and profile
+  const goalKeys=['immunity','gut','energy','antioxidant','weight','cardiovascular','anticancer','brain','skin','inflammation','sleep','bone'];
+  ['ob-goals','pf-goals'].forEach(cid=>{
+    const c=document.getElementById(cid);
+    const prev=new Set([...c.querySelectorAll('.ob-choice.selected')].map(b=>b.dataset.val));
+    c.innerHTML=goalKeys.map(k=>`<button class="ob-choice${prev.has(k)?' selected':''}" data-val="${k}" onclick="${cid==='ob-goals'?'obToggle':'pfToggle'}('goals',this)">${t('goal_'+k)}</button>`).join('');
+  });
+  // Chat quick suggestions
+  document.getElementById('chatQuickRow').innerHTML=[t('chat_q1'),t('chat_q2'),t('chat_q3'),t('chat_q4')].map(q=>`<button class="chat-quick" onclick="sendChatMsg('${q}')">${q}</button>`).join('');
 }
-function saveProfileData(p){
-  try{localStorage.setItem('ew_profile',JSON.stringify(p));}catch(e){}
-}
+
+// ═══════════════════════════════════════════
+// Profile
+// ═══════════════════════════════════════════
+const DEFAULT_PROFILE={age:28,gender:"female",weight:55,height:165,exercise:"moderate",goals:["immunity","gut","energy","antioxidant"],diet_type:"normal",allergies:[]};
+function loadProfile(){try{const s=localStorage.getItem('ew_profile');if(s)return JSON.parse(s);}catch(e){}return null;}
+function saveProfileData(p){try{localStorage.setItem('ew_profile',JSON.stringify(p));}catch(e){}}
 function isProfileSet(){return !!loadProfile();}
-
-let PROFILE = loadProfile() || {...DEFAULT_PROFILE};
+let PROFILE=loadProfile()||{...DEFAULT_PROFILE};
+let BMI,BMI_STATUS,DAILY_CAL;
 function recalcDerived(){
-  window.BMI = (PROFILE.weight/((PROFILE.height/100)**2)).toFixed(1);
-  window.BMI_STATUS = BMI<18.5?"偏瘦":BMI<24?"正常":BMI<28?"偏胖":"肥胖";
-  window.DAILY_CAL = BMI<18.5?1800:BMI<24?1600:1400;
+  BMI=(PROFILE.weight/((PROFILE.height/100)**2)).toFixed(1);
+  BMI_STATUS=BMI<18.5?t('bmi_thin'):BMI<24?t('bmi_normal'):BMI<28?t('bmi_overweight'):t('bmi_obese');
+  DAILY_CAL=BMI<18.5?1800:BMI<24?1600:1400;
 }
-recalcDerived();
+
+// Onboarding
+const obState={gender:null,goals:[]};
+function obSelect(f,el){document.querySelectorAll('#ob-'+f+' .ob-choice').forEach(b=>b.classList.remove('selected'));el.classList.add('selected');obState[f]=el.dataset.val;checkObReady();}
+function obToggle(f,el){el.classList.toggle('selected');obState[f]=[...document.getElementById('ob-'+f).querySelectorAll('.ob-choice.selected')].map(b=>b.dataset.val);checkObReady();}
+function checkObReady(){const ok=obState.gender&&document.getElementById('ob-age').value&&document.getElementById('ob-height').value&&document.getElementById('ob-weight').value&&obState.goals.length>0;document.getElementById('ob-submit').disabled=!ok;}
+document.addEventListener('DOMContentLoaded',()=>{['ob-age','ob-height','ob-weight'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('input',checkObReady);});});
+function submitOnboarding(){PROFILE.gender=obState.gender;PROFILE.age=parseInt(document.getElementById('ob-age').value)||28;PROFILE.height=parseFloat(document.getElementById('ob-height').value)||165;PROFILE.weight=parseFloat(document.getElementById('ob-weight').value)||55;PROFILE.goals=obState.goals.length?obState.goals:['immunity'];saveProfileData(PROFILE);recalcDerived();document.getElementById('onboarding').style.display='none';refreshApp();}
+
+// Profile page
+let pfState={gender:null,goals:[]};
+function pfSelect(f,el){document.querySelectorAll('#pf-'+f+' .ob-choice').forEach(b=>b.classList.remove('selected'));el.classList.add('selected');pfState[f]=el.dataset.val;}
+function pfToggle(f,el){el.classList.toggle('selected');pfState[f]=[...document.getElementById('pf-'+f).querySelectorAll('.ob-choice.selected')].map(b=>b.dataset.val);}
+function loadProfilePage(){pfState.gender=PROFILE.gender;pfState.goals=[...PROFILE.goals];document.querySelectorAll('#pf-gender .ob-choice').forEach(b=>b.classList.toggle('selected',b.dataset.val===PROFILE.gender));document.getElementById('pf-age').value=PROFILE.age||'';document.getElementById('pf-height').value=PROFILE.height||'';document.getElementById('pf-weight').value=PROFILE.weight||'';document.querySelectorAll('#pf-goals .ob-choice').forEach(b=>b.classList.toggle('selected',PROFILE.goals.includes(b.dataset.val)));document.getElementById('pf-saved').style.display='none';}
+function saveProfile(){PROFILE.gender=pfState.gender||PROFILE.gender;PROFILE.age=parseInt(document.getElementById('pf-age').value)||PROFILE.age;PROFILE.height=parseFloat(document.getElementById('pf-height').value)||PROFILE.height;PROFILE.weight=parseFloat(document.getElementById('pf-weight').value)||PROFILE.weight;PROFILE.goals=pfState.goals.length?pfState.goals:PROFILE.goals;saveProfileData(PROFILE);recalcDerived();refreshApp();const el=document.getElementById('pf-saved');el.textContent=t('pf_saved');el.style.display='block';setTimeout(()=>el.style.display='none',2000);}
+function resetProfile(){if(!confirm(t('pf_reset_confirm')))return;localStorage.removeItem('ew_profile');location.reload();}
+function updateProfileBar(){recalcDerived();const g=PROFILE.gender==='female'?t('gender_f'):t('gender_m');document.getElementById('profileBar').innerHTML=`<span class="profile-pill">${g} ${PROFILE.age}</span><span class="profile-pill">${PROFILE.height}cm / ${PROFILE.weight}kg</span><span class="profile-pill">BMI ${BMI} ${BMI_STATUS}</span>`;}
+function refreshApp(){updateProfileBar();renderMeals();saveDayToHistory(TODAY);}
 
 // ═══════════════════════════════════════════
-// Onboarding Logic
+// Food Database (same as before, abbreviated key names)
 // ═══════════════════════════════════════════
-const obState = {gender:null, goals:[]};
+const FOODS={"蓝莓":{cal:57,protein:0.7,fat:0.3,carb:14.5,fiber:2.4,cat:"fruit",defense:["angio","dna","immune","regen"],benefits:"花青素极高，抗氧化之王",benefitsEn:"Anthocyanin-rich, antioxidant powerhouse",goals:["antioxidant","brain","anticancer","immunity"],portion:"一小碗(100g)",portionEn:"1 small bowl (100g)",freq:"daily",caution:"",cautionEn:""},"草莓":{cal:32,protein:0.7,fat:0.3,carb:7.7,fiber:2,cat:"fruit",defense:["dna","immune"],benefits:"富含维C和鞣花酸",benefitsEn:"Rich in Vitamin C & ellagic acid",goals:["antioxidant","skin","immunity"],portion:"5-6颗(100g)",portionEn:"5-6 pieces (100g)",freq:"daily",caution:"",cautionEn:""},"苹果":{cal:52,protein:0.3,fat:0.2,carb:14,fiber:2.4,cat:"fruit",defense:["micro","dna"],benefits:"果胶是优质益生元",benefitsEn:"Pectin is an excellent prebiotic",goals:["gut","weight","antioxidant"],portion:"1个(180g)",portionEn:"1 apple (180g)",freq:"daily",caution:"",cautionEn:""},"香蕉":{cal:89,protein:1.1,fat:0.3,carb:23,fiber:2.6,cat:"fruit",defense:["micro","regen"],benefits:"益生元纤维，钾含量高",benefitsEn:"Prebiotic fiber, high in potassium",goals:["gut","energy","sleep"],portion:"1根(120g)",portionEn:"1 banana (120g)",freq:"daily",caution:"糖尿病患者适量",cautionEn:"Diabetics: moderate intake"},"番茄":{cal:18,protein:0.9,fat:0.2,carb:3.9,fiber:1.2,cat:"fruit",defense:["angio","dna","immune"],benefits:"番茄红素强力抗癌抗氧化",benefitsEn:"Lycopene: powerful anti-cancer antioxidant",goals:["anticancer","cardiovascular","skin"],portion:"1个(120g)",portionEn:"1 tomato (120g)",freq:"daily",caution:"",cautionEn:""},"牛油果":{cal:160,protein:2,fat:15,carb:8.5,fiber:6.7,cat:"fruit",defense:["regen","micro"],benefits:"健康脂肪助细胞修复",benefitsEn:"Healthy fats support cell repair",goals:["brain","skin","weight","inflammation"],portion:"半个(70g)",portionEn:"Half (70g)",freq:"often",caution:"热量较高，控制份量",cautionEn:"High calorie, watch portions"},"橙子":{cal:47,protein:0.9,fat:0.1,carb:12,fiber:2.4,cat:"fruit",defense:["immune","angio"],benefits:"维C含量高",benefitsEn:"High in Vitamin C",goals:["immunity","skin","energy"],portion:"1个(150g)",portionEn:"1 orange (150g)",freq:"daily",caution:"",cautionEn:""},"西兰花":{cal:34,protein:2.8,fat:0.4,carb:7,fiber:2.6,cat:"vegetable",defense:["dna","angio","immune"],benefits:"萝卜硫素激活DNA修复",benefitsEn:"Sulforaphane activates DNA repair",goals:["anticancer","immunity","inflammation"],portion:"一朵(80g)",portionEn:"1 head (80g)",freq:"daily",caution:"",cautionEn:""},"菠菜":{cal:23,protein:2.9,fat:0.4,carb:3.6,fiber:2.2,cat:"vegetable",defense:["regen","angio","immune"],benefits:"叶酸促进细胞更新",benefitsEn:"Folate promotes cell renewal",goals:["antioxidant","energy","bone","brain"],portion:"一把(80g)",portionEn:"A handful (80g)",freq:"daily",caution:"肾结石患者注意草酸",cautionEn:"Kidney stone patients: watch oxalates"},"胡萝卜":{cal:41,protein:0.9,fat:0.2,carb:10,fiber:2.8,cat:"vegetable",defense:["dna","immune","angio"],benefits:"β-胡萝卜素保护DNA",benefitsEn:"Beta-carotene protects DNA",goals:["anticancer","skin","immunity"],portion:"1根(100g)",portionEn:"1 carrot (100g)",freq:"daily",caution:"",cautionEn:""},"红薯":{cal:86,protein:1.6,fat:0.1,carb:20,fiber:3,cat:"vegetable",defense:["regen","immune"],benefits:"维A促进细胞再生",benefitsEn:"Vitamin A promotes cell regeneration",goals:["skin","immunity","gut","energy"],portion:"半个(100g)",portionEn:"Half (100g)",freq:"often",caution:"",cautionEn:""},"大蒜":{cal:149,protein:6.4,fat:0.5,carb:33,fiber:2.1,cat:"vegetable",defense:["immune","angio","micro"],benefits:"天然抗菌剂，大蒜素杀菌",benefitsEn:"Natural antimicrobial, allicin kills bacteria",goals:["immunity","anticancer","cardiovascular"],portion:"2-3瓣(10g)",portionEn:"2-3 cloves (10g)",freq:"daily",caution:"空腹食用可能刺激胃",cautionEn:"May irritate stomach on empty stomach"},"燕麦":{cal:389,protein:17,fat:7,carb:66,fiber:11,cat:"grain",defense:["micro","angio"],benefits:"β-葡聚糖降胆固醇",benefitsEn:"Beta-glucan lowers cholesterol",goals:["gut","cardiovascular","weight","energy"],portion:"半杯(40g)",portionEn:"Half cup (40g)",freq:"daily",caution:"",cautionEn:""},"糙米":{cal:362,protein:7.5,fat:2.7,carb:76,fiber:3.4,cat:"grain",defense:["micro","dna"],benefits:"全谷维生素矿物质丰富",benefitsEn:"Whole grain, rich in vitamins & minerals",goals:["gut","energy","weight"],portion:"一碗(150g熟)",portionEn:"1 bowl cooked (150g)",freq:"daily",caution:"",cautionEn:""},"米饭":{cal:130,protein:2.7,fat:0.3,carb:28,fiber:0.4,cat:"grain",defense:[],benefits:"基础能量来源",benefitsEn:"Basic energy source",goals:["energy"],portion:"一碗(150g)",portionEn:"1 bowl (150g)",freq:"daily",caution:"",cautionEn:""},"面条":{cal:138,protein:4.5,fat:0.6,carb:28,fiber:1.2,cat:"grain",defense:[],benefits:"碳水能量来源",benefitsEn:"Carb energy source",goals:["energy"],portion:"一碗(200g)",portionEn:"1 bowl (200g)",freq:"daily",caution:"",cautionEn:""},"面包":{cal:265,protein:9,fat:3.2,carb:49,fiber:2.7,cat:"grain",defense:[],benefits:"便捷碳水来源",benefitsEn:"Convenient carb source",goals:["energy"],portion:"2片(60g)",portionEn:"2 slices (60g)",freq:"daily",caution:"",cautionEn:""},"三文鱼":{cal:208,protein:20,fat:13,carb:0,fiber:0,cat:"protein",defense:["angio","regen","immune"],benefits:"Omega-3抗炎，DHA护脑",benefitsEn:"Omega-3 anti-inflammatory, DHA for brain",goals:["cardiovascular","brain","inflammation","skin"],portion:"一片(100g)",portionEn:"1 fillet (100g)",freq:"often",caution:"汞含量较低但孕妇适量",cautionEn:"Low mercury but pregnant women: moderate"},"鸡蛋":{cal:155,protein:13,fat:11,carb:1.1,fiber:0,cat:"protein",defense:["regen","dna"],benefits:"胆碱促细胞膜修复，完全蛋白",benefitsEn:"Choline for cell repair, complete protein",goals:["brain","energy"],portion:"1个(50g)",portionEn:"1 egg (50g)",freq:"daily",caution:"",cautionEn:""},"鸡胸肉":{cal:165,protein:31,fat:3.6,carb:0,fiber:0,cat:"protein",defense:["regen","immune"],benefits:"优质蛋白低脂",benefitsEn:"High-quality lean protein",goals:["weight","energy"],portion:"一块(100g)",portionEn:"1 piece (100g)",freq:"often",caution:"",cautionEn:""},"豆腐":{cal:76,protein:8,fat:4.8,carb:1.9,fiber:0.3,cat:"protein",defense:["angio","regen"],benefits:"异黄酮调节血管",benefitsEn:"Isoflavones regulate blood vessels",goals:["cardiovascular","bone","weight"],portion:"一块(100g)",portionEn:"1 block (100g)",freq:"daily",caution:"",cautionEn:""},"酸奶":{cal:59,protein:3.5,fat:3.3,carb:4.7,fiber:0,cat:"protein",defense:["micro","immune"],benefits:"活性益生菌",benefitsEn:"Live probiotics",goals:["gut","immunity","bone","skin"],portion:"一杯(150g)",portionEn:"1 cup (150g)",freq:"daily",caution:"乳糖不耐者注意",cautionEn:"Lactose intolerant: be careful"},"牛奶":{cal:42,protein:3.4,fat:1,carb:5,fiber:0,cat:"protein",defense:["regen"],benefits:"钙质丰富",benefitsEn:"Rich in calcium",goals:["bone","energy"],portion:"一杯(250ml)",portionEn:"1 glass (250ml)",freq:"daily",caution:"乳糖不耐者注意",cautionEn:"Lactose intolerant: be careful"},"核桃":{cal:654,protein:15,fat:65,carb:14,fiber:6.7,cat:"nut",defense:["regen","dna","micro"],benefits:"ALA Omega-3护脑",benefitsEn:"ALA Omega-3 for brain health",goals:["brain","cardiovascular","antioxidant"],portion:"3-4个(20g)",portionEn:"3-4 pieces (20g)",freq:"daily",caution:"热量高，控制份量",cautionEn:"High calorie, watch portions"},"杏仁":{cal:579,protein:21,fat:50,carb:22,fiber:12,cat:"nut",defense:["micro","dna"],benefits:"维E和膳食纤维",benefitsEn:"Vitamin E & dietary fiber",goals:["gut","skin","cardiovascular"],portion:"10颗(15g)",portionEn:"10 pieces (15g)",freq:"daily",caution:"",cautionEn:""},"绿茶":{cal:1,protein:0,fat:0,carb:0,fiber:0,cat:"beverage",defense:["angio","dna","immune","regen"],benefits:"EGCG最强儿茶素，全方位防御",benefitsEn:"EGCG: strongest catechin, full defense",goals:["anticancer","antioxidant","weight","brain"],portion:"一杯(250ml)",portionEn:"1 cup (250ml)",freq:"daily",caution:"空腹慎饮，睡前避免",cautionEn:"Avoid on empty stomach or before bed"},"咖啡":{cal:2,protein:0.3,fat:0,carb:0,fiber:0,cat:"beverage",defense:["immune","dna","micro"],benefits:"绿原酸抗氧化",benefitsEn:"Chlorogenic acid antioxidant",goals:["brain","energy","anticancer","weight"],portion:"一杯(250ml)",portionEn:"1 cup (250ml)",freq:"moderate",caution:"每日不超过3杯，孕妇限量",cautionEn:"Max 3 cups/day, limit during pregnancy"},"黑巧克力":{cal:546,protein:5,fat:31,carb:60,fiber:7,cat:"other",defense:["angio","regen","micro"],benefits:"可可黄烷醇促血管和干细胞",benefitsEn:"Cocoa flavanols boost vessels & stem cells",goals:["cardiovascular","brain","antioxidant"],portion:"2-3块(20g)",portionEn:"2-3 squares (20g)",freq:"moderate",caution:"选70%以上可可含量",cautionEn:"Choose 70%+ cocoa content"},"橄榄油":{cal:884,protein:0,fat:100,carb:0,fiber:0,cat:"other",defense:["angio","dna","micro"],benefits:"橄榄多酚保护DNA",benefitsEn:"Olive polyphenols protect DNA",goals:["cardiovascular","anticancer","inflammation","brain"],portion:"1勺(10ml)",portionEn:"1 tbsp (10ml)",freq:"daily",caution:"高温烹饪会损失部分营养",cautionEn:"High heat cooking reduces some nutrients"},"蘑菇":{cal:22,protein:3.1,fat:0.3,carb:3.3,fiber:1,cat:"other",defense:["immune","regen","angio"],benefits:"β-葡聚糖激活免疫",benefitsEn:"Beta-glucan activates immune system",goals:["immunity","anticancer"],portion:"几朵(80g)",portionEn:"A few (80g)",freq:"often",caution:"",cautionEn:""},"姜黄":{cal:312,protein:10,fat:3.3,carb:67,fiber:21,cat:"other",defense:["angio","dna","immune"],benefits:"姜黄素超级抗炎",benefitsEn:"Curcumin: super anti-inflammatory",goals:["inflammation","anticancer","brain","immunity"],portion:"半勺(2g)",portionEn:"Half tsp (2g)",freq:"daily",caution:"配黑胡椒提升吸收20倍",cautionEn:"Pair with black pepper for 20x absorption"},"生姜":{cal:80,protein:1.8,fat:0.8,carb:18,fiber:2,cat:"vegetable",defense:["immune","micro","angio"],benefits:"姜辣素抗炎抗氧化",benefitsEn:"Gingerol: anti-inflammatory antioxidant",goals:["inflammation","immunity","gut"],portion:"几片(10g)",portionEn:"A few slices (10g)",freq:"daily",caution:"",cautionEn:""},"包子":{cal:220,protein:7,fat:3,carb:40,fiber:1.5,cat:"grain",defense:[],benefits:"常见早餐主食",benefitsEn:"Common breakfast staple",goals:["energy"],portion:"1个(80g)",portionEn:"1 bun (80g)",freq:"moderate",caution:"",cautionEn:""},"饺子":{cal:206,protein:9,fat:6,carb:30,fiber:1,cat:"grain",defense:[],benefits:"碳水+蛋白质",benefitsEn:"Carbs + Protein",goals:["energy"],portion:"8个(200g)",portionEn:"8 dumplings (200g)",freq:"moderate",caution:"",cautionEn:""},"沙拉":{cal:50,protein:2,fat:2,carb:6,fiber:2,cat:"vegetable",defense:["micro","immune"],benefits:"生食保留酶和维C",benefitsEn:"Raw eating preserves enzymes & Vit C",goals:["gut","antioxidant"],portion:"一碗(150g)",portionEn:"1 bowl (150g)",freq:"daily",caution:"",cautionEn:""},"石榴":{cal:83,protein:1.7,fat:1.2,carb:19,fiber:4,cat:"fruit",defense:["angio","regen"],benefits:"石榴素促进干细胞再生",benefitsEn:"Pomegranate promotes stem cell regeneration",goals:["antioxidant","cardiovascular","skin"],portion:"半个(100g)",portionEn:"Half (100g)",freq:"often",caution:"",cautionEn:""},"猕猴桃":{cal:61,protein:1.1,fat:0.5,carb:15,fiber:3,cat:"fruit",defense:["immune","dna"],benefits:"维C密度超高",benefitsEn:"Extremely high Vitamin C density",goals:["immunity","skin","energy"],portion:"1个(80g)",portionEn:"1 kiwi (80g)",freq:"daily",caution:"",cautionEn:""},"虾":{cal:99,protein:24,fat:0.3,carb:0.2,fiber:0,cat:"protein",defense:["regen","immune"],benefits:"硒锌增强免疫",benefitsEn:"Selenium & zinc boost immunity",goals:["immunity","skin","energy"],portion:"8-10只(100g)",portionEn:"8-10 shrimp (100g)",freq:"often",caution:"海鲜过敏者禁食",cautionEn:"Avoid if seafood allergy"},"牛肉":{cal:250,protein:26,fat:15,carb:0,fiber:0,cat:"protein",defense:["regen","immune"],benefits:"铁质B12丰富",benefitsEn:"Rich in iron & B12",goals:["energy","immunity"],portion:"一块(100g)",portionEn:"1 piece (100g)",freq:"moderate",caution:"红肉每周不超过3次",cautionEn:"Red meat: max 3x/week"},"豆浆":{cal:33,protein:2.9,fat:1.6,carb:1.6,fiber:0.4,cat:"beverage",defense:["angio","regen"],benefits:"异黄酮调节激素",benefitsEn:"Isoflavones regulate hormones",goals:["bone","cardiovascular"],portion:"一杯(250ml)",portionEn:"1 glass (250ml)",freq:"daily",caution:"",cautionEn:""}};
 
-function obSelect(field, el){
-  document.querySelectorAll('#ob-'+field+' .ob-choice').forEach(b=>b.classList.remove('selected'));
-  el.classList.add('selected');
-  obState[field]=el.dataset.val;
-  checkObReady();
-}
-function obToggle(field, el){
-  el.classList.toggle('selected');
-  const container=document.getElementById('ob-'+field);
-  obState[field]=[...container.querySelectorAll('.ob-choice.selected')].map(b=>b.dataset.val);
-  checkObReady();
-}
-function checkObReady(){
-  const age=document.getElementById('ob-age').value;
-  const h=document.getElementById('ob-height').value;
-  const w=document.getElementById('ob-weight').value;
-  const ok=obState.gender && age && h && w && obState.goals.length>0;
-  document.getElementById('ob-submit').disabled=!ok;
-}
-// Listen for input changes
-document.addEventListener('DOMContentLoaded',()=>{
-  ['ob-age','ob-height','ob-weight'].forEach(id=>{
-    const el=document.getElementById(id);
-    if(el)el.addEventListener('input',checkObReady);
-  });
-});
+// Additional foods from old DB that we keep for matching but with shorter entries
+const FOODS_EXTRA={"覆盆子":{cal:52,protein:1.2,fat:0.7,carb:12,fiber:6.5,cat:"fruit",defense:["angio","dna"],benefits:"含鞣花酸",benefitsEn:"Contains ellagic acid",goals:["anticancer","antioxidant"],portion:"一小碗(100g)",portionEn:"1 bowl (100g)",freq:"often",caution:"",cautionEn:""},"黑莓":{cal:43,protein:1.4,fat:0.5,carb:10,fiber:5.3,cat:"fruit",defense:["dna","immune"],benefits:"多酚丰富",benefitsEn:"Rich in polyphenols",goals:["immunity","antioxidant","anticancer"],portion:"一小碗(100g)",portionEn:"1 bowl (100g)",freq:"often",caution:"",cautionEn:""},"柠檬":{cal:29,protein:1.1,fat:0.3,carb:9.3,fiber:2.8,cat:"fruit",defense:["immune","dna"],benefits:"维C双重保护",benefitsEn:"Dual Vitamin C protection",goals:["immunity","antioxidant","energy"],portion:"半个(40g)",portionEn:"Half (40g)",freq:"daily",caution:"",cautionEn:""},"樱桃":{cal:63,protein:1.1,fat:0.2,carb:16,fiber:2.1,cat:"fruit",defense:["angio","immune"],benefits:"花青素丰富，抗炎",benefitsEn:"Rich in anthocyanins, anti-inflammatory",goals:["inflammation","sleep","antioxidant"],portion:"10颗(80g)",portionEn:"10 cherries (80g)",freq:"often",caution:"",cautionEn:""},"红葡萄":{cal:69,protein:0.7,fat:0.2,carb:18,fiber:0.9,cat:"fruit",defense:["angio","regen"],benefits:"白藜芦醇保护心血管",benefitsEn:"Resveratrol protects cardiovascular",goals:["cardiovascular","antioxidant","brain"],portion:"一串(100g)",portionEn:"1 bunch (100g)",freq:"often",caution:"",cautionEn:""},"芒果":{cal:60,protein:0.8,fat:0.4,carb:15,fiber:1.6,cat:"fruit",defense:["immune","micro"],benefits:"含芒果苷支持肠道",benefitsEn:"Mangiferin supports gut",goals:["gut","immunity","skin"],portion:"半个(100g)",portionEn:"Half (100g)",freq:"often",caution:"糖分较高",cautionEn:"Higher sugar content"},"西瓜":{cal:30,protein:0.6,fat:0.2,carb:7.6,fiber:0.4,cat:"fruit",defense:["angio","immune"],benefits:"瓜氨酸促进血管健康",benefitsEn:"Citrulline promotes vascular health",goals:["cardiovascular","energy"],portion:"一片(200g)",portionEn:"1 slice (200g)",freq:"often",caution:"",cautionEn:""},"羽衣甘蓝":{cal:49,protein:4.3,fat:0.9,carb:9,fiber:3.6,cat:"vegetable",defense:["dna","immune","angio"],benefits:"维K和抗氧化剂",benefitsEn:"Vitamin K & antioxidants",goals:["anticancer","bone","antioxidant"],portion:"几片(60g)",portionEn:"A few leaves (60g)",freq:"daily",caution:"",cautionEn:""},"洋葱":{cal:40,protein:1.1,fat:0.1,carb:9.3,fiber:1.7,cat:"vegetable",defense:["micro","immune"],benefits:"槲皮素抗炎",benefitsEn:"Quercetin anti-inflammatory",goals:["immunity","inflammation","gut"],portion:"半个(80g)",portionEn:"Half (80g)",freq:"daily",caution:"",cautionEn:""},"南瓜":{cal:26,protein:1,fat:0.1,carb:6.5,fiber:0.5,cat:"vegetable",defense:["immune","regen"],benefits:"β-胡萝卜素和锌",benefitsEn:"Beta-carotene & zinc",goals:["immunity","skin","antioxidant"],portion:"一块(100g)",portionEn:"1 piece (100g)",freq:"often",caution:"",cautionEn:""},"藜麦":{cal:368,protein:14,fat:6,carb:64,fiber:7,cat:"grain",defense:["regen","dna"],benefits:"完全蛋白质",benefitsEn:"Complete protein",goals:["energy","weight"],portion:"半杯(40g)",portionEn:"Half cup (40g)",freq:"often",caution:"",cautionEn:""},"黑米":{cal:356,protein:9,fat:2.5,carb:72,fiber:3.5,cat:"grain",defense:["dna","angio"],benefits:"花青素含量极高",benefitsEn:"Very high anthocyanin content",goals:["antioxidant","anticancer","cardiovascular"],portion:"半杯(40g)",portionEn:"Half cup (40g)",freq:"often",caution:"",cautionEn:""},"毛豆":{cal:122,protein:11,fat:5,carb:9,fiber:5.2,cat:"protein",defense:["angio","micro"],benefits:"植物蛋白和纤维",benefitsEn:"Plant protein & fiber",goals:["weight","gut","cardiovascular"],portion:"一把(80g)",portionEn:"A handful (80g)",freq:"often",caution:"",cautionEn:""},"猪肉":{cal:242,protein:27,fat:14,carb:0,fiber:0,cat:"protein",defense:["regen"],benefits:"B族维生素来源",benefitsEn:"Source of B vitamins",goals:["energy"],portion:"一块(100g)",portionEn:"1 piece (100g)",freq:"moderate",caution:"控制摄入量",cautionEn:"Watch intake amounts"},"纳豆":{cal:211,protein:17,fat:11,carb:14,fiber:5.4,cat:"protein",defense:["angio","micro"],benefits:"纳豆激酶溶血栓",benefitsEn:"Nattokinase dissolves blood clots",goals:["cardiovascular","gut"],portion:"一盒(50g)",portionEn:"1 pack (50g)",freq:"often",caution:"服用抗凝药物者注意",cautionEn:"Caution if on blood thinners"},"亚麻籽":{cal:534,protein:18,fat:42,carb:29,fiber:27,cat:"nut",defense:["dna","angio","micro"],benefits:"木脂素保护DNA",benefitsEn:"Lignans protect DNA",goals:["anticancer","cardiovascular","gut"],portion:"1勺(10g)",portionEn:"1 tbsp (10g)",freq:"daily",caution:"",cautionEn:""},"奇亚籽":{cal:486,protein:17,fat:31,carb:42,fiber:34,cat:"nut",defense:["micro","dna"],benefits:"Omega-3和纤维",benefitsEn:"Omega-3 & fiber",goals:["gut","cardiovascular","weight"],portion:"1勺(10g)",portionEn:"1 tbsp (10g)",freq:"daily",caution:"",cautionEn:""},"红茶":{cal:1,protein:0,fat:0,carb:0,fiber:0,cat:"beverage",defense:["angio","micro"],benefits:"茶黄素护心血管",benefitsEn:"Theaflavins protect cardiovascular",goals:["cardiovascular","gut","energy"],portion:"一杯(250ml)",portionEn:"1 cup (250ml)",freq:"daily",caution:"",cautionEn:""},"蜂蜜":{cal:304,protein:0.3,fat:0,carb:82,fiber:0.2,cat:"other",defense:["immune","micro"],benefits:"天然抗菌益生元",benefitsEn:"Natural antimicrobial prebiotic",goals:["immunity","gut","energy"],portion:"1勺(15g)",portionEn:"1 tbsp (15g)",freq:"moderate",caution:"1岁以下婴儿禁食",cautionEn:"Do NOT give to infants under 1 year"},"泡菜":{cal:15,protein:1.1,fat:0.3,carb:2.4,fiber:1.4,cat:"other",defense:["micro","immune"],benefits:"乳酸菌发酵蔬菜",benefitsEn:"Lactic acid fermented vegetables",goals:["gut","immunity"],portion:"一碟(50g)",portionEn:"1 dish (50g)",freq:"daily",caution:"高钠，高血压者适量",cautionEn:"High sodium, hypertension patients: moderate"},"木耳":{cal:38,protein:0.5,fat:0.2,carb:10,fiber:5.8,cat:"other",defense:["angio","immune"],benefits:"多糖体清血管",benefitsEn:"Polysaccharides cleanse vessels",goals:["cardiovascular","immunity"],portion:"一把(干10g)",portionEn:"A handful dry (10g)",freq:"often",caution:"",cautionEn:""},"香菇":{cal:22,protein:3.1,fat:0.3,carb:3.3,fiber:1,cat:"other",defense:["immune","regen","angio"],benefits:"β-葡聚糖激活免疫",benefitsEn:"Beta-glucan activates immunity",goals:["immunity","anticancer"],portion:"几朵(80g)",portionEn:"A few (80g)",freq:"often",caution:"",cautionEn:""},"花椰菜":{cal:25,protein:1.9,fat:0.3,carb:5,fiber:2,cat:"vegetable",defense:["dna","immune"],benefits:"异硫氰酸酯抗癌",benefitsEn:"Isothiocyanates anti-cancer",goals:["anticancer","inflammation"],portion:"一朵(80g)",portionEn:"1 head (80g)",freq:"daily",caution:"",cautionEn:""},"芦笋":{cal:20,protein:2.2,fat:0.1,carb:3.9,fiber:2.1,cat:"vegetable",defense:["micro","regen"],benefits:"菊粉是优质益生元",benefitsEn:"Inulin is an excellent prebiotic",goals:["gut","energy"],portion:"5-6根(100g)",portionEn:"5-6 stalks (100g)",freq:"often",caution:"",cautionEn:""},"秋葵":{cal:33,protein:1.9,fat:0.2,carb:7,fiber:3.2,cat:"vegetable",defense:["micro","immune"],benefits:"黏液质保护肠道",benefitsEn:"Mucilage protects gut lining",goals:["gut","immunity"],portion:"5-6根(80g)",portionEn:"5-6 pods (80g)",freq:"often",caution:"",cautionEn:""},"甜椒":{cal:31,protein:1,fat:0.3,carb:6,fiber:2.1,cat:"vegetable",defense:["immune","dna"],benefits:"维C超橙子",benefitsEn:"More Vitamin C than oranges",goals:["immunity","skin","antioxidant"],portion:"半个(80g)",portionEn:"Half (80g)",freq:"daily",caution:"",cautionEn:""},"南瓜籽":{cal:559,protein:30,fat:49,carb:11,fiber:6,cat:"nut",defense:["immune","regen"],benefits:"锌镁丰富",benefitsEn:"Rich in zinc & magnesium",goals:["immunity","sleep","bone"],portion:"一把(15g)",portionEn:"A handful (15g)",freq:"daily",caution:"",cautionEn:""},"开心果":{cal:560,protein:20,fat:45,carb:28,fiber:10,cat:"nut",defense:["angio","micro"],benefits:"叶黄素护眼",benefitsEn:"Lutein protects eyes",goals:["cardiovascular","gut","antioxidant"],portion:"一把(15g)",portionEn:"A handful (15g)",freq:"daily",caution:"",cautionEn:""},"芝麻":{cal:573,protein:18,fat:50,carb:23,fiber:12,cat:"nut",defense:["dna","angio"],benefits:"芝麻素保肝",benefitsEn:"Sesamin protects liver",goals:["antioxidant","bone","cardiovascular"],portion:"1勺(10g)",portionEn:"1 tbsp (10g)",freq:"daily",caution:"",cautionEn:""},"石榴汁":{cal:54,protein:0.2,fat:0.3,carb:13,fiber:0.1,cat:"beverage",defense:["angio","regen"],benefits:"鞣花酸浓度极高",benefitsEn:"Very high ellagic acid concentration",goals:["cardiovascular","antioxidant","skin"],portion:"一杯(250ml)",portionEn:"1 glass (250ml)",freq:"often",caution:"",cautionEn:""},"胡萝卜汁":{cal:40,protein:0.9,fat:0.2,carb:9.3,fiber:0.8,cat:"beverage",defense:["immune","dna"],benefits:"β-胡萝卜素集中来源",benefitsEn:"Concentrated beta-carotene source",goals:["immunity","skin"],portion:"一杯(250ml)",portionEn:"1 glass (250ml)",freq:"often",caution:"",cautionEn:""},"肉桂":{cal:247,protein:4,fat:1.2,carb:81,fiber:53,cat:"other",defense:["angio","micro"],benefits:"调节血糖血管",benefitsEn:"Regulates blood sugar & vessels",goals:["cardiovascular","weight","gut"],portion:"少许(2g)",portionEn:"A pinch (2g)",freq:"daily",caution:"",cautionEn:""},"黑胡椒":{cal:251,protein:10,fat:3.3,carb:64,fiber:25,cat:"other",defense:["dna","immune"],benefits:"胡椒碱提升吸收20倍",benefitsEn:"Piperine enhances absorption 20x",goals:["immunity","antioxidant"],portion:"少许(1g)",portionEn:"A pinch (1g)",freq:"daily",caution:"",cautionEn:""},"炒饭":{cal:174,protein:5,fat:6,carb:25,fiber:0.8,cat:"grain",defense:[],benefits:"便捷能量来源",benefitsEn:"Quick energy source",goals:["energy"],portion:"一碗(250g)",portionEn:"1 bowl (250g)",freq:"moderate",caution:"",cautionEn:""},"三明治":{cal:250,protein:10,fat:10,carb:30,fiber:2,cat:"grain",defense:[],benefits:"均衡搭配",benefitsEn:"Balanced combination",goals:["energy"],portion:"1个(150g)",portionEn:"1 sandwich (150g)",freq:"moderate",caution:"",cautionEn:""}};
+Object.assign(FOODS,FOODS_EXTRA);
 
-function submitOnboarding(){
-  PROFILE.gender=obState.gender;
-  PROFILE.age=parseInt(document.getElementById('ob-age').value)||28;
-  PROFILE.height=parseFloat(document.getElementById('ob-height').value)||165;
-  PROFILE.weight=parseFloat(document.getElementById('ob-weight').value)||55;
-  PROFILE.goals=obState.goals.length?obState.goals:['immunity'];
-  saveProfileData(PROFILE);
-  recalcDerived();
-  document.getElementById('onboarding').style.display='none';
-  refreshApp();
-}
-
-// ═══════════════════════════════════════════
-// Profile Page Logic
-// ═══════════════════════════════════════════
-let pfState = {gender:null, goals:[]};
-
-function pfSelect(field, el){
-  document.querySelectorAll('#pf-'+field+' .ob-choice').forEach(b=>b.classList.remove('selected'));
-  el.classList.add('selected');
-  pfState[field]=el.dataset.val;
-}
-function pfToggle(field, el){
-  el.classList.toggle('selected');
-  const container=document.getElementById('pf-'+field);
-  pfState[field]=[...container.querySelectorAll('.ob-choice.selected')].map(b=>b.dataset.val);
-}
-
-function loadProfilePage(){
-  pfState.gender=PROFILE.gender;
-  pfState.goals=[...PROFILE.goals];
-  // Set gender buttons
-  document.querySelectorAll('#pf-gender .ob-choice').forEach(b=>{
-    b.classList.toggle('selected',b.dataset.val===PROFILE.gender);
-  });
-  // Set input values
-  document.getElementById('pf-age').value=PROFILE.age||'';
-  document.getElementById('pf-height').value=PROFILE.height||'';
-  document.getElementById('pf-weight').value=PROFILE.weight||'';
-  // Set goal buttons
-  document.querySelectorAll('#pf-goals .ob-choice').forEach(b=>{
-    b.classList.toggle('selected',PROFILE.goals.includes(b.dataset.val));
-  });
-  document.getElementById('pf-saved').style.display='none';
-}
-
-function saveProfile(){
-  PROFILE.gender=pfState.gender||PROFILE.gender;
-  PROFILE.age=parseInt(document.getElementById('pf-age').value)||PROFILE.age;
-  PROFILE.height=parseFloat(document.getElementById('pf-height').value)||PROFILE.height;
-  PROFILE.weight=parseFloat(document.getElementById('pf-weight').value)||PROFILE.weight;
-  PROFILE.goals=pfState.goals.length?pfState.goals:PROFILE.goals;
-  saveProfileData(PROFILE);
-  recalcDerived();
-  refreshApp();
-  const el=document.getElementById('pf-saved');
-  el.style.display='block';
-  setTimeout(()=>el.style.display='none',2000);
-}
-
-function resetProfile(){
-  if(!confirm('This will reset your profile. You will see the setup screen again. Continue?'))return;
-  localStorage.removeItem('ew_profile');
-  location.reload();
-}
-
-function refreshApp(){
-  updateProfileBar();
-  renderMeals();
-  saveDayToHistory(TODAY);
-}
-
-const GOAL_NAMES = {
-  immunity:"增强免疫力",antioxidant:"抗氧化抗衰老",gut:"改善肠道",
-  cardiovascular:"心血管保护",anticancer:"癌症预防",inflammation:"减少炎症",
-  brain:"脑功能",weight:"体重管理",skin:"皮肤健康",
-  energy:"提升精力",sleep:"改善睡眠",bone:"骨骼健康"
-};
-const DEF_NAMES = {angio:"血管生成",regen:"细胞再生",micro:"微生物组",dna:"DNA保护",immune:"免疫系统"};
-const DEF_COLORS = {angio:"#22c55e",regen:"#3b82f6",micro:"#a855f7",dna:"#eab308",immune:"#ef4444"};
-
-// ═══════════════════════════════════════════
-// Food Database
-// ═══════════════════════════════════════════
-const FOODS = {
-  "蓝莓":{cal:57,protein:0.7,fat:0.3,carb:14.5,fiber:2.4,cat:"fruit",defense:["angio","dna","immune","regen"],benefits:"花青素极高，抗氧化之王",goals:["antioxidant","brain","anticancer","immunity"],portion:"一小碗(100g)"},
-  "草莓":{cal:32,protein:0.7,fat:0.3,carb:7.7,fiber:2,cat:"fruit",defense:["dna","immune"],benefits:"富含维C和鞣花酸",goals:["antioxidant","skin","immunity"],portion:"5-6颗(100g)"},
-  "覆盆子":{cal:52,protein:1.2,fat:0.7,carb:12,fiber:6.5,cat:"fruit",defense:["angio","dna"],benefits:"含鞣花酸，抑制异常血管",goals:["anticancer","antioxidant"],portion:"一小碗(100g)"},
-  "黑莓":{cal:43,protein:1.4,fat:0.5,carb:10,fiber:5.3,cat:"fruit",defense:["dna","immune"],benefits:"多酚丰富，增强免疫",goals:["immunity","antioxidant","anticancer"],portion:"一小碗(100g)"},
-  "石榴":{cal:83,protein:1.7,fat:1.2,carb:19,fiber:4,cat:"fruit",defense:["angio","regen"],benefits:"石榴素促进干细胞再生",goals:["antioxidant","cardiovascular","skin"],portion:"半个(100g)"},
-  "苹果":{cal:52,protein:0.3,fat:0.2,carb:14,fiber:2.4,cat:"fruit",defense:["micro","dna"],benefits:"果胶是优质益生元",goals:["gut","weight","antioxidant"],portion:"1个(180g)"},
-  "橙子":{cal:47,protein:0.9,fat:0.1,carb:12,fiber:2.4,cat:"fruit",defense:["immune","angio"],benefits:"维C含量高",goals:["immunity","skin","energy"],portion:"1个(150g)"},
-  "柠檬":{cal:29,protein:1.1,fat:0.3,carb:9.3,fiber:2.8,cat:"fruit",defense:["immune","dna"],benefits:"柠檬酸和维C双重保护",goals:["immunity","antioxidant","energy"],portion:"半个(40g)"},
-  "猕猴桃":{cal:61,protein:1.1,fat:0.5,carb:15,fiber:3,cat:"fruit",defense:["immune","dna"],benefits:"维C密度超高",goals:["immunity","skin","energy"],portion:"1个(80g)"},
-  "樱桃":{cal:63,protein:1.1,fat:0.2,carb:16,fiber:2.1,cat:"fruit",defense:["angio","immune"],benefits:"花青素丰富，抗炎",goals:["inflammation","sleep","antioxidant"],portion:"10颗(80g)"},
-  "芒果":{cal:60,protein:0.8,fat:0.4,carb:15,fiber:1.6,cat:"fruit",defense:["immune","micro"],benefits:"含芒果苷，支持肠道",goals:["gut","immunity","skin"],portion:"半个(100g)"},
-  "木瓜":{cal:43,protein:0.5,fat:0.3,carb:11,fiber:1.7,cat:"fruit",defense:["immune","micro"],benefits:"木瓜蛋白酶助消化",goals:["gut","immunity","skin"],portion:"一片(100g)"},
-  "番茄":{cal:18,protein:0.9,fat:0.2,carb:3.9,fiber:1.2,cat:"fruit",defense:["angio","dna","immune"],benefits:"番茄红素强力抗癌",goals:["anticancer","cardiovascular","skin"],portion:"1个(120g)"},
-  "红葡萄":{cal:69,protein:0.7,fat:0.2,carb:18,fiber:0.9,cat:"fruit",defense:["angio","regen"],benefits:"白藜芦醇保护心血管",goals:["cardiovascular","antioxidant","brain"],portion:"一串(100g)"},
-  "蔓越莓":{cal:46,protein:0.4,fat:0.1,carb:12,fiber:4.6,cat:"fruit",defense:["micro","immune"],benefits:"防止有害菌粘附",goals:["gut","immunity"],portion:"一把(30g)"},
-  "香蕉":{cal:89,protein:1.1,fat:0.3,carb:23,fiber:2.6,cat:"fruit",defense:["micro","regen"],benefits:"益生元纤维",goals:["gut","energy","sleep"],portion:"1根(120g)"},
-  "牛油果":{cal:160,protein:2,fat:15,carb:8.5,fiber:6.7,cat:"fruit",defense:["regen","micro"],benefits:"健康脂肪助细胞修复",goals:["brain","skin","weight","inflammation"],portion:"半个(70g)"},
-  "火龙果":{cal:50,protein:1.1,fat:0.4,carb:11,fiber:1.9,cat:"fruit",defense:["micro","immune"],benefits:"益生元纤维丰富",goals:["gut","skin","antioxidant"],portion:"半个(150g)"},
-  "西瓜":{cal:30,protein:0.6,fat:0.2,carb:7.6,fiber:0.4,cat:"fruit",defense:["angio","immune"],benefits:"瓜氨酸促进血管健康",goals:["cardiovascular","energy"],portion:"一片(200g)"},
-  "梨":{cal:57,protein:0.4,fat:0.1,carb:15,fiber:3.1,cat:"fruit",defense:["micro","dna"],benefits:"纤维丰富",goals:["gut","weight"],portion:"1个(170g)"},
-  "桃子":{cal:39,protein:0.9,fat:0.3,carb:10,fiber:1.5,cat:"fruit",defense:["dna","immune"],benefits:"含绿原酸保护DNA",goals:["antioxidant","skin"],portion:"1个(150g)"},
-  "哈密瓜":{cal:34,protein:0.8,fat:0.2,carb:8.2,fiber:0.9,cat:"fruit",defense:["immune","regen"],benefits:"β-胡萝卜素来源",goals:["immunity","skin","energy"],portion:"一片(150g)"},
-  "葡萄柚":{cal:42,protein:0.8,fat:0.1,carb:11,fiber:1.6,cat:"fruit",defense:["angio","immune"],benefits:"柚皮苷调节血管",goals:["cardiovascular","weight","immunity"],portion:"半个(150g)"},
-  "西兰花":{cal:34,protein:2.8,fat:0.4,carb:7,fiber:2.6,cat:"vegetable",defense:["dna","angio","immune"],benefits:"萝卜硫素激活DNA修复",goals:["anticancer","immunity","inflammation"],portion:"一朵(80g)"},
-  "菠菜":{cal:23,protein:2.9,fat:0.4,carb:3.6,fiber:2.2,cat:"vegetable",defense:["regen","angio","immune"],benefits:"叶酸促进细胞更新",goals:["antioxidant","energy","bone","brain"],portion:"一把(80g)"},
-  "羽衣甘蓝":{cal:49,protein:4.3,fat:0.9,carb:9,fiber:3.6,cat:"vegetable",defense:["dna","immune","angio"],benefits:"维K和抗氧化剂",goals:["anticancer","bone","antioxidant"],portion:"几片(60g)"},
-  "大蒜":{cal:149,protein:6.4,fat:0.5,carb:33,fiber:2.1,cat:"vegetable",defense:["immune","angio","micro"],benefits:"天然抗菌剂",goals:["immunity","anticancer","cardiovascular"],portion:"2-3瓣(10g)"},
-  "洋葱":{cal:40,protein:1.1,fat:0.1,carb:9.3,fiber:1.7,cat:"vegetable",defense:["micro","immune"],benefits:"槲皮素抗炎",goals:["immunity","inflammation","gut"],portion:"半个(80g)"},
-  "胡萝卜":{cal:41,protein:0.9,fat:0.2,carb:10,fiber:2.8,cat:"vegetable",defense:["dna","immune","angio"],benefits:"β-胡萝卜素保护DNA",goals:["anticancer","skin","immunity"],portion:"1根(100g)"},
-  "红薯":{cal:86,protein:1.6,fat:0.1,carb:20,fiber:3,cat:"vegetable",defense:["regen","immune"],benefits:"维A促进细胞再生",goals:["skin","immunity","gut","energy"],portion:"半个(100g)"},
-  "花椰菜":{cal:25,protein:1.9,fat:0.3,carb:5,fiber:2,cat:"vegetable",defense:["dna","immune"],benefits:"异硫氰酸酯抗癌",goals:["anticancer","inflammation"],portion:"一朵(80g)"},
-  "卷心菜":{cal:25,protein:1.3,fat:0.1,carb:5.8,fiber:2.5,cat:"vegetable",defense:["micro","dna"],benefits:"纤维丰富",goals:["gut","anticancer","weight"],portion:"几片(80g)"},
-  "芦笋":{cal:20,protein:2.2,fat:0.1,carb:3.9,fiber:2.1,cat:"vegetable",defense:["micro","regen"],benefits:"菊粉是优质益生元",goals:["gut","energy"],portion:"5-6根(100g)"},
-  "甜椒":{cal:31,protein:1,fat:0.3,carb:6,fiber:2.1,cat:"vegetable",defense:["immune","dna"],benefits:"维C超橙子",goals:["immunity","skin","antioxidant"],portion:"半个(80g)"},
-  "茄子":{cal:25,protein:1,fat:0.2,carb:6,fiber:3,cat:"vegetable",defense:["angio","dna"],benefits:"茄碱抑制血管新生",goals:["anticancer","antioxidant"],portion:"半根(100g)"},
-  "芹菜":{cal:16,protein:0.7,fat:0.2,carb:3,fiber:1.6,cat:"vegetable",defense:["angio","immune"],benefits:"芹菜素抗炎",goals:["cardiovascular","inflammation","weight"],portion:"2根(80g)"},
-  "小白菜":{cal:13,protein:1.5,fat:0.2,carb:2.2,fiber:1,cat:"vegetable",defense:["dna","immune"],benefits:"十字花科",goals:["anticancer","bone","immunity"],portion:"一把(100g)"},
-  "甜菜根":{cal:43,protein:1.6,fat:0.2,carb:10,fiber:2.8,cat:"vegetable",defense:["angio","regen"],benefits:"硝酸盐促循环",goals:["cardiovascular","energy","brain"],portion:"半个(80g)"},
-  "南瓜":{cal:26,protein:1,fat:0.1,carb:6.5,fiber:0.5,cat:"vegetable",defense:["immune","regen"],benefits:"β-胡萝卜素和锌",goals:["immunity","skin","antioxidant"],portion:"一块(100g)"},
-  "苦瓜":{cal:17,protein:1,fat:0.2,carb:3.7,fiber:2.8,cat:"vegetable",defense:["angio","immune"],benefits:"调节血糖",goals:["weight","immunity","anticancer"],portion:"半根(100g)"},
-  "秋葵":{cal:33,protein:1.9,fat:0.2,carb:7,fiber:3.2,cat:"vegetable",defense:["micro","immune"],benefits:"黏液质保护肠道",goals:["gut","immunity"],portion:"5-6根(80g)"},
-  "山药":{cal:118,protein:1.5,fat:0.1,carb:28,fiber:1.6,cat:"vegetable",defense:["micro","regen"],benefits:"促进激素平衡",goals:["gut","energy","bone"],portion:"一段(100g)"},
-  "紫甘蓝":{cal:31,protein:1.4,fat:0.2,carb:7,fiber:2.1,cat:"vegetable",defense:["dna","angio"],benefits:"花青素极高",goals:["antioxidant","anticancer","brain"],portion:"几片(80g)"},
-  "生姜":{cal:80,protein:1.8,fat:0.8,carb:18,fiber:2,cat:"vegetable",defense:["immune","micro","angio"],benefits:"姜辣素抗炎抗氧化",goals:["inflammation","immunity","gut"],portion:"几片(10g)"},
-  "豆芽":{cal:31,protein:3.2,fat:0.2,carb:5.9,fiber:1.8,cat:"vegetable",defense:["regen","micro"],benefits:"活性酶丰富",goals:["energy","gut"],portion:"一把(100g)"},
-  "燕麦":{cal:389,protein:17,fat:7,carb:66,fiber:11,cat:"grain",defense:["micro","angio"],benefits:"β-葡聚糖降胆固醇",goals:["gut","cardiovascular","weight","energy"],portion:"半杯(40g)"},
-  "藜麦":{cal:368,protein:14,fat:6,carb:64,fiber:7,cat:"grain",defense:["regen","dna"],benefits:"完全蛋白质",goals:["energy","weight"],portion:"半杯(40g)"},
-  "糙米":{cal:362,protein:7.5,fat:2.7,carb:76,fiber:3.4,cat:"grain",defense:["micro","dna"],benefits:"全谷维生素矿物质",goals:["gut","energy","weight"],portion:"一碗(150g熟)"},
-  "黑米":{cal:356,protein:9,fat:2.5,carb:72,fiber:3.5,cat:"grain",defense:["dna","angio"],benefits:"花青素含量极高",goals:["antioxidant","anticancer","cardiovascular"],portion:"半杯(40g)"},
-  "小米":{cal:378,protein:11,fat:4.2,carb:73,fiber:8.5,cat:"grain",defense:["micro","regen"],benefits:"易消化，B族维生素",goals:["gut","sleep","energy"],portion:"半杯(40g)"},
-  "荞麦":{cal:343,protein:13,fat:3.4,carb:72,fiber:10,cat:"grain",defense:["angio","dna"],benefits:"芦丁保护血管",goals:["cardiovascular","antioxidant"],portion:"半杯(40g)"},
-  "红豆":{cal:329,protein:20,fat:0.5,carb:61,fiber:12,cat:"grain",defense:["micro","regen"],benefits:"高纤维高蛋白",goals:["gut","weight","energy"],portion:"半杯熟(80g)"},
-  "绿豆":{cal:347,protein:24,fat:1.2,carb:63,fiber:16,cat:"grain",defense:["immune","dna"],benefits:"清热解毒",goals:["immunity","antioxidant"],portion:"半杯熟(80g)"},
-  "薏仁":{cal:360,protein:13,fat:4.9,carb:65,fiber:4.2,cat:"grain",defense:["micro","immune"],benefits:"薏苡仁酯抗炎",goals:["inflammation","skin","gut"],portion:"半杯(40g)"},
-  "黑豆":{cal:341,protein:22,fat:1.4,carb:62,fiber:16,cat:"grain",defense:["dna","regen"],benefits:"花青素和异黄酮",goals:["antioxidant","bone"],portion:"半杯熟(80g)"},
-  "鹰嘴豆":{cal:364,protein:19,fat:6,carb:61,fiber:17,cat:"grain",defense:["micro","regen"],benefits:"优质植物蛋白",goals:["gut","weight","energy"],portion:"半杯熟(80g)"},
-  "扁豆":{cal:352,protein:25,fat:1.1,carb:60,fiber:11,cat:"grain",defense:["micro","dna"],benefits:"叶酸铁质丰富",goals:["energy","gut","bone"],portion:"半杯熟(80g)"},
-  "米饭":{cal:130,protein:2.7,fat:0.3,carb:28,fiber:0.4,cat:"grain",defense:[],benefits:"基础能量来源",goals:["energy"],portion:"一碗(150g)"},
-  "面条":{cal:138,protein:4.5,fat:0.6,carb:28,fiber:1.2,cat:"grain",defense:[],benefits:"碳水能量来源",goals:["energy"],portion:"一碗(200g)"},
-  "面包":{cal:265,protein:9,fat:3.2,carb:49,fiber:2.7,cat:"grain",defense:[],benefits:"便捷碳水来源",goals:["energy"],portion:"2片(60g)"},
-  "三文鱼":{cal:208,protein:20,fat:13,carb:0,fiber:0,cat:"protein",defense:["angio","regen","immune"],benefits:"Omega-3抗炎，DHA护脑",goals:["cardiovascular","brain","inflammation","skin"],portion:"一片(100g)"},
-  "鸡蛋":{cal:155,protein:13,fat:11,carb:1.1,fiber:0,cat:"protein",defense:["regen","dna"],benefits:"胆碱促细胞膜修复",goals:["brain","energy"],portion:"1个(50g)"},
-  "豆腐":{cal:76,protein:8,fat:4.8,carb:1.9,fiber:0.3,cat:"protein",defense:["angio","regen"],benefits:"异黄酮调节血管",goals:["cardiovascular","bone","weight"],portion:"一块(100g)"},
-  "毛豆":{cal:122,protein:11,fat:5,carb:9,fiber:5.2,cat:"protein",defense:["angio","micro"],benefits:"植物蛋白和纤维",goals:["weight","gut","cardiovascular"],portion:"一把(80g)"},
-  "鸡胸肉":{cal:165,protein:31,fat:3.6,carb:0,fiber:0,cat:"protein",defense:["regen","immune"],benefits:"优质蛋白低脂",goals:["weight","energy"],portion:"一块(100g)"},
-  "虾":{cal:99,protein:24,fat:0.3,carb:0.2,fiber:0,cat:"protein",defense:["regen","immune"],benefits:"硒锌增强免疫",goals:["immunity","skin","energy"],portion:"8-10只(100g)"},
-  "牛肉":{cal:250,protein:26,fat:15,carb:0,fiber:0,cat:"protein",defense:["regen","immune"],benefits:"铁质B12丰富",goals:["energy","immunity"],portion:"一块(100g)"},
-  "猪肉":{cal:242,protein:27,fat:14,carb:0,fiber:0,cat:"protein",defense:["regen"],benefits:"B族维生素来源",goals:["energy"],portion:"一块(100g)"},
-  "酸奶":{cal:59,protein:3.5,fat:3.3,carb:4.7,fiber:0,cat:"protein",defense:["micro","immune"],benefits:"活性益生菌",goals:["gut","immunity","bone","skin"],portion:"一杯(150g)"},
-  "牛奶":{cal:42,protein:3.4,fat:1,carb:5,fiber:0,cat:"protein",defense:["regen"],benefits:"钙质丰富",goals:["bone","energy"],portion:"一杯(250ml)"},
-  "纳豆":{cal:211,protein:17,fat:11,carb:14,fiber:5.4,cat:"protein",defense:["angio","micro"],benefits:"纳豆激酶溶血栓",goals:["cardiovascular","gut"],portion:"一盒(50g)"},
-  "沙丁鱼":{cal:208,protein:25,fat:11,carb:0,fiber:0,cat:"protein",defense:["angio","regen"],benefits:"高Omega-3和钙",goals:["cardiovascular","bone","brain"],portion:"一条(80g)"},
-  "牡蛎":{cal:81,protein:9,fat:2,carb:5,fiber:0,cat:"protein",defense:["immune","regen"],benefits:"锌含量极高",goals:["immunity","skin"],portion:"3-4个(80g)"},
-  "海参":{cal:55,protein:13,fat:0.2,carb:0.5,fiber:0,cat:"protein",defense:["immune","regen"],benefits:"海参多糖增强免疫",goals:["immunity","skin"],portion:"一条(50g)"},
-  "鲭鱼":{cal:205,protein:19,fat:14,carb:0,fiber:0,cat:"protein",defense:["angio","regen","immune"],benefits:"EPA+DHA极高",goals:["cardiovascular","brain","inflammation"],portion:"一片(100g)"},
-  "核桃":{cal:654,protein:15,fat:65,carb:14,fiber:6.7,cat:"nut",defense:["regen","dna","micro"],benefits:"ALA Omega-3护脑",goals:["brain","cardiovascular","antioxidant"],portion:"3-4个(20g)"},
-  "杏仁":{cal:579,protein:21,fat:50,carb:22,fiber:12,cat:"nut",defense:["micro","dna"],benefits:"维E和膳食纤维",goals:["gut","skin","cardiovascular"],portion:"10颗(15g)"},
-  "亚麻籽":{cal:534,protein:18,fat:42,carb:29,fiber:27,cat:"nut",defense:["dna","angio","micro"],benefits:"木脂素保护DNA",goals:["anticancer","cardiovascular","gut"],portion:"1勺(10g)"},
-  "南瓜籽":{cal:559,protein:30,fat:49,carb:11,fiber:6,cat:"nut",defense:["immune","regen"],benefits:"锌镁丰富",goals:["immunity","sleep","bone"],portion:"一把(15g)"},
-  "芝麻":{cal:573,protein:18,fat:50,carb:23,fiber:12,cat:"nut",defense:["dna","angio"],benefits:"芝麻素保肝",goals:["antioxidant","bone","cardiovascular"],portion:"1勺(10g)"},
-  "葵花籽":{cal:584,protein:21,fat:51,carb:20,fiber:8.6,cat:"nut",defense:["dna","regen"],benefits:"维E极高",goals:["antioxidant","skin","energy"],portion:"一把(15g)"},
-  "开心果":{cal:560,protein:20,fat:45,carb:28,fiber:10,cat:"nut",defense:["angio","micro"],benefits:"叶黄素护眼",goals:["cardiovascular","gut","antioxidant"],portion:"一把(15g)"},
-  "奇亚籽":{cal:486,protein:17,fat:31,carb:42,fiber:34,cat:"nut",defense:["micro","dna"],benefits:"Omega-3和纤维",goals:["gut","cardiovascular","weight"],portion:"1勺(10g)"},
-  "绿茶":{cal:1,protein:0,fat:0,carb:0,fiber:0,cat:"beverage",defense:["angio","dna","immune","regen"],benefits:"EGCG最强儿茶素",goals:["anticancer","antioxidant","weight","brain"],portion:"一杯(250ml)"},
-  "红茶":{cal:1,protein:0,fat:0,carb:0,fiber:0,cat:"beverage",defense:["angio","micro"],benefits:"茶黄素护心血管",goals:["cardiovascular","gut","energy"],portion:"一杯(250ml)"},
-  "咖啡":{cal:2,protein:0.3,fat:0,carb:0,fiber:0,cat:"beverage",defense:["immune","dna","micro"],benefits:"绿原酸抗氧化",goals:["brain","energy","anticancer","weight"],portion:"一杯(250ml)"},
-  "豆浆":{cal:33,protein:2.9,fat:1.6,carb:1.6,fiber:0.4,cat:"beverage",defense:["angio","regen"],benefits:"异黄酮调节激素",goals:["bone","cardiovascular"],portion:"一杯(250ml)"},
-  "石榴汁":{cal:54,protein:0.2,fat:0.3,carb:13,fiber:0.1,cat:"beverage",defense:["angio","regen"],benefits:"鞣花酸浓度极高",goals:["cardiovascular","antioxidant","skin"],portion:"一杯(250ml)"},
-  "胡萝卜汁":{cal:40,protein:0.9,fat:0.2,carb:9.3,fiber:0.8,cat:"beverage",defense:["immune","dna"],benefits:"β-胡萝卜素集中来源",goals:["immunity","skin"],portion:"一杯(250ml)"},
-  "黑巧克力":{cal:546,protein:5,fat:31,carb:60,fiber:7,cat:"other",defense:["angio","regen","micro"],benefits:"可可黄烷醇促血管和干细胞",goals:["cardiovascular","brain","antioxidant"],portion:"2-3块(20g)"},
-  "橄榄油":{cal:884,protein:0,fat:100,carb:0,fiber:0,cat:"other",defense:["angio","dna","micro"],benefits:"橄榄多酚保护DNA",goals:["cardiovascular","anticancer","inflammation","brain"],portion:"1勺(10ml)"},
-  "蜂蜜":{cal:304,protein:0.3,fat:0,carb:82,fiber:0.2,cat:"other",defense:["immune","micro"],benefits:"天然抗菌益生元",goals:["immunity","gut","energy"],portion:"1勺(15g)"},
-  "泡菜":{cal:15,protein:1.1,fat:0.3,carb:2.4,fiber:1.4,cat:"other",defense:["micro","immune"],benefits:"乳酸菌发酵蔬菜",goals:["gut","immunity"],portion:"一碟(50g)"},
-  "蘑菇":{cal:22,protein:3.1,fat:0.3,carb:3.3,fiber:1,cat:"other",defense:["immune","regen","angio"],benefits:"β-葡聚糖激活免疫",goals:["immunity","anticancer"],portion:"几朵(80g)"},
-  "香菇":{cal:22,protein:3.1,fat:0.3,carb:3.3,fiber:1,cat:"other",defense:["immune","regen","angio"],benefits:"β-葡聚糖激活免疫",goals:["immunity","anticancer"],portion:"几朵(80g)"},
-  "木耳":{cal:38,protein:0.5,fat:0.2,carb:10,fiber:5.8,cat:"other",defense:["angio","immune"],benefits:"多糖体清血管",goals:["cardiovascular","immunity"],portion:"一把(干10g)"},
-  "姜黄":{cal:312,protein:10,fat:3.3,carb:67,fiber:21,cat:"other",defense:["angio","dna","immune"],benefits:"姜黄素超级抗炎",goals:["inflammation","anticancer","brain","immunity"],portion:"半勺(2g)"},
-  "肉桂":{cal:247,protein:4,fat:1.2,carb:81,fiber:53,cat:"other",defense:["angio","micro"],benefits:"调节血糖血管",goals:["cardiovascular","weight","gut"],portion:"少许(2g)"},
-  "黑胡椒":{cal:251,protein:10,fat:3.3,carb:64,fiber:25,cat:"other",defense:["dna","immune"],benefits:"胡椒碱提升吸收20倍",goals:["immunity","antioxidant"],portion:"少许(1g)"},
-  "包子":{cal:220,protein:7,fat:3,carb:40,fiber:1.5,cat:"grain",defense:[],benefits:"常见早餐主食",goals:["energy"],portion:"1个(80g)"},
-  "饺子":{cal:206,protein:9,fat:6,carb:30,fiber:1,cat:"grain",defense:[],benefits:"碳水+蛋白质",goals:["energy"],portion:"8个(200g)"},
-  "炒饭":{cal:174,protein:5,fat:6,carb:25,fiber:0.8,cat:"grain",defense:[],benefits:"便捷能量来源",goals:["energy"],portion:"一碗(250g)"},
-  "三明治":{cal:250,protein:10,fat:10,carb:30,fiber:2,cat:"grain",defense:[],benefits:"均衡搭配",goals:["energy"],portion:"1个(150g)"},
-  "沙拉":{cal:50,protein:2,fat:2,carb:6,fiber:2,cat:"vegetable",defense:["micro","immune"],benefits:"生食保留酶和维C",goals:["gut","antioxidant"],portion:"一碗(150g)"},
-};
-
-const CAT_LABEL={fruit:"水果",vegetable:"蔬菜",grain:"谷物",protein:"蛋白质",nut:"坚果",beverage:"饮品",other:"其他"};
+const DEF_COLORS={angio:"#3a9a5c",regen:"#3a6fd4",micro:"#7a4ad4",dna:"#e8973a",immune:"#d4483a"};
+function catLabel(c){return t('cat_'+c)||c}
+function defName(d){return t('def_'+d)||d}
+function goalName(g){return t('goal_'+g)||g}
 const CAT_CLS={fruit:"ftag-fruit",vegetable:"ftag-vegetable",grain:"ftag-grain",protein:"ftag-protein",nut:"ftag-nut",beverage:"ftag-beverage",other:"ftag-other"};
 
 // ═══════════════════════════════════════════
 // Meals & State
 // ═══════════════════════════════════════════
-const MEALS = [
-  {id:"breakfast",name:"早餐",time:"7:00 - 9:00"},
-  {id:"lunch",name:"午餐",time:"11:30 - 13:00"},
-  {id:"snack",name:"加餐",time:"15:00 - 16:00"},
-  {id:"dinner",name:"晚餐",time:"18:00 - 20:00"},
-];
-
-let mealRecords = {breakfast:[],lunch:[],snack:[],dinner:[]};
-const TODAY = new Date().toISOString().slice(0,10);
-
-// Load today's data
+function getMeals(){return[{id:"breakfast",name:t('meal_breakfast'),time:t('meal_time_b')},{id:"lunch",name:t('meal_lunch'),time:t('meal_time_l')},{id:"snack",name:t('meal_snack'),time:t('meal_time_s')},{id:"dinner",name:t('meal_dinner'),time:t('meal_time_d')}];}
+let mealRecords={breakfast:[],lunch:[],snack:[],dinner:[]};
+const TODAY=new Date().toISOString().slice(0,10);
 try{const s=localStorage.getItem('ew_'+TODAY);if(s)mealRecords=JSON.parse(s);}catch(e){}
+function save(){try{localStorage.setItem('ew_'+TODAY,JSON.stringify(mealRecords));}catch(e){}saveDayToHistory(TODAY);}
 
-function save(){
-  try{localStorage.setItem('ew_'+TODAY,JSON.stringify(mealRecords));}catch(e){}
-  // Also save to history
-  saveDayToHistory(TODAY);
-}
+// History
+function getHistory(){try{return JSON.parse(localStorage.getItem('ew_history')||'{}');}catch(e){return {};}}
+function saveDayToHistory(ds){const h=getHistory();const af=[];getMeals().forEach(m=>{let recs;if(ds===TODAY)recs=mealRecords[m.id];else{try{const d=JSON.parse(localStorage.getItem('ew_'+ds)||'{}');recs=d[m.id]||[];}catch(e){recs=[];}}recs.forEach(f=>af.push(f));});if(!af.length){delete h[ds];}else{const s=calcStats(af);h[ds]={score:s.score,cal:s.totalCal,foods:af.length,names:af.map(f=>f.name)};}try{localStorage.setItem('ew_history',JSON.stringify(h));}catch(e){}}
 
-// ═══════════════════════════════════════════
-// History storage (for calendar)
-// ═══════════════════════════════════════════
-function getHistory(){
-  try{return JSON.parse(localStorage.getItem('ew_history')||'{}');}catch(e){return {};}
-}
-function saveDayToHistory(dateStr){
-  const h=getHistory();
-  const allFoods=[];
-  MEALS.forEach(m=>{
-    const key='ew_'+dateStr;
-    let recs;
-    if(dateStr===TODAY) recs=mealRecords[m.id];
-    else{try{const d=JSON.parse(localStorage.getItem(key)||'{}');recs=d[m.id]||[];}catch(e){recs=[];}}
-    recs.forEach(f=>allFoods.push(f));
-  });
-  if(allFoods.length===0){delete h[dateStr];}
-  else{
-    const stats = calcStats(allFoods);
-    h[dateStr]={score:stats.score,cal:stats.totalCal,foods:allFoods.length,names:allFoods.map(f=>f.name)};
-  }
-  try{localStorage.setItem('ew_history',JSON.stringify(h));}catch(e){}
-}
-
-function calcStats(allFoods){
-  let totalCal=0,totalP=0,totalF=0,totalC=0,totalFiber=0;
-  const allDef=new Set(),goalCov={};
-  PROFILE.goals.forEach(g=>goalCov[g]=0);
-  allFoods.forEach(f=>{
-    const n=f.nutrition||{};
-    totalCal+=n.cal||0;totalP+=n.protein||0;totalF+=n.fat||0;totalC+=n.carb||0;totalFiber+=n.fiber||0;
-    (n.defense||[]).forEach(d=>allDef.add(d));
-    (n.goals||[]).forEach(g=>{if(g in goalCov)goalCov[g]++;});
-  });
-  const calPct=Math.min(100,(totalCal/DAILY_CAL)*100);
-  const pTarget=PROFILE.weight*1.2;
-  const pPct=Math.min(100,(totalP/pTarget)*100);
-  const defScore=Math.round((allDef.size/5)*100);
-  const gKeys=Object.keys(goalCov);
-  const goalScore=gKeys.length?Math.round((gKeys.filter(g=>goalCov[g]>0).length/gKeys.length)*100):0;
-  const score=Math.round(defScore*.3+goalScore*.3+Math.min(100,calPct)*.2+pPct*.2);
-  return{score,totalCal,totalP,totalF,totalC,totalFiber,allDef,goalCov,calPct,pTarget,pPct,defScore,goalScore};
-}
+function calcStats(af){let tc=0,tp=0,tf=0,tcar=0,tfi=0;const ad=new Set(),gc={};PROFILE.goals.forEach(g=>gc[g]=0);af.forEach(f=>{const n=f.nutrition||{};tc+=n.cal||0;tp+=n.protein||0;tf+=n.fat||0;tcar+=n.carb||0;tfi+=n.fiber||0;(n.defense||[]).forEach(d=>ad.add(d));(n.goals||[]).forEach(g=>{if(g in gc)gc[g]++;});});const pt=PROFILE.weight*1.2;const ds=Math.round((ad.size/5)*100);const gk=Object.keys(gc);const gs=gk.length?Math.round((gk.filter(g=>gc[g]>0).length/gk.length)*100):0;const sc=Math.round(ds*.3+gs*.3+Math.min(100,(tc/DAILY_CAL)*100)*.2+Math.min(100,(tp/pt)*100)*.2);return{score:sc,totalCal:tc,totalP:tp,totalF:tf,totalC:tcar,totalFiber:tfi,allDef:ad,goalCov:gc,pTarget:pt};}
 
 // ═══════════════════════════════════════════
 // Init
 // ═══════════════════════════════════════════
 let calYear,calMonth,selectedDate=TODAY;
-
-function updateProfileBar(){
-  const g=PROFILE.gender==='female'?'女':'男';
-  document.getElementById('profileBar').innerHTML=`
-    <span class="profile-pill">${g} ${PROFILE.age}岁</span>
-    <span class="profile-pill">${PROFILE.height}cm / ${PROFILE.weight}kg</span>
-    <span class="profile-pill">BMI ${BMI} ${BMI_STATUS}</span>`;
-}
-
 function init(){
-  // Check if first time — show onboarding
-  if(!isProfileSet()){
-    document.getElementById('onboarding').style.display='flex';
-  }
-
+  recalcDerived();applyI18n();
+  if(!isProfileSet())document.getElementById('onboarding').style.display='flex';
   updateProfileBar();
-
-  document.querySelectorAll('.tab-btn').forEach(btn=>{
-    btn.onclick=()=>{
-      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-      document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById('page-'+btn.dataset.page).classList.add('active');
-      if(btn.dataset.page==='summary') renderCalendar();
-      if(btn.dataset.page==='recommend') renderRecommend();
-      if(btn.dataset.page==='profile') loadProfilePage();
-    };
-  });
-
+  document.querySelectorAll('.tab-btn').forEach(btn=>{btn.onclick=()=>{document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById('page-'+btn.dataset.page).classList.add('active');if(btn.dataset.page==='summary')renderCalendar();if(btn.dataset.page==='recommend')renderRecommend();if(btn.dataset.page==='profile')loadProfilePage();};});
   const now=new Date();calYear=now.getFullYear();calMonth=now.getMonth();
-  renderMeals();
-  saveDayToHistory(TODAY);
+  renderMeals();saveDayToHistory(TODAY);
 }
 
 // ═══════════════════════════════════════════
 // Record Page
 // ═══════════════════════════════════════════
-function renderMeals(){
-  const c=document.getElementById('mealSections');
-  c.innerHTML=MEALS.map(m=>{
-    const count=mealRecords[m.id].length;
-    return `<div class="meal-card">
-      <div class="meal-header">
-        <div><span class="meal-title">${m.name}</span> <span class="meal-time">${m.time}</span></div>
-        ${count?`<span class="meal-count">${count} items</span>`:''}
-      </div>
-      <div class="photo-area">
-        <label class="photo-label">
-          <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
-          拍照上传
-          <input type="file" accept="image/*" capture="environment" multiple onchange="handlePhoto('${m.id}',this)">
-        </label>
-      </div>
-      <div class="photo-grid" id="photos-${m.id}"></div>
-      <div class="input-row">
-        <input class="text-input" id="inp-${m.id}" placeholder="输入食物，如 蓝莓、鸡蛋…" onkeydown="if(event.key==='Enter')addFood('${m.id}')">
-        <button class="btn btn-dark btn-sm" onclick="addFood('${m.id}')">Add</button>
-      </div>
-      <div class="quick-grid" id="qk-${m.id}"></div>
-      <div class="tags-wrap" id="tags-${m.id}"></div>
-      <div class="meal-sub" id="sub-${m.id}"></div>
-    </div>`;
-  }).join('');
-  MEALS.forEach(m=>{renderQuick(m.id);renderTags(m.id);renderPhotos(m.id);updateSub(m.id);});
-}
+function renderMeals(){const c=document.getElementById('mealSections');const meals=getMeals();c.innerHTML=meals.map(m=>{const cnt=mealRecords[m.id].length;return`<div class="meal-card"><div class="meal-header"><div><span class="meal-title">${m.name}</span><span class="meal-time">${m.time}</span></div>${cnt?`<span class="meal-count">${cnt} ${t('items')}</span>`:''}</div><div class="photo-area"><label class="photo-label"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>${t('photo_upload')}<input type="file" accept="image/*" capture="environment" multiple onchange="handlePhoto('${m.id}',this)"></label></div><div class="photo-grid" id="photos-${m.id}"></div><div class="input-row"><input class="text-input" id="inp-${m.id}" placeholder="${t('input_placeholder')}" onkeydown="if(event.key==='Enter')addFood('${m.id}')"><button class="btn btn-accent btn-sm" onclick="addFood('${m.id}')">${t('add')}</button></div><div class="quick-grid" id="qk-${m.id}"></div><div class="tags-wrap" id="tags-${m.id}"></div><div class="meal-sub" id="sub-${m.id}"></div></div>`;}).join('');meals.forEach(m=>{renderQuick(m.id);renderTags(m.id);renderPhotos(m.id);updateSub(m.id);});}
 
-const QUICK_MAP={
-  breakfast:["鸡蛋","牛奶","燕麦","面包","香蕉","酸奶","蓝莓","豆浆"],
-  lunch:["米饭","鸡胸肉","西兰花","番茄","豆腐","菠菜","三文鱼","面条"],
-  snack:["苹果","核桃","绿茶","黑巧克力","杏仁","酸奶","咖啡","蜂蜜"],
-  dinner:["糙米","虾","芦笋","红薯","秋葵","豆腐","鸡蛋","沙拉"],
-};
+const QUICK_MAP={breakfast:["鸡蛋","牛奶","燕麦","面包","香蕉","酸奶","蓝莓","豆浆"],lunch:["米饭","鸡胸肉","西兰花","番茄","豆腐","菠菜","三文鱼","面条"],snack:["苹果","核桃","绿茶","黑巧克力","杏仁","酸奶","咖啡","蜂蜜"],dinner:["糙米","虾","芦笋","红薯","秋葵","豆腐","鸡蛋","沙拉"]};
 
-function renderQuick(mid){
-  const el=document.getElementById('qk-'+mid);
-  const added=mealRecords[mid].map(f=>f.name);
-  el.innerHTML=(QUICK_MAP[mid]||[]).map(n=>`<button class="quick-btn ${added.includes(n)?'added':''}" onclick="toggleQuick('${mid}','${n}')">${n}</button>`).join('');
-}
-
-function toggleQuick(mid,name){
-  const i=mealRecords[mid].findIndex(f=>f.name===name);
-  if(i>=0) mealRecords[mid].splice(i,1);
-  else mealRecords[mid].push({name,nutrition:FOODS[name]||guessFood(name)});
-  save();renderQuick(mid);renderTags(mid);updateSub(mid);
-}
-
-function addFood(mid){
-  const inp=document.getElementById('inp-'+mid);
-  const raw=inp.value.trim();if(!raw)return;
-  raw.split(/[,，、\s]+/).filter(Boolean).forEach(name=>{
-    if(mealRecords[mid].some(f=>f.name===name))return;
-    mealRecords[mid].push({name,nutrition:FOODS[name]||guessFood(name)});
-  });
-  inp.value='';save();renderQuick(mid);renderTags(mid);updateSub(mid);
-}
-
-function removeFood(mid,idx){
-  mealRecords[mid].splice(idx,1);save();renderQuick(mid);renderTags(mid);updateSub(mid);
-}
-
-function guessFood(name){
-  for(const k of Object.keys(FOODS)){if(name.includes(k)||k.includes(name))return{...FOODS[k],matchedAs:k};}
-  return{cal:80,protein:3,fat:3,carb:12,fiber:1,cat:"other",defense:[],benefits:"",goals:[],portion:"适量",unknown:true};
-}
-
-function renderTags(mid){
-  const el=document.getElementById('tags-'+mid);
-  el.innerHTML=mealRecords[mid].map((f,i)=>{
-    const cat=f.nutrition?.cat||'other';
-    return `<span class="ftag ${CAT_CLS[cat]||'ftag-other'}">${CAT_LABEL[cat]||'其他'} · ${f.name}${f.nutrition?.unknown?' ?':''}<span class="x" onclick="removeFood('${mid}',${i})">×</span></span>`;
-  }).join('');
-}
-
-function updateSub(mid){
-  const el=document.getElementById('sub-'+mid);
-  const foods=mealRecords[mid];
-  if(!foods.length){el.innerHTML='';return;}
-  let cal=0,p=0,f=0,c=0;
-  foods.forEach(fd=>{const n=fd.nutrition||{};cal+=n.cal||0;p+=n.protein||0;f+=n.fat||0;c+=n.carb||0;});
-  el.innerHTML=`${foods.length} items &middot; ~${Math.round(cal)} kcal &middot; P ${p.toFixed(1)}g &middot; F ${f.toFixed(1)}g &middot; C ${c.toFixed(1)}g`;
-}
-
-function handlePhoto(mid,input){
-  if(!input.files.length)return;
-  if(!window._ph)window._ph={};if(!window._ph[mid])window._ph[mid]=[];
-  for(const file of input.files){
-    const r=new FileReader();
-    r.onload=e=>{window._ph[mid].push(e.target.result);renderPhotos(mid);};
-    r.readAsDataURL(file);
-  }
-}
-function renderPhotos(mid){
-  const el=document.getElementById('photos-'+mid);
-  el.innerHTML=(window._ph?.[mid]||[]).map(s=>`<img src="${s}">`).join('');
-}
+function renderQuick(mid){const el=document.getElementById('qk-'+mid);const added=mealRecords[mid].map(f=>f.name);el.innerHTML=(QUICK_MAP[mid]||[]).map(n=>`<button class="quick-btn ${added.includes(n)?'added':''}" onclick="toggleQuick('${mid}','${n}')">${n}</button>`).join('');}
+function toggleQuick(mid,name){const i=mealRecords[mid].findIndex(f=>f.name===name);if(i>=0)mealRecords[mid].splice(i,1);else mealRecords[mid].push({name,nutrition:FOODS[name]||guessFood(name)});save();renderQuick(mid);renderTags(mid);updateSub(mid);}
+function addFood(mid){const inp=document.getElementById('inp-'+mid);const raw=inp.value.trim();if(!raw)return;raw.split(/[,，、\s]+/).filter(Boolean).forEach(name=>{if(mealRecords[mid].some(f=>f.name===name))return;mealRecords[mid].push({name,nutrition:FOODS[name]||guessFood(name)});});inp.value='';save();renderQuick(mid);renderTags(mid);updateSub(mid);}
+function removeFood(mid,idx){mealRecords[mid].splice(idx,1);save();renderQuick(mid);renderTags(mid);updateSub(mid);}
+function guessFood(name){for(const k of Object.keys(FOODS)){if(name.includes(k)||k.includes(name))return{...FOODS[k],matchedAs:k};}return{cal:80,protein:3,fat:3,carb:12,fiber:1,cat:"other",defense:[],benefits:"",benefitsEn:"",goals:[],portion:"适量",portionEn:"moderate",unknown:true};}
+function renderTags(mid){const el=document.getElementById('tags-'+mid);el.innerHTML=mealRecords[mid].map((f,i)=>{const cat=f.nutrition?.cat||'other';return`<span class="ftag ${CAT_CLS[cat]||'ftag-other'}">${catLabel(cat)} · ${f.name}${f.nutrition?.unknown?' ?':''}<span class="x" onclick="removeFood('${mid}',${i})">×</span></span>`;}).join('');}
+function updateSub(mid){const el=document.getElementById('sub-'+mid);const foods=mealRecords[mid];if(!foods.length){el.innerHTML='';return;}let cal=0,p=0,f=0,c=0;foods.forEach(fd=>{const n=fd.nutrition||{};cal+=n.cal||0;p+=n.protein||0;f+=n.fat||0;c+=n.carb||0;});el.innerHTML=`${foods.length} ${t('items')} · ~${Math.round(cal)} kcal · P ${p.toFixed(1)}g · F ${f.toFixed(1)}g · C ${c.toFixed(1)}g`;}
+function handlePhoto(mid,input){if(!input.files.length)return;if(!window._ph)window._ph={};if(!window._ph[mid])window._ph[mid]=[];for(const file of input.files){const r=new FileReader();r.onload=e=>{window._ph[mid].push(e.target.result);renderPhotos(mid);};r.readAsDataURL(file);}}
+function renderPhotos(mid){const el=document.getElementById('photos-'+mid);el.innerHTML=(window._ph?.[mid]||[]).map(s=>`<img src="${s}">`).join('');}
 
 // ═══════════════════════════════════════════
-// Summary — Calendar Mode
+// Calendar
 // ═══════════════════════════════════════════
-function generateSummary(){
-  // Save current, switch to calendar
-  save();saveDayToHistory(TODAY);selectedDate=TODAY;
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn')[1].classList.add('active');
-  document.getElementById('page-summary').classList.add('active');
-  renderCalendar();
-}
+function generateSummary(){save();saveDayToHistory(TODAY);selectedDate=TODAY;document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab-btn')[1].classList.add('active');document.getElementById('page-summary').classList.add('active');renderCalendar();}
 
-function renderCalendar(){
-  const container=document.getElementById('summaryContent');
-  const history=getHistory();
-  const weekdays=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+function renderCalendar(){const container=document.getElementById('summaryContent');const history=getHistory();const wd=t('weekdays');const first=new Date(calYear,calMonth,1);let sd=first.getDay()-1;if(sd<0)sd=6;const dim=new Date(calYear,calMonth+1,0).getDate();const pd=new Date(calYear,calMonth,0).getDate();const mn=t('months');let h=`<div class="cal-nav"><button class="cal-nav-btn" onclick="navMonth(-1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button><span class="cal-month">${mn[calMonth]} ${calYear}</span><button class="cal-nav-btn" onclick="navMonth(1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button></div>`;h+=`<div class="legend"><div class="legend-item"><div class="legend-dot" style="background:#3a9a5c"></div>${t('legend_great')}</div><div class="legend-item"><div class="legend-dot" style="background:#e8973a"></div>${t('legend_ok')}</div><div class="legend-item"><div class="legend-dot" style="background:#d4483a"></div>${t('legend_low')}</div></div>`;h+=`<div class="cal-grid">`;wd.forEach(w=>{h+=`<div class="cal-weekday">${w}</div>`;});for(let i=sd-1;i>=0;i--)h+=`<div class="cal-day other-month"><span class="day-num">${pd-i}</span><span class="day-dot"></span></div>`;const ts=new Date().toISOString().slice(0,10);for(let d=1;d<=dim;d++){const ds=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;const rec=history[ds];const it=ds===ts;const is=ds===selectedDate;const hr=!!rec;const sc=rec?.score||0;const dc=sc>=80?'#3a9a5c':sc>=50?'#e8973a':'#d4483a';h+=`<div class="cal-day${it?' today':''}${is?' selected':''}${hr?' has-record':''}" onclick="selectDate('${ds}')"><span class="day-num">${d}</span><span class="day-dot" style="background:${dc}"></span></div>`;}const tc2=sd+dim;const rem=tc2%7===0?0:7-tc2%7;for(let i=1;i<=rem;i++)h+=`<div class="cal-day other-month"><span class="day-num">${i}</span><span class="day-dot"></span></div>`;h+=`</div>`;h+=`<div id="dayDetail">${renderDayDetail(selectedDate)}</div>`;container.innerHTML=h;}
+function navMonth(d){calMonth+=d;if(calMonth>11){calMonth=0;calYear++;}if(calMonth<0){calMonth=11;calYear--;}renderCalendar();}
+function selectDate(ds){selectedDate=ds;renderCalendar();}
 
-  // First day of month
-  const first=new Date(calYear,calMonth,1);
-  let startDay=first.getDay()-1;if(startDay<0)startDay=6; // Mon=0
-  const daysInMonth=new Date(calYear,calMonth+1,0).getDate();
-  const prevDays=new Date(calYear,calMonth,0).getDate();
-
-  const monthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
-
-  let html=`
-  <div class="cal-nav">
-    <button class="cal-nav-btn" onclick="navMonth(-1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
-    <span class="cal-month">${monthNames[calMonth]} ${calYear}</span>
-    <button class="cal-nav-btn" onclick="navMonth(1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
-  </div>`;
-
-  // Legend
-  html+=`<div class="legend">
-    <div class="legend-item"><div class="legend-dot" style="background:#22c55e"></div>Great (80+)</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div>OK (50-79)</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div>Low (&lt;50)</div>
-  </div>`;
-
-  html+=`<div class="cal-grid">`;
-  weekdays.forEach(w=>{html+=`<div class="cal-weekday">${w}</div>`;});
-
-  // Previous month padding
-  for(let i=startDay-1;i>=0;i--){
-    html+=`<div class="cal-day other-month"><span class="day-num">${prevDays-i}</span><span class="day-dot"></span></div>`;
-  }
-
-  // Current month days
-  const todayStr=new Date().toISOString().slice(0,10);
-  for(let d=1;d<=daysInMonth;d++){
-    const ds=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const rec=history[ds];
-    const isToday=ds===todayStr;
-    const isSelected=ds===selectedDate;
-    const hasRec=!!rec;
-    const score=rec?.score||0;
-    const dotColor=score>=80?'#22c55e':score>=50?'#f59e0b':'#ef4444';
-    
-    html+=`<div class="cal-day${isToday?' today':''}${isSelected?' selected':''}${hasRec?' has-record':''}" onclick="selectDate('${ds}')">
-      <span class="day-num">${d}</span>
-      <span class="day-dot" style="background:${dotColor}"></span>
-    </div>`;
-  }
-
-  // Next month padding
-  const totalCells=startDay+daysInMonth;
-  const remaining=totalCells%7===0?0:7-totalCells%7;
-  for(let i=1;i<=remaining;i++){
-    html+=`<div class="cal-day other-month"><span class="day-num">${i}</span><span class="day-dot"></span></div>`;
-  }
-  html+=`</div>`;
-
-  // Day detail
-  html+=`<div id="dayDetail">${renderDayDetail(selectedDate)}</div>`;
-
-  container.innerHTML=html;
-}
-
-function navMonth(delta){
-  calMonth+=delta;
-  if(calMonth>11){calMonth=0;calYear++;}
-  if(calMonth<0){calMonth=11;calYear--;}
-  renderCalendar();
-}
-
-function selectDate(ds){
-  selectedDate=ds;
-  renderCalendar();
-}
-
-function renderDayDetail(dateStr){
-  // Get foods for this date
-  let allFoods=[];
-  const mealFoods={breakfast:[],lunch:[],snack:[],dinner:[]};
-
-  if(dateStr===TODAY){
-    MEALS.forEach(m=>{
-      mealRecords[m.id].forEach(f=>{allFoods.push(f);mealFoods[m.id].push(f);});
-    });
-  } else {
-    try{
-      const d=JSON.parse(localStorage.getItem('ew_'+dateStr)||'{}');
-      MEALS.forEach(m=>{(d[m.id]||[]).forEach(f=>{allFoods.push(f);mealFoods[m.id].push(f);});});
-    }catch(e){}
-  }
-
-  if(!allFoods.length){
-    const d=new Date(dateStr);
-    const dayName=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][d.getDay()];
-    return `<div class="card" style="text-align:center;padding:32px 20px">
-      <div style="font-size:15px;font-weight:700;margin-bottom:4px">${dateStr}</div>
-      <div style="font-size:13px;color:var(--text3)">No records for this day</div>
-    </div>`;
-  }
-
-  const s=calcStats(allFoods);
-  const ringColor=s.score>=80?'#22c55e':s.score>=50?'#f59e0b':'#ef4444';
-
-  let html=`<div class="day-detail">`;
-
-  // Date & Score
-  html+=`<div class="card">
-    <div style="text-align:center;font-size:13px;font-weight:600;color:var(--text2);margin-bottom:4px">${dateStr}</div>
-    <div class="day-score-ring">
-      <div class="ring-wrap">
-        <svg width="88" height="88" viewBox="0 0 88 88">
-          <circle cx="44" cy="44" r="36" fill="none" stroke="var(--surface2)" stroke-width="6"/>
-          <circle cx="44" cy="44" r="36" fill="none" stroke="${ringColor}" stroke-width="6" stroke-linecap="round"
-            stroke-dasharray="${s.score*2.26} ${226-s.score*2.26}"/>
-        </svg>
-        <div class="ring-center">
-          <div class="ring-num" style="color:${ringColor}">${s.score}</div>
-          <div class="ring-label">score</div>
-        </div>
-      </div>
-    </div>
-    <div class="stats-row">
-      <div class="stat-box">
-        <div class="stat-val">${Math.round(s.totalCal)}</div>
-        <div class="stat-label">kcal / ${DAILY_CAL}</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-val">${allFoods.length}</div>
-        <div class="stat-label">foods</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-val">${s.allDef.size}/5</div>
-        <div class="stat-label">defense</div>
-      </div>
-    </div>
-  </div>`;
-
-  // Nutrients
-  html+=`<div class="card">
-    <div class="card-label">Nutrients</div>`;
-  const nutrients=[
-    {name:'蛋白质',val:s.totalP,target:s.pTarget,unit:'g',color:'#3b82f6'},
-    {name:'脂肪',val:s.totalF,target:(DAILY_CAL*.3)/9,unit:'g',color:'#f59e0b'},
-    {name:'碳水',val:s.totalC,target:(DAILY_CAL*.5)/4,unit:'g',color:'#ef4444'},
-    {name:'膳食纤维',val:s.totalFiber,target:25,unit:'g',color:'#22c55e'},
-  ];
-  nutrients.forEach(n=>{
-    const pct=Math.min(100,(n.val/n.target)*100);
-    html+=`<div class="prog-item">
-      <div class="prog-head"><span class="prog-name">${n.name}</span><span class="prog-val">${n.val.toFixed(1)}${n.unit} / ${n.target.toFixed(0)}${n.unit}</span></div>
-      <div class="prog-bar"><div class="prog-fill" style="width:${pct}%;background:${n.color}"></div></div>
-    </div>`;
-  });
-  html+=`</div>`;
-
-  // Defense
-  html+=`<div class="card">
-    <div class="card-label">Defense Systems</div>
-    <div class="def-pills">`;
-  for(const[dk,dn] of Object.entries(DEF_NAMES)){
-    const on=s.allDef.has(dk);
-    html+=`<span class="def-pill" style="opacity:${on?1:.25};background:${DEF_COLORS[dk]}15;color:${DEF_COLORS[dk]}">${on?'&#10003; ':''}${dn}</span>`;
-  }
-  html+=`</div></div>`;
-
-  // Goals
-  html+=`<div class="card">
-    <div class="card-label">Health Goals</div>`;
-  Object.keys(s.goalCov).forEach(g=>{
-    const c=s.goalCov[g];
-    const color=c>=3?'#22c55e':c>=1?'#f59e0b':'#ef4444';
-    html+=`<div class="goal-row">
-      <span class="goal-name">${GOAL_NAMES[g]}</span>
-      <div class="goal-bar"><div class="goal-fill" style="width:${Math.min(100,c*25)}%;background:${color}"></div></div>
-      <span class="goal-count" style="color:${color}">${c}</span>
-    </div>`;
-  });
-  html+=`</div>`;
-
-  // Timeline
-  html+=`<div class="card">
-    <div class="card-label">Meals</div>
-    <div class="timeline">`;
-  MEALS.forEach(m=>{
-    const foods=mealFoods[m.id];
-    const has=foods.length>0;
-    html+=`<div class="tl-item${has?' has-food':''}">
-      <div class="tl-label">${m.name}</div>`;
-    if(has){
-      html+=`<div class="tl-foods">${foods.map(f=>{
-        const cat=f.nutrition?.cat||'other';
-        return `<span class="ftag ${CAT_CLS[cat]||'ftag-other'}" style="font-size:11px;padding:3px 10px">${f.name}</span>`;
-      }).join('')}</div>`;
-      let mc=0;foods.forEach(f=>mc+=f.nutrition?.cal||0);
-      html+=`<div class="tl-kcal">~${Math.round(mc)} kcal</div>`;
-    } else {
-      html+=`<div style="font-size:12px;color:var(--text4)">-</div>`;
-    }
-    html+=`</div>`;
-  });
-  html+=`</div></div>`;
-
-  // Tips
-  const tips=[];
-  if(s.totalCal<DAILY_CAL*.7)tips.push(`热量仅 ${Math.round(s.totalCal)} kcal，距目标差 ${Math.round(DAILY_CAL-s.totalCal)} kcal。建议增加坚果、牛油果等。`);
-  if(s.totalP<s.pTarget*.7)tips.push(`蛋白质偏低（${s.totalP.toFixed(1)}g / ${s.pTarget.toFixed(0)}g），补充鸡蛋、鱼虾或豆类。`);
-  if(s.totalFiber<15)tips.push(`膳食纤维仅 ${s.totalFiber.toFixed(1)}g，增加全谷物和蔬果。`);
-  if(s.allDef.size<4)tips.push(`仅覆盖 ${s.allDef.size}/5 防御系统，试试增加食物种类。`);
-  if(!tips.length)tips.push('今天的饮食搭配非常棒！继续保持。');
-
-  html+=`<div class="tips-box">
-    <div class="tips-title">Suggestions</div>
-    ${tips.map(t=>`<div class="tips-item">· ${t}</div>`).join('')}
-  </div>`;
-
-  html+=`</div>`;
-  return html;
-}
+function renderDayDetail(ds){let af=[];const mf={breakfast:[],lunch:[],snack:[],dinner:[]};if(ds===TODAY){getMeals().forEach(m=>{mealRecords[m.id].forEach(f=>{af.push(f);mf[m.id].push(f);});});}else{try{const d=JSON.parse(localStorage.getItem('ew_'+ds)||'{}');getMeals().forEach(m=>{(d[m.id]||[]).forEach(f=>{af.push(f);mf[m.id].push(f);});});}catch(e){}}if(!af.length)return`<div class="card" style="text-align:center;padding:28px 20px"><div style="font-size:14px;font-weight:700;margin-bottom:3px">${ds}</div><div style="font-size:12px;color:var(--text3)">${t('no_record')}</div></div>`;const s=calcStats(af);const rc=s.score>=80?'#3a9a5c':s.score>=50?'#e8973a':'#d4483a';let h=`<div class="day-detail"><div class="card"><div style="text-align:center;font-size:12px;font-weight:600;color:var(--text2);margin-bottom:3px">${ds}</div><div class="day-score-ring"><div class="ring-wrap"><svg width="84" height="84" viewBox="0 0 84 84"><circle cx="42" cy="42" r="34" fill="none" stroke="var(--surface2)" stroke-width="5"/><circle cx="42" cy="42" r="34" fill="none" stroke="${rc}" stroke-width="5" stroke-linecap="round" stroke-dasharray="${s.score*2.14} ${214-s.score*2.14}"/></svg><div class="ring-center"><div class="ring-num" style="color:${rc}">${s.score}</div><div class="ring-label">${t('score')}</div></div></div></div><div class="stats-row"><div class="stat-box"><div class="stat-val">${Math.round(s.totalCal)}</div><div class="stat-label">kcal/${DAILY_CAL}</div></div><div class="stat-box"><div class="stat-val">${af.length}</div><div class="stat-label">${t('items')}</div></div><div class="stat-box"><div class="stat-val">${s.allDef.size}/5</div><div class="stat-label">${t('defense')}</div></div></div></div>`;h+=`<div class="card"><div class="card-label">${t('nutrients')}</div>`;[{name:t('chat_protein'),val:s.totalP,tgt:s.pTarget,u:'g',c:'#3a6fd4'},{name:t('chat_fat'),val:s.totalF,tgt:(DAILY_CAL*.3)/9,u:'g',c:'#e8973a'},{name:t('chat_carb'),val:s.totalC,tgt:(DAILY_CAL*.5)/4,u:'g',c:'#d4483a'},{name:t('chat_fiber'),val:s.totalFiber,tgt:25,u:'g',c:'#3a9a5c'}].forEach(n=>{const p=Math.min(100,(n.val/n.tgt)*100);h+=`<div class="prog-item"><div class="prog-head"><span class="prog-name">${n.name}</span><span class="prog-val">${n.val.toFixed(1)}${n.u}/${n.tgt.toFixed(0)}${n.u}</span></div><div class="prog-bar"><div class="prog-fill" style="width:${p}%;background:${n.c}"></div></div></div>`;});h+=`</div>`;h+=`<div class="card"><div class="card-label">${t('defense')}</div><div class="def-pills">`;['angio','regen','micro','dna','immune'].forEach(dk=>{const on=s.allDef.has(dk);h+=`<span class="def-pill" style="opacity:${on?1:.25};background:${DEF_COLORS[dk]}18;color:${DEF_COLORS[dk]}">${on?'&#10003; ':''}${defName(dk)}</span>`;});h+=`</div></div>`;h+=`<div class="card"><div class="card-label">${t('health_goals')}</div>`;Object.keys(s.goalCov).forEach(g=>{const c=s.goalCov[g];const cl=c>=3?'#3a9a5c':c>=1?'#e8973a':'#d4483a';h+=`<div class="goal-row"><span class="goal-name">${goalName(g)}</span><div class="goal-bar"><div class="goal-fill" style="width:${Math.min(100,c*25)}%;background:${cl}"></div></div><span class="goal-count" style="color:${cl}">${c}</span></div>`;});h+=`</div>`;h+=`<div class="card"><div class="card-label">${t('meals_label')}</div><div class="timeline">`;getMeals().forEach(m=>{const foods=mf[m.id];const has=foods.length>0;h+=`<div class="tl-item${has?' has-food':''}"><div class="tl-label">${m.name}</div>`;if(has){h+=`<div class="tl-foods">${foods.map(f=>{const cat=f.nutrition?.cat||'other';return`<span class="ftag ${CAT_CLS[cat]||'ftag-other'}" style="font-size:10px;padding:2px 8px">${f.name}</span>`;}).join('')}</div>`;let mc=0;foods.forEach(f=>mc+=f.nutrition?.cal||0);h+=`<div class="tl-kcal">~${Math.round(mc)} kcal</div>`;}else h+=`<div style="font-size:11px;color:var(--text4)">-</div>`;h+=`</div>`;});h+=`</div></div>`;const tips=[];if(s.totalCal<DAILY_CAL*.7)tips.push(t('tip_cal_low').replace('{cur}',Math.round(s.totalCal)).replace('{diff}',Math.round(DAILY_CAL-s.totalCal)));if(s.totalP<s.pTarget*.7)tips.push(t('tip_protein_low').replace('{cur}',s.totalP.toFixed(1)).replace('{target}',s.pTarget.toFixed(0)));if(s.totalFiber<15)tips.push(t('tip_fiber_low').replace('{cur}',s.totalFiber.toFixed(1)));if(s.allDef.size<4)tips.push(t('tip_defense_low').replace('{n}',s.allDef.size));if(!tips.length)tips.push(t('tip_great'));h+=`<div class="tips-box"><div class="tips-title">${t('suggestions')}</div>${tips.map(x=>`<div class="tips-item">· ${x}</div>`).join('')}</div></div>`;return h;}
 
 // ═══════════════════════════════════════════
-// Recommend Page
+// Recommend
 // ═══════════════════════════════════════════
-function renderRecommend(){
-  const container=document.getElementById('recommendContent');
-  const goals=PROFILE.goals;
-  const defScores={angio:1,regen:1,micro:1,dna:1,immune:1};
-  const GDM={immunity:["immune","micro"],antioxidant:["dna","angio"],gut:["micro","regen"],
-    cardiovascular:["angio","regen"],anticancer:["angio","dna","immune"],inflammation:["immune","angio"],
-    brain:["regen","dna","angio"],weight:["micro","angio"],skin:["regen","immune","dna"],
-    energy:["regen","micro"],sleep:["micro","regen"],bone:["regen","dna"]};
-  goals.forEach(g=>(GDM[g]||[]).forEach(d=>defScores[d]+=2));
-  if(BMI<18.5){defScores.regen+=2;defScores.micro+=2;defScores.immune+=1;}
+function renderRecommend(){const c=document.getElementById('recommendContent');const goals=PROFILE.goals;const ds2={angio:1,regen:1,micro:1,dna:1,immune:1};const GDM={immunity:["immune","micro"],antioxidant:["dna","angio"],gut:["micro","regen"],cardiovascular:["angio","regen"],anticancer:["angio","dna","immune"],inflammation:["immune","angio"],brain:["regen","dna","angio"],weight:["micro","angio"],skin:["regen","immune","dna"],energy:["regen","micro"],sleep:["micro","regen"],bone:["regen","dna"]};goals.forEach(g=>(GDM[g]||[]).forEach(d=>ds2[d]+=2));const eaten=new Set();getMeals().forEach(m=>mealRecords[m.id].forEach(f=>eaten.add(f.name)));const scored=[];for(const[name,data]of Object.entries(FOODS)){if(!data.defense?.length)continue;let sc=0;data.defense.forEach(d=>sc+=ds2[d]||0);sc+=(data.goals||[]).filter(g=>goals.includes(g)).length*3;if(eaten.has(name))sc-=10;sc+=(simpleHash(TODAY+name)%40)/10;scored.push({name,sc,...data});}scored.sort((a,b)=>b.sc-a.sc);const cg={};['fruit','vegetable','grain','protein','nut','beverage','other'].forEach(cat=>{scored.forEach(f=>{if(f.cat===cat){if(!cg[cat])cg[cat]=[];if(cg[cat].length<4)cg[cat].push(f);}});});let h=`<div style="margin-bottom:16px"><div style="font-size:18px;font-weight:800;letter-spacing:-.3px">${t('foryou')}</div><div style="font-size:11px;color:var(--text3);margin-top:2px">${t('foryou_sub')} · ${TODAY}</div></div>`;['fruit','vegetable','grain','protein','nut','beverage','other'].forEach(cat=>{const foods=cg[cat];if(!foods?.length)return;h+=`<div class="rec-section"><div class="rec-section-title">${catLabel(cat)}</div><div class="card" style="padding:3px 14px">`;foods.forEach(f=>{const ie=eaten.has(f.name);const ben=LANG==='en'?(f.benefitsEn||f.benefits):f.benefits;const por=LANG==='en'?(f.portionEn||f.portion):f.portion;h+=`<div class="rec-item" style="${ie?'opacity:.35':''}"><div class="rec-info"><div class="rec-name">${f.name}${ie?' ✓':''}</div><div class="rec-desc">${ben} · ${por||''}</div><div class="rec-pills">${(f.defense||[]).map(d=>`<span class="rec-pill" style="background:${DEF_COLORS[d]}18;color:${DEF_COLORS[d]}">${defName(d)}</span>`).join('')}${(f.goals||[]).filter(g=>goals.includes(g)).map(g=>`<span class="rec-pill" style="background:#e8f5ec;color:#2d7a48">${goalName(g)}</span>`).join('')}</div></div>${!ie?`<div class="rec-add"><button class="btn btn-outline btn-xs" onclick="recAdd('${f.name}')">+ ${t('add')}</button></div>`:''}</div>`;});h+=`</div></div>`;});h+=`<div class="tips-box"><div class="tips-title">${t('daily_tips')}</div><div class="tips-item">· ${t('tip_bmi').replace('{bmi}',BMI).replace('{status}',BMI_STATUS).replace('{cal}',DAILY_CAL)}</div><div class="tips-item">· ${t('tip_protein').replace('{target}',(PROFILE.weight*1.2).toFixed(0))}</div><div class="tips-item">· ${t('tip_variety')}</div>${BMI<18.5?`<div class="tips-item">· ${t('tip_thin')}</div>`:''}</div>`;c.innerHTML=h;}
 
-  const eaten=new Set();
-  MEALS.forEach(m=>mealRecords[m.id].forEach(f=>eaten.add(f.name)));
-
-  const scored=[];
-  for(const[name,data] of Object.entries(FOODS)){
-    if(!data.defense?.length)continue;
-    let sc=0;
-    data.defense.forEach(d=>sc+=defScores[d]||0);
-    sc+=(data.goals||[]).filter(g=>goals.includes(g)).length*3;
-    if(eaten.has(name))sc-=10;
-    sc+=(simpleHash(TODAY+name)%40)/10;
-    scored.push({name,sc,...data});
-  }
-  scored.sort((a,b)=>b.sc-a.sc);
-
-  const catGroups={};
-  const catOrder=['fruit','vegetable','grain','protein','nut','beverage','other'];
-  scored.forEach(f=>{if(!catGroups[f.cat])catGroups[f.cat]=[];if(catGroups[f.cat].length<4)catGroups[f.cat].push(f);});
-
-  let html=`<div style="margin-bottom:20px">
-    <div style="font-size:20px;font-weight:800;letter-spacing:-.3px">For You</div>
-    <div style="font-size:12px;color:var(--text3);margin-top:2px">Personalized picks based on your profile · ${TODAY}</div>
-  </div>`;
-
-  catOrder.forEach(cat=>{
-    const foods=catGroups[cat];if(!foods?.length)return;
-    html+=`<div class="rec-section"><div class="rec-section-title">${CAT_LABEL[cat]}</div><div class="card" style="padding:4px 16px">`;
-    foods.forEach(f=>{
-      const isEaten=eaten.has(f.name);
-      html+=`<div class="rec-item" style="${isEaten?'opacity:.4':''}">
-        <div class="rec-info">
-          <div class="rec-name">${f.name}${isEaten?' ✓':''}</div>
-          <div class="rec-desc">${f.benefits} · ${f.portion||''}</div>
-          <div class="rec-pills">
-            ${(f.defense||[]).map(d=>`<span class="rec-pill" style="background:${DEF_COLORS[d]}15;color:${DEF_COLORS[d]}">${DEF_NAMES[d]}</span>`).join('')}
-            ${(f.goals||[]).filter(g=>goals.includes(g)).map(g=>`<span class="rec-pill" style="background:#dcfce7;color:#16a34a">${GOAL_NAMES[g]}</span>`).join('')}
-          </div>
-        </div>
-        ${!isEaten?`<div class="rec-add"><button class="btn btn-outline btn-xs" onclick="recAdd('${f.name}')">+ Add</button></div>`:''}
-      </div>`;
-    });
-    html+=`</div></div>`;
-  });
-
-  // Tip
-  html+=`<div class="tips-box">
-    <div class="tips-title">Daily Tips</div>
-    <div class="tips-item">· BMI ${BMI}（${BMI_STATUS}），每日建议 ${DAILY_CAL} kcal</div>
-    <div class="tips-item">· 蛋白质目标 ${(PROFILE.weight*1.2).toFixed(0)}g/天</div>
-    <div class="tips-item">· 每天吃 5+ 种不同颜色的蔬果</div>
-    ${BMI<18.5?'<div class="tips-item">· 偏瘦体质多吃坚果、牛油果等健康脂肪</div>':''}
-  </div>`;
-
-  container.innerHTML=html;
-}
-
-function recAdd(name){
-  const hour=new Date().getHours();
-  let mid='snack';
-  if(hour<10)mid='breakfast';else if(hour<14)mid='lunch';else if(hour<17)mid='snack';else mid='dinner';
-  if(mealRecords[mid].some(f=>f.name===name))return;
-  mealRecords[mid].push({name,nutrition:FOODS[name]||guessFood(name)});
-  save();renderMeals();renderRecommend();
-}
-
+function recAdd(name){const hour=new Date().getHours();let mid='snack';if(hour<10)mid='breakfast';else if(hour<14)mid='lunch';else if(hour<17)mid='snack';else mid='dinner';if(mealRecords[mid].some(f=>f.name===name))return;mealRecords[mid].push({name,nutrition:FOODS[name]||guessFood(name)});save();renderMeals();renderRecommend();}
 function simpleHash(str){let h=0;for(let i=0;i<str.length;i++){h=((h<<5)-h)+str.charCodeAt(i);h|=0;}return Math.abs(h);}
 
+// ═══════════════════════════════════════════
+// Chat / Food Assistant
+// ═══════════════════════════════════════════
+let chatOpen=false;
+function openChat(){chatOpen=true;document.getElementById('chatPanel').classList.add('open');document.getElementById('chatFab').style.display='none';if(!document.getElementById('chatMsgs').children.length){addChatMsg('bot',t('chat_welcome'));}}
+function closeChat(){chatOpen=false;document.getElementById('chatPanel').classList.remove('open');document.getElementById('chatFab').style.display='flex';}
+function addChatMsg(type,html){const d=document.createElement('div');d.className='chat-msg '+type;d.innerHTML=html;document.getElementById('chatMsgs').appendChild(d);d.scrollIntoView({behavior:'smooth'});}
+function sendChat(){const inp=document.getElementById('chatInput');const q=inp.value.trim();if(!q)return;inp.value='';sendChatMsg(q);}
+function sendChatMsg(q){addChatMsg('user',q);setTimeout(()=>processChat(q),200);}
+
+function processChat(q){
+  // Find food
+  let food=null,fname=q.trim();
+  if(FOODS[fname])food=FOODS[fname];
+  else{for(const k of Object.keys(FOODS)){if(k.includes(fname)||fname.includes(k)){food=FOODS[k];fname=k;break;}}}
+  if(!food){addChatMsg('bot',t('chat_not_found').replace('{name}',q));return;}
+
+  const ben=LANG==='en'?(food.benefitsEn||food.benefits):food.benefits;
+  const por=LANG==='en'?(food.portionEn||food.portion):food.portion;
+  const cau=LANG==='en'?(food.cautionEn||food.caution||t('caution_none')):(food.caution||t('caution_none'));
+  const freqMap={daily:t('freq_daily'),often:t('freq_often'),moderate:t('freq_moderate')};
+  const freq=freqMap[food.freq]||freqMap.often;
+  const matchGoals=(food.goals||[]).filter(g=>PROFILE.goals.includes(g));
+
+  let h=`<div class="food-card">`;
+  h+=`<div class="fc-name">${fname}</div>`;
+  h+=`<div class="fc-row"><span>${t('chat_cal')}</span><span>${food.cal} kcal</span></div>`;
+  h+=`<div class="fc-row"><span>${t('chat_protein')}</span><span>${food.protein}g</span></div>`;
+  h+=`<div class="fc-row"><span>${t('chat_fat')}</span><span>${food.fat}g</span></div>`;
+  h+=`<div class="fc-row"><span>${t('chat_carb')}</span><span>${food.carb}g</span></div>`;
+  h+=`<div class="fc-row"><span>${t('chat_fiber')}</span><span>${food.fiber}g</span></div>`;
+  h+=`<div class="fc-row"><span>${t('chat_portion')}</span><span>${por}</span></div>`;
+  h+=`<div class="fc-section"><div class="fc-section-title">${t('chat_benefits')}</div><div class="fc-text">${ben}</div></div>`;
+  if(food.defense?.length){h+=`<div class="fc-section"><div class="fc-section-title">${t('chat_defense')}</div><div class="fc-tags">${food.defense.map(d=>`<span class="fc-tag" style="background:${DEF_COLORS[d]}18;color:${DEF_COLORS[d]}">${defName(d)}</span>`).join('')}</div></div>`;}
+  if(matchGoals.length){h+=`<div class="fc-section"><div class="fc-section-title">${t('chat_goals_match')}</div><div class="fc-tags">${matchGoals.map(g=>`<span class="fc-tag" style="background:#e8f5ec;color:#2d7a48">${goalName(g)}</span>`).join('')}</div></div>`;}
+  h+=`<div class="fc-section"><div class="fc-section-title">${t('chat_freq')}</div><div class="fc-text">${freq}</div></div>`;
+  h+=`<div class="fc-section"><div class="fc-section-title">${t('chat_caution')}</div><div class="fc-text">${cau}</div></div>`;
+  h+=`</div>`;
+  addChatMsg('bot',h);
+}
+
 init();
+
 </script>
 </body>
 </html>
