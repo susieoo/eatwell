@@ -752,21 +752,35 @@ function renderDateTabsHTML(dates, activeDate, switchFn){
 
 function renderRecordDateTabs(){
   const dates=getDateRange(currentRecordDate, 7);
-  document.getElementById('recordDateTabs').innerHTML=renderDateTabsHTML(dates, currentRecordDate, 'switchRecordDate');
-  // Scroll active tab into view
-  setTimeout(()=>{
-    const active=document.querySelector('#recordDateTabs .date-tab.active');
-    if(active)active.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});
-  },50);
+  const el=document.getElementById('recordDateTabs');
+  el.innerHTML=renderDateTabsHTML(dates, currentRecordDate, 'switchRecordDate');
+  // Scroll active tab into view — use requestAnimationFrame for reliable positioning
+  requestAnimationFrame(()=>{
+    const active=el.querySelector('.date-tab.active');
+    if(active){
+      const container=el.querySelector('.date-tabs');
+      if(container){
+        const offset=active.offsetLeft - container.offsetWidth/2 + active.offsetWidth/2;
+        container.scrollLeft=Math.max(0, offset);
+      }
+    }
+  });
 }
 
 function renderRecDateTabs(){
   const dates=getDateRange(currentRecDate, 7);
-  document.getElementById('recDateTabs').innerHTML=renderDateTabsHTML(dates, currentRecDate, 'switchRecDate');
-  setTimeout(()=>{
-    const active=document.querySelector('#recDateTabs .date-tab.active');
-    if(active)active.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});
-  },50);
+  const el=document.getElementById('recDateTabs');
+  el.innerHTML=renderDateTabsHTML(dates, currentRecDate, 'switchRecDate');
+  requestAnimationFrame(()=>{
+    const active=el.querySelector('.date-tab.active');
+    if(active){
+      const container=el.querySelector('.date-tabs');
+      if(container){
+        const offset=active.offsetLeft - container.offsetWidth/2 + active.offsetWidth/2;
+        container.scrollLeft=Math.max(0, offset);
+      }
+    }
+  });
 }
 
 // ═══════════════════════════════════════════
@@ -791,7 +805,7 @@ function getMeals(){return[{id:"breakfast",name:t('meal_breakfast'),time:t('meal
 let mealRecords={breakfast:[],lunch:[],snack:[],dinner:[]};
 const TODAY=new Date().toISOString().slice(0,10);
 let currentRecordDate=TODAY;
-let currentRecDate=TODAY; // for recommend page
+let currentRecDate=TODAY; // for recommend page — synced with currentRecordDate
 
 function loadMealsForDate(ds){
   try{const s=localStorage.getItem('ew_'+ds);if(s)return JSON.parse(s);}catch(e){}
@@ -805,6 +819,7 @@ function switchRecordDate(ds){
   // Save current before switching
   save();
   currentRecordDate=ds;
+  currentRecDate=ds; // sync recommend page date
   mealRecords=loadMealsForDate(ds);
   window._ph={}; // reset photos on date switch
   renderRecordDateTabs();
@@ -812,7 +827,12 @@ function switchRecordDate(ds){
 }
 
 function switchRecDate(ds){
+  // Save current record before switching
+  save();
   currentRecDate=ds;
+  currentRecordDate=ds; // sync record page date
+  mealRecords=loadMealsForDate(ds);
+  window._ph={};
   renderRecDateTabs();
   renderRecommend();
 }
@@ -831,7 +851,7 @@ function init(){
   recalcDerived();applyI18n();
   if(!isProfileSet())document.getElementById('onboarding').style.display='flex';
   updateProfileBar();
-  document.querySelectorAll('.tab-btn').forEach(btn=>{btn.onclick=()=>{document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById('page-'+btn.dataset.page).classList.add('active');if(btn.dataset.page==='summary')renderCalendar();if(btn.dataset.page==='recommend'){renderRecDateTabs();renderRecommend();}if(btn.dataset.page==='profile')loadProfilePage();};});
+  document.querySelectorAll('.tab-btn').forEach(btn=>{btn.onclick=()=>{document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById('page-'+btn.dataset.page).classList.add('active');if(btn.dataset.page==='record'){renderRecordDateTabs();renderMeals();}if(btn.dataset.page==='summary')renderCalendar();if(btn.dataset.page==='recommend'){renderRecDateTabs();renderRecommend();}if(btn.dataset.page==='profile')loadProfilePage();};});
   const now=new Date();calYear=now.getFullYear();calMonth=now.getMonth();
   renderRecordDateTabs();renderMeals();saveDayToHistory(currentRecordDate);
 }
