@@ -263,10 +263,34 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 .goal-fill{height:100%;border-radius:3px;transition:width .8s cubic-bezier(.25,.1,.25,1)}
 .goal-count{font-size:10px;font-weight:700;min-width:28px;text-align:right}
 
-.tips-box{background:var(--surface);border-radius:var(--radius-sm);padding:16px 18px;margin-top:12px;
-  border-left:4px solid var(--accent);box-shadow:var(--shadow-sm)}
-.tips-title{font-size:11px;font-weight:700;color:var(--text);margin-bottom:8px;letter-spacing:.3px}
+.tips-box{background:var(--surface);border-radius:var(--radius);padding:20px;margin-top:14px;box-shadow:var(--shadow)}
+.tips-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:14px;letter-spacing:.3px;display:flex;align-items:center;gap:8px}
+.tips-title::before{content:'';display:inline-block;width:4px;height:16px;border-radius:2px;background:var(--accent)}
 .tips-item{font-size:11px;color:var(--text2);line-height:1.8}
+
+.tips-section{margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.tips-section:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.tips-section-title{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.tips-section-title .ts-icon{width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff}
+.tips-summary{font-size:12px;color:var(--text);line-height:1.9;margin-bottom:14px;padding:14px 16px;
+  background:linear-gradient(135deg,var(--accent)08,var(--surface2));border-radius:var(--radius-sm)}
+.tips-highlight{display:inline;font-weight:600;color:var(--accent)}
+.tips-food-tag{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;margin:2px 3px;
+  background:var(--accent)10;color:var(--accent);font-weight:600}
+.tips-warn-tag{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;margin:2px 3px;
+  background:#dc4a3f10;color:#dc4a3f;font-weight:600}
+.tips-good-tag{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;margin:2px 3px;
+  background:#4a9e6e10;color:#4a9e6e;font-weight:600}
+.tips-suggest-item{font-size:11px;color:var(--text2);line-height:2;padding-left:4px}
+.tips-suggest-item::before{content:'💡';margin-right:5px;font-size:10px}
+.tips-warn-item{font-size:11px;color:var(--text2);line-height:2;padding-left:4px}
+.tips-warn-item::before{content:'⚠️';margin-right:5px;font-size:10px}
+.tips-good-item{font-size:11px;color:var(--text2);line-height:2;padding-left:4px}
+.tips-good-item::before{content:'✅';margin-right:5px;font-size:10px}
+.tips-meter{display:flex;align-items:center;gap:8px;margin:6px 0}
+.tips-meter-bar{flex:1;height:6px;border-radius:3px;background:var(--surface2);overflow:hidden}
+.tips-meter-fill{height:100%;border-radius:3px;transition:width .6s ease}
+.tips-meter-label{font-size:10px;font-weight:600;min-width:36px;text-align:right}
 
 /* ── Date Tab Strip ── */
 .date-tabs{display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;-webkit-overflow-scrolling:touch;
@@ -626,6 +650,41 @@ zh: {
   tip_fiber_low:"膳食纤维仅 {cur}g，增加全谷物和蔬果。",
   tip_defense_low:"仅覆盖 {n}/5 防御系统，试试增加食物种类。",
   tip_great:"今天的饮食搭配非常棒！继续保持。",
+  ana_title:"详细分析与建议",
+  ana_overview:"综合评估",
+  ana_meal_analysis:"餐次分析",
+  ana_nutrient_balance:"营养均衡度",
+  ana_defense_analysis:"防御系统分析",
+  ana_goal_analysis:"健康目标分析",
+  ana_food_highlights:"食物亮点",
+  ana_improvement:"优化建议",
+  ana_score_great:"今日饮食非常均衡，综合评分 {score} 分！共摄入 {count} 种食物，覆盖 {def}/5 大防御系统，热量达标率 {calPct}%。",
+  ana_score_good:"今日饮食整体不错，评分 {score} 分。共 {count} 种食物，但仍有提升空间。",
+  ana_score_low:"今日饮食评分 {score} 分，营养结构有待改善。共 {count} 种食物，建议增加食物多样性。",
+  ana_meal_missing:"<b>{meal}</b> 未记录食物，跳餐可能导致后续餐次过量进食。",
+  ana_meal_light:"<b>{meal}</b> 仅有 {count} 种食物（{cal} kcal），搭配较单一。",
+  ana_meal_heavy:"<b>{meal}</b> 热量偏高（{cal} kcal），占全日 {pct}%，建议分散到其他餐次。",
+  ana_meal_good:"<b>{meal}</b> 搭配合理，{count} 种食物共 {cal} kcal。",
+  ana_ratio_carb_high:"碳水占比偏高（{pct}%），建议用糙米、燕麦替代部分精制碳水。",
+  ana_ratio_fat_high:"脂肪占比偏高（{pct}%），注意控制烹饪用油和高脂食物。",
+  ana_ratio_fat_low:"脂肪摄入偏低（{pct}%），适量补充坚果、牛油果等健康脂肪。",
+  ana_ratio_protein_low:"蛋白质占比偏低（{pct}%），建议增加鸡蛋、鱼虾、豆类等优质蛋白。",
+  ana_ratio_good:"三大营养素比例基本合理（蛋白质 {pPct}%、脂肪 {fPct}%、碳水 {cPct}%）。",
+  ana_cat_missing:"缺少<b>{cat}</b>类食物，",
+  ana_cat_fruit_tip:"水果富含维C和抗氧化物，每日建议 200-350g。",
+  ana_cat_veg_tip:"蔬菜提供膳食纤维和矿物质，每日建议 300-500g。",
+  ana_cat_protein_tip:"优质蛋白促进细胞修复和免疫力。",
+  ana_cat_grain_tip:"全谷物提供持久能量和B族维生素。",
+  ana_cat_nut_tip:"坚果富含健康脂肪和微量元素，每日一小把即可。",
+  ana_def_miss:"<b>{name}</b>系统未覆盖，推荐食物：",
+  ana_def_covered:"已覆盖 <b>{name}</b>（贡献食物：{foods}）。",
+  ana_goal_unmet:"你关注的「{goal}」目前无对应食物，建议添加：",
+  ana_goal_weak:"「{goal}」仅有 {count} 种食物支持，可再补充：",
+  ana_goal_good:"「{goal}」已有 {count} 种食物覆盖，表现不错！",
+  ana_highlight_best:"今日之星：<b>{name}</b>——{reason}",
+  ana_highlight_diverse:"食物多样性{level}，共覆盖 {n} 个食物类别。",
+  ana_diverse_great:"优秀",ana_diverse_good:"良好",ana_diverse_low:"不足",
+  ana_no_data:"记录的食物较少，建议补充更多食物以获得完整分析。",
   recog_title:"识别食物",recog_analyzing:"正在分析照片中的食物…",recog_found:"识别到以下食物，点击选择：",
   recog_manual:"手动输入食物",recog_confirm:"添加选中食物",recog_none:"未能自动识别，请手动输入食物名称",
   recog_add:"添加",photo_delete_confirm:"删除这张照片？",
@@ -669,6 +728,41 @@ en: {
   tip_fiber_low:"Fiber only {cur}g. Eat more whole grains and veggies.",
   tip_defense_low:"Only {n}/5 defense systems covered. Add more variety.",
   tip_great:"Your diet today is excellent! Keep it up.",
+  ana_title:"Detailed Analysis & Suggestions",
+  ana_overview:"Overview",
+  ana_meal_analysis:"Meal Analysis",
+  ana_nutrient_balance:"Nutrient Balance",
+  ana_defense_analysis:"Defense System Analysis",
+  ana_goal_analysis:"Health Goal Analysis",
+  ana_food_highlights:"Food Highlights",
+  ana_improvement:"Optimization Tips",
+  ana_score_great:"Excellent balance today! Score {score}. {count} foods, {def}/5 defense systems covered, calorie achievement {calPct}%.",
+  ana_score_good:"Good diet today, score {score}. {count} foods total, but room for improvement.",
+  ana_score_low:"Score {score} — nutritional structure needs work. {count} foods total, try adding more variety.",
+  ana_meal_missing:"<b>{meal}</b> has no recorded food. Skipping meals may cause overeating later.",
+  ana_meal_light:"<b>{meal}</b> has only {count} food(s) ({cal} kcal) — consider more variety.",
+  ana_meal_heavy:"<b>{meal}</b> is calorie-heavy ({cal} kcal, {pct}% of daily total). Spread intake across meals.",
+  ana_meal_good:"<b>{meal}</b> is well-balanced: {count} foods, {cal} kcal.",
+  ana_ratio_carb_high:"Carb ratio is high ({pct}%). Consider replacing refined carbs with whole grains.",
+  ana_ratio_fat_high:"Fat ratio is high ({pct}%). Watch cooking oil and high-fat foods.",
+  ana_ratio_fat_low:"Fat intake is low ({pct}%). Add healthy fats like nuts or avocado.",
+  ana_ratio_protein_low:"Protein ratio is low ({pct}%). Add eggs, fish, or legumes.",
+  ana_ratio_good:"Macro ratio looks balanced (Protein {pPct}%, Fat {fPct}%, Carb {cPct}%).",
+  ana_cat_missing:"Missing <b>{cat}</b> foods. ",
+  ana_cat_fruit_tip:"Fruits provide Vitamin C & antioxidants (200-350g/day recommended).",
+  ana_cat_veg_tip:"Vegetables provide fiber & minerals (300-500g/day recommended).",
+  ana_cat_protein_tip:"Quality protein supports cell repair & immunity.",
+  ana_cat_grain_tip:"Whole grains provide sustained energy & B vitamins.",
+  ana_cat_nut_tip:"Nuts offer healthy fats & micronutrients — a handful daily.",
+  ana_def_miss:"<b>{name}</b> system not covered. Try: ",
+  ana_def_covered:"<b>{name}</b> covered (from: {foods}).",
+  ana_goal_unmet:"Your goal \"{goal}\" has no matching foods. Try adding: ",
+  ana_goal_weak:"\"{goal}\" has only {count} supporting food(s). Consider adding: ",
+  ana_goal_good:"\"{goal}\" is well-supported by {count} foods. Nice!",
+  ana_highlight_best:"Star food: <b>{name}</b> — {reason}",
+  ana_highlight_diverse:"Food diversity is {level}: {n} categories covered.",
+  ana_diverse_great:"excellent",ana_diverse_good:"good",ana_diverse_low:"lacking",
+  ana_no_data:"Too few foods recorded. Add more for a complete analysis.",
   recog_title:"Identify Food",recog_analyzing:"Analyzing food in photo…",recog_found:"Foods detected, tap to select:",
   recog_manual:"Enter food manually",recog_confirm:"Add Selected",recog_none:"Could not auto-detect. Please enter food name manually.",
   recog_add:"Add",photo_delete_confirm:"Delete this photo?",
@@ -1200,7 +1294,218 @@ function renderCalendar(){const container=document.getElementById('summaryConten
 function navMonth(d){calMonth+=d;if(calMonth>11){calMonth=0;calYear++;}if(calMonth<0){calMonth=11;calYear--;}renderCalendar();}
 function selectDate(ds){selectedDate=ds;renderCalendar();}
 
-function renderDayDetail(ds){let af=[];const mf={breakfast:[],lunch:[],snack:[],dinner:[]};if(ds===currentRecordDate){getMeals().forEach(m=>{mealRecords[m.id].forEach(f=>{af.push(f);mf[m.id].push(f);});});}else{try{const d=JSON.parse(localStorage.getItem('ew_'+ds)||'{}');getMeals().forEach(m=>{(d[m.id]||[]).forEach(f=>{af.push(f);mf[m.id].push(f);});});}catch(e){}}if(!af.length)return`<div class="card" style="text-align:center;padding:28px 20px"><div style="font-size:14px;font-weight:700;margin-bottom:3px">${ds}</div><div style="font-size:12px;color:var(--text3)">${t('no_record')}</div></div>`;const s=calcStats(af);const rc=s.score>=80?'#4a9e6e':s.score>=50?'#d97706':'#dc4a3f';let h=`<div class="day-detail"><div class="card"><div style="text-align:center;font-size:12px;font-weight:600;color:var(--text2);margin-bottom:3px">${ds}</div><div class="day-score-ring"><div class="ring-wrap"><svg width="90" height="90" viewBox="0 0 90 90"><circle cx="45" cy="45" r="36" fill="none" stroke="var(--surface2)" stroke-width="5"/><circle cx="45" cy="45" r="36" fill="none" stroke="${rc}" stroke-width="5" stroke-linecap="round" stroke-dasharray="${s.score*2.26} ${226-s.score*2.26}"/></svg><div class="ring-center"><div class="ring-num" style="color:${rc}">${s.score}</div><div class="ring-label">${t('score')}</div></div></div></div><div class="stats-row"><div class="stat-box"><div class="stat-val">${Math.round(s.totalCal)}</div><div class="stat-label">kcal/${DAILY_CAL}</div></div><div class="stat-box"><div class="stat-val">${af.length}</div><div class="stat-label">${t('items')}</div></div><div class="stat-box"><div class="stat-val">${s.allDef.size}/5</div><div class="stat-label">${t('defense')}</div></div></div></div>`;h+=`<div class="card"><div class="card-label">${t('nutrients')}</div>`;[{name:t('chat_protein'),val:s.totalP,tgt:s.pTarget,u:'g',c:'#4a7eb5'},{name:t('chat_fat'),val:s.totalF,tgt:(DAILY_CAL*.3)/9,u:'g',c:'#d97706'},{name:t('chat_carb'),val:s.totalC,tgt:(DAILY_CAL*.5)/4,u:'g',c:'#dc4a3f'},{name:t('chat_fiber'),val:s.totalFiber,tgt:25,u:'g',c:'#4a9e6e'}].forEach(n=>{const p=Math.min(100,(n.val/n.tgt)*100);h+=`<div class="prog-item"><div class="prog-head"><span class="prog-name">${n.name}</span><span class="prog-val">${n.val.toFixed(1)}${n.u}/${n.tgt.toFixed(0)}${n.u}</span></div><div class="prog-bar"><div class="prog-fill" style="width:${p}%;background:${n.c}"></div></div></div>`;});h+=`</div>`;h+=`<div class="card"><div class="card-label">${t('defense')}</div><div class="def-pills">`;['angio','regen','micro','dna','immune'].forEach(dk=>{const on=s.allDef.has(dk);h+=`<span class="def-pill" style="opacity:${on?1:.25};background:${DEF_COLORS[dk]}18;color:${DEF_COLORS[dk]}">${on?'&#10003; ':''}${defName(dk)}</span>`;});h+=`</div></div>`;h+=`<div class="card"><div class="card-label">${t('health_goals')}</div>`;Object.keys(s.goalCov).forEach(g=>{const c=s.goalCov[g];const cl=c>=3?'#4a9e6e':c>=1?'#d97706':'#dc4a3f';h+=`<div class="goal-row"><span class="goal-name">${goalName(g)}</span><div class="goal-bar"><div class="goal-fill" style="width:${Math.min(100,c*25)}%;background:${cl}"></div></div><span class="goal-count" style="color:${cl}">${c}</span></div>`;});h+=`</div>`;h+=`<div class="card"><div class="card-label">${t('meals_label')}</div><div class="timeline">`;getMeals().forEach(m=>{const foods=mf[m.id];const has=foods.length>0;h+=`<div class="tl-item${has?' has-food':''}"><div class="tl-label">${m.name}</div>`;if(has){h+=`<div class="tl-foods">${foods.map(f=>{const cat=f.nutrition?.cat||'other';return`<span class="ftag ${CAT_CLS[cat]||'ftag-other'}" style="font-size:10px;padding:2px 8px">${f.name}</span>`;}).join('')}</div>`;let mc=0;foods.forEach(f=>mc+=f.nutrition?.cal||0);h+=`<div class="tl-kcal">~${Math.round(mc)} kcal</div>`;}else h+=`<div style="font-size:11px;color:var(--text4)">-</div>`;h+=`</div>`;});h+=`</div></div>`;const tips=[];if(s.totalCal<DAILY_CAL*.7)tips.push(t('tip_cal_low').replace('{cur}',Math.round(s.totalCal)).replace('{diff}',Math.round(DAILY_CAL-s.totalCal)));if(s.totalP<s.pTarget*.7)tips.push(t('tip_protein_low').replace('{cur}',s.totalP.toFixed(1)).replace('{target}',s.pTarget.toFixed(0)));if(s.totalFiber<15)tips.push(t('tip_fiber_low').replace('{cur}',s.totalFiber.toFixed(1)));if(s.allDef.size<4)tips.push(t('tip_defense_low').replace('{n}',s.allDef.size));if(!tips.length)tips.push(t('tip_great'));h+=`<div class="tips-box"><div class="tips-title">${t('suggestions')}</div>${tips.map(x=>`<div class="tips-item">· ${x}</div>`).join('')}</div></div>`;return h;}
+function buildDetailedAnalysis(af, mf, s){
+  if(af.length<2) return `<div class="tips-box"><div class="tips-title">${t('ana_title')}</div><div class="tips-item">${t('ana_no_data')}</div></div>`;
+
+  let html='';
+
+  // ── 1. Overview Summary ──
+  const calPct=Math.round((s.totalCal/DAILY_CAL)*100);
+  let overviewText='';
+  if(s.score>=80) overviewText=t('ana_score_great').replace('{score}',s.score).replace('{count}',af.length).replace('{def}',s.allDef.size).replace('{calPct}',calPct);
+  else if(s.score>=50) overviewText=t('ana_score_good').replace('{score}',s.score).replace('{count}',af.length);
+  else overviewText=t('ana_score_low').replace('{score}',s.score).replace('{count}',af.length);
+  html+=`<div class="tips-summary">${overviewText}</div>`;
+
+  // ── 2. Meal Distribution Analysis ──
+  const meals=getMeals();
+  const mealAnalysis=[];
+  meals.forEach(m=>{
+    const foods=mf[m.id];
+    let mc=0; foods.forEach(f=>mc+=(f.nutrition?.cal||0));
+    if(!foods.length){
+      mealAnalysis.push({type:'warn',text:t('ana_meal_missing').replace('{meal}',m.name)});
+    } else if(foods.length===1 && mc<150){
+      mealAnalysis.push({type:'warn',text:t('ana_meal_light').replace('{meal}',m.name).replace('{count}',foods.length).replace('{cal}',Math.round(mc))});
+    } else if(s.totalCal>0 && mc/s.totalCal>0.55){
+      mealAnalysis.push({type:'warn',text:t('ana_meal_heavy').replace('{meal}',m.name).replace('{cal}',Math.round(mc)).replace('{pct}',Math.round(mc/s.totalCal*100))});
+    } else if(foods.length>=2){
+      mealAnalysis.push({type:'good',text:t('ana_meal_good').replace('{meal}',m.name).replace('{count}',foods.length).replace('{cal}',Math.round(mc))});
+    }
+  });
+  if(mealAnalysis.length){
+    html+=`<div class="tips-section"><div class="tips-section-title"><span class="ts-icon" style="background:#4a7eb5">🍽</span>${t('ana_meal_analysis')}</div>`;
+    mealAnalysis.forEach(a=>{
+      const cls=a.type==='good'?'tips-good-item':'tips-warn-item';
+      html+=`<div class="${cls}">${a.text}</div>`;
+    });
+    html+=`</div>`;
+  }
+
+  // ── 3. Macro Nutrient Ratio ──
+  const totalKcalFromMacro=s.totalP*4+s.totalF*9+s.totalC*4;
+  if(totalKcalFromMacro>0){
+    const pPct=Math.round((s.totalP*4/totalKcalFromMacro)*100);
+    const fPct=Math.round((s.totalF*9/totalKcalFromMacro)*100);
+    const cPct=Math.round((s.totalC*4/totalKcalFromMacro)*100);
+    html+=`<div class="tips-section"><div class="tips-section-title"><span class="ts-icon" style="background:#d97706">⚖</span>${t('ana_nutrient_balance')}</div>`;
+    // Visual ratio bar
+    html+=`<div style="display:flex;height:8px;border-radius:4px;overflow:hidden;margin:6px 0 10px">`;
+    html+=`<div style="width:${pPct}%;background:#4a7eb5" title="Protein ${pPct}%"></div>`;
+    html+=`<div style="width:${fPct}%;background:#d97706" title="Fat ${fPct}%"></div>`;
+    html+=`<div style="width:${cPct}%;background:#dc4a3f" title="Carb ${cPct}%"></div>`;
+    html+=`</div>`;
+    html+=`<div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-bottom:8px">`;
+    html+=`<span style="color:#4a7eb5;font-weight:600">${t('chat_protein')} ${pPct}%</span>`;
+    html+=`<span style="color:#d97706;font-weight:600">${t('chat_fat')} ${fPct}%</span>`;
+    html+=`<span style="color:#dc4a3f;font-weight:600">${t('chat_carb')} ${cPct}%</span>`;
+    html+=`</div>`;
+    let ratioIssues=[];
+    if(cPct>65) ratioIssues.push({type:'warn',text:t('ana_ratio_carb_high').replace('{pct}',cPct)});
+    if(fPct>40) ratioIssues.push({type:'warn',text:t('ana_ratio_fat_high').replace('{pct}',fPct)});
+    if(fPct<15) ratioIssues.push({type:'suggest',text:t('ana_ratio_fat_low').replace('{pct}',fPct)});
+    if(pPct<10) ratioIssues.push({type:'suggest',text:t('ana_ratio_protein_low').replace('{pct}',pPct)});
+    if(!ratioIssues.length) ratioIssues.push({type:'good',text:t('ana_ratio_good').replace('{pPct}',pPct).replace('{fPct}',fPct).replace('{cPct}',cPct)});
+    ratioIssues.forEach(r=>{
+      const cls=r.type==='good'?'tips-good-item':r.type==='warn'?'tips-warn-item':'tips-suggest-item';
+      html+=`<div class="${cls}">${r.text}</div>`;
+    });
+    // Fiber & calorie quick notes
+    if(s.totalFiber<15) html+=`<div class="tips-warn-item">${t('tip_fiber_low').replace('{cur}',s.totalFiber.toFixed(1))}</div>`;
+    if(s.totalCal<DAILY_CAL*0.7) html+=`<div class="tips-warn-item">${t('tip_cal_low').replace('{cur}',Math.round(s.totalCal)).replace('{diff}',Math.round(DAILY_CAL-s.totalCal))}</div>`;
+    else if(s.totalCal>DAILY_CAL*1.2) html+=`<div class="tips-warn-item">${LANG==='zh'?'热量超标（'+Math.round(s.totalCal)+' / '+DAILY_CAL+' kcal），注意控制份量。':'Calories exceed target ('+Math.round(s.totalCal)+' / '+DAILY_CAL+' kcal). Watch portions.'}</div>`;
+    html+=`</div>`;
+  }
+
+  // ── 4. Food Category Diversity ──
+  const catSet=new Set();
+  af.forEach(f=>catSet.add(f.nutrition?.cat||'other'));
+  const catCount=catSet.size;
+  const divLevel=catCount>=5?t('ana_diverse_great'):catCount>=3?t('ana_diverse_good'):t('ana_diverse_low');
+  const missingCats=[];
+  const catTipMap={fruit:'ana_cat_fruit_tip',vegetable:'ana_cat_veg_tip',protein:'ana_cat_protein_tip',grain:'ana_cat_grain_tip',nut:'ana_cat_nut_tip'};
+  ['fruit','vegetable','protein','grain','nut'].forEach(c=>{
+    if(!catSet.has(c)) missingCats.push({cat:catLabel(c),tip:t(catTipMap[c])});
+  });
+
+  // ── 5. Defense System Deep Analysis ──
+  const defKeys=['angio','regen','micro','dna','immune'];
+  const defFoodMap={};
+  defKeys.forEach(dk=>defFoodMap[dk]=[]);
+  af.forEach(f=>{(f.nutrition?.defense||[]).forEach(dk=>{if(defFoodMap[dk])defFoodMap[dk].push(f.name);});});
+  const defSuggestMap={
+    angio:['西兰花','番茄','绿茶','橄榄油','黑巧克力'],
+    regen:['三文鱼','鸡蛋','蓝莓','菠菜','核桃'],
+    micro:['酸奶','燕麦','大蒜','泡菜','芦笋'],
+    dna:['蓝莓','西兰花','绿茶','核桃','胡萝卜'],
+    immune:['蘑菇','大蒜','猕猴桃','菠菜','绿茶']
+  };
+  const defItems=[];
+  defKeys.forEach(dk=>{
+    const names=defFoodMap[dk];
+    if(names.length>0){
+      const unique=[...new Set(names)].slice(0,4);
+      defItems.push({type:'good',text:t('ana_def_covered').replace('{name}',defName(dk)).replace('{foods}',unique.map(n=>`<span class="tips-food-tag">${n}</span>`).join(' '))});
+    } else {
+      const existNames=new Set(af.map(f=>f.name));
+      const suggests=defSuggestMap[dk].filter(n=>!existNames.has(n)).slice(0,3);
+      defItems.push({type:'warn',text:t('ana_def_miss').replace('{name}',defName(dk))+suggests.map(n=>`<span class="tips-food-tag">${n}</span>`).join(' ')});
+    }
+  });
+  if(defItems.length){
+    html+=`<div class="tips-section"><div class="tips-section-title"><span class="ts-icon" style="background:#8b6cc1">🛡</span>${t('ana_defense_analysis')}</div>`;
+    defItems.forEach(d=>{
+      const cls=d.type==='good'?'tips-good-item':'tips-warn-item';
+      html+=`<div class="${cls}">${d.text}</div>`;
+    });
+    html+=`</div>`;
+  }
+
+  // ── 6. Health Goal Analysis ──
+  const goalItems=[];
+  const goalSuggestMap={
+    immunity:['蘑菇','大蒜','猕猴桃','菠菜'],
+    gut:['酸奶','燕麦','秋葵','芦笋'],
+    energy:['燕麦','香蕉','鸡蛋','红薯'],
+    antioxidant:['蓝莓','绿茶','番茄','核桃'],
+    weight:['鸡胸肉','西兰花','燕麦','豆腐'],
+    cardiovascular:['三文鱼','橄榄油','核桃','番茄'],
+    anticancer:['西兰花','蓝莓','绿茶','姜黄'],
+    brain:['核桃','三文鱼','蓝莓','绿茶'],
+    skin:['牛油果','番茄','猕猴桃','菠菜'],
+    inflammation:['三文鱼','姜黄','生姜','蓝莓'],
+    sleep:['樱桃','香蕉','南瓜籽','核桃'],
+    bone:['牛奶','菠菜','豆腐','芝麻']
+  };
+  Object.keys(s.goalCov).forEach(g=>{
+    const cnt=s.goalCov[g];
+    if(cnt===0){
+      const existNames=new Set(af.map(f=>f.name));
+      const suggests=(goalSuggestMap[g]||[]).filter(n=>!existNames.has(n)).slice(0,3);
+      goalItems.push({type:'warn',text:t('ana_goal_unmet').replace('{goal}',goalName(g))+suggests.map(n=>`<span class="tips-food-tag">${n}</span>`).join(' ')});
+    } else if(cnt<=2){
+      const existNames=new Set(af.map(f=>f.name));
+      const suggests=(goalSuggestMap[g]||[]).filter(n=>!existNames.has(n)).slice(0,2);
+      goalItems.push({type:'suggest',text:t('ana_goal_weak').replace('{goal}',goalName(g)).replace('{count}',cnt)+(suggests.length?suggests.map(n=>`<span class="tips-food-tag">${n}</span>`).join(' '):'')});
+    } else {
+      goalItems.push({type:'good',text:t('ana_goal_good').replace('{goal}',goalName(g)).replace('{count}',cnt)});
+    }
+  });
+  if(goalItems.length){
+    html+=`<div class="tips-section"><div class="tips-section-title"><span class="ts-icon" style="background:#4a9e6e">🎯</span>${t('ana_goal_analysis')}</div>`;
+    goalItems.forEach(g=>{
+      const cls=g.type==='good'?'tips-good-item':g.type==='warn'?'tips-warn-item':'tips-suggest-item';
+      html+=`<div class="${cls}">${g.text}</div>`;
+    });
+    html+=`</div>`;
+  }
+
+  // ── 7. Food Highlights & Diversity ──
+  html+=`<div class="tips-section"><div class="tips-section-title"><span class="ts-icon" style="background:#d97706">⭐</span>${t('ana_food_highlights')}</div>`;
+  // Find star food (most defense systems covered)
+  let bestFood=null, bestDef=0;
+  af.forEach(f=>{
+    const dc=(f.nutrition?.defense||[]).length;
+    if(dc>bestDef){bestDef=dc;bestFood=f;}
+  });
+  if(bestFood && bestDef>=2){
+    const isCN=LANG==='zh';
+    const reason=isCN?
+      ('覆盖 '+bestDef+' 个防御系统'+(bestFood.nutrition?.benefits?'，'+bestFood.nutrition.benefits:'')):
+      ('covers '+bestDef+' defense systems'+(bestFood.nutrition?.benefitsEn?', '+bestFood.nutrition.benefitsEn:''));
+    html+=`<div class="tips-good-item">${t('ana_highlight_best').replace('{name}',bestFood.name).replace('{reason}',reason)}</div>`;
+  }
+  // Diversity rating
+  html+=`<div class="tips-${catCount>=5?'good':'suggest'}-item">${t('ana_highlight_diverse').replace('{level}',divLevel).replace('{n}',catCount)}</div>`;
+  // Missing categories
+  missingCats.forEach(mc=>{
+    html+=`<div class="tips-suggest-item">${t('ana_cat_missing').replace('{cat}',mc.cat)}${mc.tip}</div>`;
+  });
+  html+=`</div>`;
+
+  // ── 8. Actionable Improvement Tips ──
+  const improveTips=[];
+  // Compile top 3-5 actionable suggestions from analysis
+  if(s.totalCal<DAILY_CAL*0.7) improveTips.push(t('tip_cal_low').replace('{cur}',Math.round(s.totalCal)).replace('{diff}',Math.round(DAILY_CAL-s.totalCal)));
+  if(s.totalP<s.pTarget*0.7) improveTips.push(t('tip_protein_low').replace('{cur}',s.totalP.toFixed(1)).replace('{target}',s.pTarget.toFixed(0)));
+  // Meal-specific suggestion
+  const breakfastFoods=mf.breakfast;
+  const dinnerFoods=mf.dinner;
+  if(!breakfastFoods.length) improveTips.push(LANG==='zh'?'建议补充早餐，早晨进食有助于稳定血糖和提升精力。':'Consider adding breakfast — morning meals help stabilize blood sugar and boost energy.');
+  if(!dinnerFoods.length && af.length>=3) improveTips.push(LANG==='zh'?'晚餐未记录，适当的晚餐有助于夜间身体修复。':'No dinner recorded. A light dinner supports overnight body repair.');
+  // Defense gap
+  const missDef=defKeys.filter(dk=>!s.allDef.has(dk));
+  if(missDef.length>=2 && missDef.length<=4){
+    const missNames=missDef.map(dk=>defName(dk)).join('、');
+    improveTips.push(LANG==='zh'?
+      `还缺少${missNames}等防御系统覆盖，尝试增加食物种类来补全。`:
+      `Missing ${missDef.map(dk=>defName(dk)).join(', ')} defense coverage. Add variety to fill gaps.`);
+  }
+  // Top excellent
+  if(!improveTips.length) improveTips.push(t('tip_great'));
+
+  if(improveTips.length){
+    html+=`<div class="tips-section"><div class="tips-section-title"><span class="ts-icon" style="background:#4a9e6e">📋</span>${t('ana_improvement')}</div>`;
+    improveTips.forEach(tip=>{
+      html+=`<div class="tips-suggest-item">${tip}</div>`;
+    });
+    html+=`</div>`;
+  }
+
+  return html;
+}
+
+function renderDayDetail(ds){let af=[];const mf={breakfast:[],lunch:[],snack:[],dinner:[]};if(ds===currentRecordDate){getMeals().forEach(m=>{mealRecords[m.id].forEach(f=>{af.push(f);mf[m.id].push(f);});});}else{try{const d=JSON.parse(localStorage.getItem('ew_'+ds)||'{}');getMeals().forEach(m=>{(d[m.id]||[]).forEach(f=>{af.push(f);mf[m.id].push(f);});});}catch(e){}}if(!af.length)return`<div class="card" style="text-align:center;padding:28px 20px"><div style="font-size:14px;font-weight:700;margin-bottom:3px">${ds}</div><div style="font-size:12px;color:var(--text3)">${t('no_record')}</div></div>`;const s=calcStats(af);const rc=s.score>=80?'#4a9e6e':s.score>=50?'#d97706':'#dc4a3f';let h=`<div class="day-detail"><div class="card"><div style="text-align:center;font-size:12px;font-weight:600;color:var(--text2);margin-bottom:3px">${ds}</div><div class="day-score-ring"><div class="ring-wrap"><svg width="90" height="90" viewBox="0 0 90 90"><circle cx="45" cy="45" r="36" fill="none" stroke="var(--surface2)" stroke-width="5"/><circle cx="45" cy="45" r="36" fill="none" stroke="${rc}" stroke-width="5" stroke-linecap="round" stroke-dasharray="${s.score*2.26} ${226-s.score*2.26}"/></svg><div class="ring-center"><div class="ring-num" style="color:${rc}">${s.score}</div><div class="ring-label">${t('score')}</div></div></div></div><div class="stats-row"><div class="stat-box"><div class="stat-val">${Math.round(s.totalCal)}</div><div class="stat-label">kcal/${DAILY_CAL}</div></div><div class="stat-box"><div class="stat-val">${af.length}</div><div class="stat-label">${t('items')}</div></div><div class="stat-box"><div class="stat-val">${s.allDef.size}/5</div><div class="stat-label">${t('defense')}</div></div></div></div>`;h+=`<div class="card"><div class="card-label">${t('nutrients')}</div>`;[{name:t('chat_protein'),val:s.totalP,tgt:s.pTarget,u:'g',c:'#4a7eb5'},{name:t('chat_fat'),val:s.totalF,tgt:(DAILY_CAL*.3)/9,u:'g',c:'#d97706'},{name:t('chat_carb'),val:s.totalC,tgt:(DAILY_CAL*.5)/4,u:'g',c:'#dc4a3f'},{name:t('chat_fiber'),val:s.totalFiber,tgt:25,u:'g',c:'#4a9e6e'}].forEach(n=>{const p=Math.min(100,(n.val/n.tgt)*100);h+=`<div class="prog-item"><div class="prog-head"><span class="prog-name">${n.name}</span><span class="prog-val">${n.val.toFixed(1)}${n.u}/${n.tgt.toFixed(0)}${n.u}</span></div><div class="prog-bar"><div class="prog-fill" style="width:${p}%;background:${n.c}"></div></div></div>`;});h+=`</div>`;h+=`<div class="card"><div class="card-label">${t('defense')}</div><div class="def-pills">`;['angio','regen','micro','dna','immune'].forEach(dk=>{const on=s.allDef.has(dk);h+=`<span class="def-pill" style="opacity:${on?1:.25};background:${DEF_COLORS[dk]}18;color:${DEF_COLORS[dk]}">${on?'&#10003; ':''}${defName(dk)}</span>`;});h+=`</div></div>`;h+=`<div class="card"><div class="card-label">${t('health_goals')}</div>`;Object.keys(s.goalCov).forEach(g=>{const c=s.goalCov[g];const cl=c>=3?'#4a9e6e':c>=1?'#d97706':'#dc4a3f';h+=`<div class="goal-row"><span class="goal-name">${goalName(g)}</span><div class="goal-bar"><div class="goal-fill" style="width:${Math.min(100,c*25)}%;background:${cl}"></div></div><span class="goal-count" style="color:${cl}">${c}</span></div>`;});h+=`</div>`;h+=`<div class="card"><div class="card-label">${t('meals_label')}</div><div class="timeline">`;getMeals().forEach(m=>{const foods=mf[m.id];const has=foods.length>0;h+=`<div class="tl-item${has?' has-food':''}"><div class="tl-label">${m.name}</div>`;if(has){h+=`<div class="tl-foods">${foods.map(f=>{const cat=f.nutrition?.cat||'other';return`<span class="ftag ${CAT_CLS[cat]||'ftag-other'}" style="font-size:10px;padding:2px 8px">${f.name}</span>`;}).join('')}</div>`;let mc=0;foods.forEach(f=>mc+=f.nutrition?.cal||0);h+=`<div class="tl-kcal">~${Math.round(mc)} kcal</div>`;}else h+=`<div style="font-size:11px;color:var(--text4)">-</div>`;h+=`</div>`;});h+=`</div></div>`;h+=`<div class="tips-box"><div class="tips-title">${t('ana_title')}</div>${buildDetailedAnalysis(af,mf,s)}</div></div>`;return h;}
 
 // ═══════════════════════════════════════════
 // Recommend
