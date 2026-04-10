@@ -630,6 +630,7 @@ zh: {
   bmi_thin:"偏瘦",bmi_normal:"正常",bmi_overweight:"偏胖",bmi_obese:"肥胖",
   nutrients:"营养素",defense:"防御系统",health_goals:"健康目标",meals_label:"餐次",suggestions:"建议",
   no_record:"该日无记录",foryou:"为你推荐",foryou_sub:"基于你的个人信息定制",daily_tips:"每日提示",
+  rec_today_picks:"今日精选",rec_fill_gap:"补全防御缺口",
   legend_great:"优秀(80+)",legend_ok:"良好(50-79)",legend_low:"待提升(<50)",
   def_angio:"血管生成",def_regen:"细胞再生",def_micro:"微生物组",def_dna:"DNA保护",def_immune:"免疫系统",
   cat_fruit:"水果",cat_vegetable:"蔬菜",cat_grain:"谷物",cat_protein:"蛋白质",cat_nut:"坚果",cat_beverage:"饮品",cat_other:"其他",
@@ -708,6 +709,7 @@ en: {
   bmi_thin:"Underweight",bmi_normal:"Normal",bmi_overweight:"Overweight",bmi_obese:"Obese",
   nutrients:"Nutrients",defense:"Defense Systems",health_goals:"Health Goals",meals_label:"Meals",suggestions:"Suggestions",
   no_record:"No records for this day",foryou:"For You",foryou_sub:"Personalized picks based on your profile",daily_tips:"Daily Tips",
+  rec_today_picks:"Today's Picks",rec_fill_gap:"Fill Defense Gaps",
   legend_great:"Great (80+)",legend_ok:"OK (50-79)",legend_low:"Low (<50)",
   def_angio:"Angiogenesis",def_regen:"Regeneration",def_micro:"Microbiome",def_dna:"DNA Protect",def_immune:"Immune",
   cat_fruit:"Fruit",cat_vegetable:"Vegetable",cat_grain:"Grain",cat_protein:"Protein",cat_nut:"Nut",cat_beverage:"Beverage",cat_other:"Other",
@@ -935,6 +937,47 @@ const FOODS={"蓝莓":{cal:57,protein:0.7,fat:0.3,carb:14.5,fiber:2.4,cat:"fruit
 // Additional foods from old DB that we keep for matching but with shorter entries
 const FOODS_EXTRA={"覆盆子":{cal:52,protein:1.2,fat:0.7,carb:12,fiber:6.5,cat:"fruit",defense:["angio","dna"],benefits:"含鞣花酸",benefitsEn:"Contains ellagic acid",goals:["anticancer","antioxidant"],portion:"一小碗(100g)",portionEn:"1 bowl (100g)",freq:"often",caution:"",cautionEn:""},"黑莓":{cal:43,protein:1.4,fat:0.5,carb:10,fiber:5.3,cat:"fruit",defense:["dna","immune"],benefits:"多酚丰富",benefitsEn:"Rich in polyphenols",goals:["immunity","antioxidant","anticancer"],portion:"一小碗(100g)",portionEn:"1 bowl (100g)",freq:"often",caution:"",cautionEn:""},"柠檬":{cal:29,protein:1.1,fat:0.3,carb:9.3,fiber:2.8,cat:"fruit",defense:["immune","dna"],benefits:"维C双重保护",benefitsEn:"Dual Vitamin C protection",goals:["immunity","antioxidant","energy"],portion:"半个(40g)",portionEn:"Half (40g)",freq:"daily",caution:"",cautionEn:""},"樱桃":{cal:63,protein:1.1,fat:0.2,carb:16,fiber:2.1,cat:"fruit",defense:["angio","immune"],benefits:"花青素丰富，抗炎",benefitsEn:"Rich in anthocyanins, anti-inflammatory",goals:["inflammation","sleep","antioxidant"],portion:"10颗(80g)",portionEn:"10 cherries (80g)",freq:"often",caution:"",cautionEn:""},"红葡萄":{cal:69,protein:0.7,fat:0.2,carb:18,fiber:0.9,cat:"fruit",defense:["angio","regen"],benefits:"白藜芦醇保护心血管",benefitsEn:"Resveratrol protects cardiovascular",goals:["cardiovascular","antioxidant","brain"],portion:"一串(100g)",portionEn:"1 bunch (100g)",freq:"often",caution:"",cautionEn:""},"芒果":{cal:60,protein:0.8,fat:0.4,carb:15,fiber:1.6,cat:"fruit",defense:["immune","micro"],benefits:"含芒果苷支持肠道",benefitsEn:"Mangiferin supports gut",goals:["gut","immunity","skin"],portion:"半个(100g)",portionEn:"Half (100g)",freq:"often",caution:"糖分较高",cautionEn:"Higher sugar content"},"西瓜":{cal:30,protein:0.6,fat:0.2,carb:7.6,fiber:0.4,cat:"fruit",defense:["angio","immune"],benefits:"瓜氨酸促进血管健康",benefitsEn:"Citrulline promotes vascular health",goals:["cardiovascular","energy"],portion:"一片(200g)",portionEn:"1 slice (200g)",freq:"often",caution:"",cautionEn:""},"羽衣甘蓝":{cal:49,protein:4.3,fat:0.9,carb:9,fiber:3.6,cat:"vegetable",defense:["dna","immune","angio"],benefits:"维K和抗氧化剂",benefitsEn:"Vitamin K & antioxidants",goals:["anticancer","bone","antioxidant"],portion:"几片(60g)",portionEn:"A few leaves (60g)",freq:"daily",caution:"",cautionEn:""},"洋葱":{cal:40,protein:1.1,fat:0.1,carb:9.3,fiber:1.7,cat:"vegetable",defense:["micro","immune"],benefits:"槲皮素抗炎",benefitsEn:"Quercetin anti-inflammatory",goals:["immunity","inflammation","gut"],portion:"半个(80g)",portionEn:"Half (80g)",freq:"daily",caution:"",cautionEn:""},"南瓜":{cal:26,protein:1,fat:0.1,carb:6.5,fiber:0.5,cat:"vegetable",defense:["immune","regen"],benefits:"β-胡萝卜素和锌",benefitsEn:"Beta-carotene & zinc",goals:["immunity","skin","antioxidant"],portion:"一块(100g)",portionEn:"1 piece (100g)",freq:"often",caution:"",cautionEn:""},"藜麦":{cal:368,protein:14,fat:6,carb:64,fiber:7,cat:"grain",defense:["regen","dna"],benefits:"完全蛋白质",benefitsEn:"Complete protein",goals:["energy","weight"],portion:"半杯(40g)",portionEn:"Half cup (40g)",freq:"often",caution:"",cautionEn:""},"黑米":{cal:356,protein:9,fat:2.5,carb:72,fiber:3.5,cat:"grain",defense:["dna","angio"],benefits:"花青素含量极高",benefitsEn:"Very high anthocyanin content",goals:["antioxidant","anticancer","cardiovascular"],portion:"半杯(40g)",portionEn:"Half cup (40g)",freq:"often",caution:"",cautionEn:""},"毛豆":{cal:122,protein:11,fat:5,carb:9,fiber:5.2,cat:"protein",defense:["angio","micro"],benefits:"植物蛋白和纤维",benefitsEn:"Plant protein & fiber",goals:["weight","gut","cardiovascular"],portion:"一把(80g)",portionEn:"A handful (80g)",freq:"often",caution:"",cautionEn:""},"猪肉":{cal:242,protein:27,fat:14,carb:0,fiber:0,cat:"protein",defense:["regen"],benefits:"B族维生素来源",benefitsEn:"Source of B vitamins",goals:["energy"],portion:"一块(100g)",portionEn:"1 piece (100g)",freq:"moderate",caution:"控制摄入量",cautionEn:"Watch intake amounts"},"纳豆":{cal:211,protein:17,fat:11,carb:14,fiber:5.4,cat:"protein",defense:["angio","micro"],benefits:"纳豆激酶溶血栓",benefitsEn:"Nattokinase dissolves blood clots",goals:["cardiovascular","gut"],portion:"一盒(50g)",portionEn:"1 pack (50g)",freq:"often",caution:"服用抗凝药物者注意",cautionEn:"Caution if on blood thinners"},"亚麻籽":{cal:534,protein:18,fat:42,carb:29,fiber:27,cat:"nut",defense:["dna","angio","micro"],benefits:"木脂素保护DNA",benefitsEn:"Lignans protect DNA",goals:["anticancer","cardiovascular","gut"],portion:"1勺(10g)",portionEn:"1 tbsp (10g)",freq:"daily",caution:"",cautionEn:""},"奇亚籽":{cal:486,protein:17,fat:31,carb:42,fiber:34,cat:"nut",defense:["micro","dna"],benefits:"Omega-3和纤维",benefitsEn:"Omega-3 & fiber",goals:["gut","cardiovascular","weight"],portion:"1勺(10g)",portionEn:"1 tbsp (10g)",freq:"daily",caution:"",cautionEn:""},"红茶":{cal:1,protein:0,fat:0,carb:0,fiber:0,cat:"beverage",defense:["angio","micro"],benefits:"茶黄素护心血管",benefitsEn:"Theaflavins protect cardiovascular",goals:["cardiovascular","gut","energy"],portion:"一杯(250ml)",portionEn:"1 cup (250ml)",freq:"daily",caution:"",cautionEn:""},"蜂蜜":{cal:304,protein:0.3,fat:0,carb:82,fiber:0.2,cat:"other",defense:["immune","micro"],benefits:"天然抗菌益生元",benefitsEn:"Natural antimicrobial prebiotic",goals:["immunity","gut","energy"],portion:"1勺(15g)",portionEn:"1 tbsp (15g)",freq:"moderate",caution:"1岁以下婴儿禁食",cautionEn:"Do NOT give to infants under 1 year"},"泡菜":{cal:15,protein:1.1,fat:0.3,carb:2.4,fiber:1.4,cat:"other",defense:["micro","immune"],benefits:"乳酸菌发酵蔬菜",benefitsEn:"Lactic acid fermented vegetables",goals:["gut","immunity"],portion:"一碟(50g)",portionEn:"1 dish (50g)",freq:"daily",caution:"高钠，高血压者适量",cautionEn:"High sodium, hypertension patients: moderate"},"木耳":{cal:38,protein:0.5,fat:0.2,carb:10,fiber:5.8,cat:"other",defense:["angio","immune"],benefits:"多糖体清血管",benefitsEn:"Polysaccharides cleanse vessels",goals:["cardiovascular","immunity"],portion:"一把(干10g)",portionEn:"A handful dry (10g)",freq:"often",caution:"",cautionEn:""},"香菇":{cal:22,protein:3.1,fat:0.3,carb:3.3,fiber:1,cat:"other",defense:["immune","regen","angio"],benefits:"β-葡聚糖激活免疫",benefitsEn:"Beta-glucan activates immunity",goals:["immunity","anticancer"],portion:"几朵(80g)",portionEn:"A few (80g)",freq:"often",caution:"",cautionEn:""},"花椰菜":{cal:25,protein:1.9,fat:0.3,carb:5,fiber:2,cat:"vegetable",defense:["dna","immune"],benefits:"异硫氰酸酯抗癌",benefitsEn:"Isothiocyanates anti-cancer",goals:["anticancer","inflammation"],portion:"一朵(80g)",portionEn:"1 head (80g)",freq:"daily",caution:"",cautionEn:""},"芦笋":{cal:20,protein:2.2,fat:0.1,carb:3.9,fiber:2.1,cat:"vegetable",defense:["micro","regen"],benefits:"菊粉是优质益生元",benefitsEn:"Inulin is an excellent prebiotic",goals:["gut","energy"],portion:"5-6根(100g)",portionEn:"5-6 stalks (100g)",freq:"often",caution:"",cautionEn:""},"秋葵":{cal:33,protein:1.9,fat:0.2,carb:7,fiber:3.2,cat:"vegetable",defense:["micro","immune"],benefits:"黏液质保护肠道",benefitsEn:"Mucilage protects gut lining",goals:["gut","immunity"],portion:"5-6根(80g)",portionEn:"5-6 pods (80g)",freq:"often",caution:"",cautionEn:""},"甜椒":{cal:31,protein:1,fat:0.3,carb:6,fiber:2.1,cat:"vegetable",defense:["immune","dna"],benefits:"维C超橙子",benefitsEn:"More Vitamin C than oranges",goals:["immunity","skin","antioxidant"],portion:"半个(80g)",portionEn:"Half (80g)",freq:"daily",caution:"",cautionEn:""},"南瓜籽":{cal:559,protein:30,fat:49,carb:11,fiber:6,cat:"nut",defense:["immune","regen"],benefits:"锌镁丰富",benefitsEn:"Rich in zinc & magnesium",goals:["immunity","sleep","bone"],portion:"一把(15g)",portionEn:"A handful (15g)",freq:"daily",caution:"",cautionEn:""},"开心果":{cal:560,protein:20,fat:45,carb:28,fiber:10,cat:"nut",defense:["angio","micro"],benefits:"叶黄素护眼",benefitsEn:"Lutein protects eyes",goals:["cardiovascular","gut","antioxidant"],portion:"一把(15g)",portionEn:"A handful (15g)",freq:"daily",caution:"",cautionEn:""},"芝麻":{cal:573,protein:18,fat:50,carb:23,fiber:12,cat:"nut",defense:["dna","angio"],benefits:"芝麻素保肝",benefitsEn:"Sesamin protects liver",goals:["antioxidant","bone","cardiovascular"],portion:"1勺(10g)",portionEn:"1 tbsp (10g)",freq:"daily",caution:"",cautionEn:""},"石榴汁":{cal:54,protein:0.2,fat:0.3,carb:13,fiber:0.1,cat:"beverage",defense:["angio","regen"],benefits:"鞣花酸浓度极高",benefitsEn:"Very high ellagic acid concentration",goals:["cardiovascular","antioxidant","skin"],portion:"一杯(250ml)",portionEn:"1 glass (250ml)",freq:"often",caution:"",cautionEn:""},"胡萝卜汁":{cal:40,protein:0.9,fat:0.2,carb:9.3,fiber:0.8,cat:"beverage",defense:["immune","dna"],benefits:"β-胡萝卜素集中来源",benefitsEn:"Concentrated beta-carotene source",goals:["immunity","skin"],portion:"一杯(250ml)",portionEn:"1 glass (250ml)",freq:"often",caution:"",cautionEn:""},"肉桂":{cal:247,protein:4,fat:1.2,carb:81,fiber:53,cat:"other",defense:["angio","micro"],benefits:"调节血糖血管",benefitsEn:"Regulates blood sugar & vessels",goals:["cardiovascular","weight","gut"],portion:"少许(2g)",portionEn:"A pinch (2g)",freq:"daily",caution:"",cautionEn:""},"黑胡椒":{cal:251,protein:10,fat:3.3,carb:64,fiber:25,cat:"other",defense:["dna","immune"],benefits:"胡椒碱提升吸收20倍",benefitsEn:"Piperine enhances absorption 20x",goals:["immunity","antioxidant"],portion:"少许(1g)",portionEn:"A pinch (1g)",freq:"daily",caution:"",cautionEn:""},"炒饭":{cal:174,protein:5,fat:6,carb:25,fiber:0.8,cat:"grain",defense:[],benefits:"便捷能量来源",benefitsEn:"Quick energy source",goals:["energy"],portion:"一碗(250g)",portionEn:"1 bowl (250g)",freq:"moderate",caution:"",cautionEn:""},"三明治":{cal:250,protein:10,fat:10,carb:30,fiber:2,cat:"grain",defense:[],benefits:"均衡搭配",benefitsEn:"Balanced combination",goals:["energy"],portion:"1个(150g)",portionEn:"1 sandwich (150g)",freq:"moderate",caution:"",cautionEn:""}};
 Object.assign(FOODS,FOODS_EXTRA);
+
+// ── Additional foods batch 2: broaden variety ──
+const FOODS_EXTRA2={
+"火龙果":{cal:50,protein:1.1,fat:0.4,carb:11,fiber:3,cat:"fruit",defense:["micro","immune"],benefits:"甜菜红素+益生元纤维",benefitsEn:"Betacyanins + prebiotic fiber",goals:["gut","immunity","skin"],portion:"半个(150g)",portionEn:"Half (150g)",freq:"often",caution:"",cautionEn:""},
+"百香果":{cal:97,protein:2.2,fat:0.7,carb:23,fiber:10,cat:"fruit",defense:["immune","dna"],benefits:"维C极高，膳食纤维丰富",benefitsEn:"Very high Vit C, rich in fiber",goals:["immunity","gut","antioxidant"],portion:"2个(60g)",portionEn:"2 fruits (60g)",freq:"often",caution:"",cautionEn:""},
+"木瓜":{cal:43,protein:0.5,fat:0.3,carb:11,fiber:1.7,cat:"fruit",defense:["immune","regen"],benefits:"木瓜蛋白酶助消化",benefitsEn:"Papain aids digestion",goals:["gut","skin","immunity"],portion:"一块(150g)",portionEn:"1 piece (150g)",freq:"often",caution:"",cautionEn:""},
+"葡萄柚":{cal:42,protein:0.8,fat:0.1,carb:11,fiber:1.6,cat:"fruit",defense:["immune","angio"],benefits:"柚皮苷降血脂",benefitsEn:"Naringin lowers blood lipids",goals:["cardiovascular","weight","immunity"],portion:"半个(150g)",portionEn:"Half (150g)",freq:"often",caution:"服药期间注意相互作用",cautionEn:"Watch drug interactions"},
+"桑葚":{cal:43,protein:1.4,fat:0.4,carb:10,fiber:1.7,cat:"fruit",defense:["angio","dna","regen"],benefits:"花青素+白藜芦醇双效抗氧化",benefitsEn:"Anthocyanins + resveratrol dual antioxidant",goals:["antioxidant","brain","anticancer"],portion:"一小碗(100g)",portionEn:"1 bowl (100g)",freq:"often",caution:"",cautionEn:""},
+"荔枝":{cal:66,protein:0.8,fat:0.4,carb:17,fiber:1.3,cat:"fruit",defense:["immune","regen"],benefits:"多酚类抗氧化",benefitsEn:"Polyphenol antioxidants",goals:["skin","energy","immunity"],portion:"5-6颗(80g)",portionEn:"5-6 lychees (80g)",freq:"moderate",caution:"一次不宜超过10颗",cautionEn:"Max 10 at a time"},
+"紫薯":{cal:86,protein:1.6,fat:0.1,carb:20,fiber:3.3,cat:"vegetable",defense:["dna","angio"],benefits:"花青素含量极高",benefitsEn:"Extremely high anthocyanin content",goals:["antioxidant","anticancer","gut"],portion:"1个(100g)",portionEn:"1 piece (100g)",freq:"often",caution:"",cautionEn:""},
+"西葫芦":{cal:17,protein:1.2,fat:0.3,carb:3.1,fiber:1,cat:"vegetable",defense:["immune","micro"],benefits:"低卡高水分，富含钾",benefitsEn:"Low-cal, high water, rich in potassium",goals:["weight","gut"],portion:"半个(100g)",portionEn:"Half (100g)",freq:"daily",caution:"",cautionEn:""},
+"山药":{cal:118,protein:1.5,fat:0.1,carb:28,fiber:1.6,cat:"vegetable",defense:["micro","regen"],benefits:"黏蛋白保护胃黏膜",benefitsEn:"Mucin protects stomach lining",goals:["gut","energy","immunity"],portion:"一段(100g)",portionEn:"1 piece (100g)",freq:"often",caution:"",cautionEn:""},
+"莲藕":{cal:74,protein:2.6,fat:0.1,carb:16,fiber:4.9,cat:"vegetable",defense:["micro","immune"],benefits:"鞣质抗菌，膳食纤维佳",benefitsEn:"Tannins antimicrobial, good fiber",goals:["gut","immunity","energy"],portion:"几片(100g)",portionEn:"A few slices (100g)",freq:"often",caution:"",cautionEn:""},
+"苦瓜":{cal:17,protein:1,fat:0.1,carb:3.7,fiber:2.8,cat:"vegetable",defense:["immune","dna"],benefits:"苦瓜素辅助降血糖",benefitsEn:"Charantin helps lower blood sugar",goals:["weight","immunity","anticancer"],portion:"半根(80g)",portionEn:"Half (80g)",freq:"often",caution:"孕妇慎食",cautionEn:"Pregnant women: caution"},
+"紫甘蓝":{cal:31,protein:1.4,fat:0.2,carb:7,fiber:2.1,cat:"vegetable",defense:["dna","immune","angio"],benefits:"花青素和异硫氰酸酯",benefitsEn:"Anthocyanins & isothiocyanates",goals:["anticancer","antioxidant","inflammation"],portion:"几片(80g)",portionEn:"A few leaves (80g)",freq:"daily",caution:"",cautionEn:""},
+"韭菜":{cal:26,protein:2.5,fat:0.2,carb:4.6,fiber:1.4,cat:"vegetable",defense:["immune","micro"],benefits:"含硫化合物杀菌",benefitsEn:"Sulfur compounds antimicrobial",goals:["immunity","gut","energy"],portion:"一把(80g)",portionEn:"A handful (80g)",freq:"often",caution:"",cautionEn:""},
+"薏米":{cal:361,protein:13,fat:5,carb:65,fiber:5,cat:"grain",defense:["micro","immune"],benefits:"薏苡仁酯抗炎利湿",benefitsEn:"Coixenolide anti-inflammatory",goals:["inflammation","weight","skin"],portion:"半杯(40g)",portionEn:"Half cup (40g)",freq:"often",caution:"孕妇慎用",cautionEn:"Pregnant women: caution"},
+"小米":{cal:359,protein:9,fat:3.1,carb:73,fiber:8.5,cat:"grain",defense:["micro","regen"],benefits:"色氨酸助眠，养胃佳品",benefitsEn:"Tryptophan aids sleep, good for stomach",goals:["sleep","gut","energy"],portion:"一碗(150g熟)",portionEn:"1 bowl cooked (150g)",freq:"daily",caution:"",cautionEn:""},
+"荞麦":{cal:343,protein:13,fat:3.4,carb:72,fiber:10,cat:"grain",defense:["angio","dna"],benefits:"芦丁保护血管",benefitsEn:"Rutin protects blood vessels",goals:["cardiovascular","weight","antioxidant"],portion:"一碗(150g熟)",portionEn:"1 bowl cooked (150g)",freq:"often",caution:"",cautionEn:""},
+"紫米":{cal:354,protein:8,fat:2.3,carb:75,fiber:4,cat:"grain",defense:["dna","angio"],benefits:"花色苷抗衰老",benefitsEn:"Anthocyanidins anti-aging",goals:["antioxidant","anticancer","brain"],portion:"半杯(40g)",portionEn:"Half cup (40g)",freq:"often",caution:"",cautionEn:""},
+"金枪鱼":{cal:144,protein:23,fat:5,carb:0,fiber:0,cat:"protein",defense:["angio","regen","immune"],benefits:"DHA/EPA护心脑",benefitsEn:"DHA/EPA for heart & brain",goals:["cardiovascular","brain","inflammation"],portion:"一块(80g)",portionEn:"1 piece (80g)",freq:"often",caution:"汞含量注意",cautionEn:"Watch mercury content"},
+"鳕鱼":{cal:82,protein:18,fat:0.7,carb:0,fiber:0,cat:"protein",defense:["regen","immune"],benefits:"低脂高蛋白，富含维D",benefitsEn:"Low-fat, high protein, rich in Vit D",goals:["bone","energy","immunity"],portion:"一块(100g)",portionEn:"1 fillet (100g)",freq:"often",caution:"",cautionEn:""},
+"鸭肉":{cal:240,protein:16,fat:19,carb:0,fiber:0,cat:"protein",defense:["regen","immune"],benefits:"不饱和脂肪比例高",benefitsEn:"High unsaturated fat ratio",goals:["energy","immunity"],portion:"一块(100g)",portionEn:"1 piece (100g)",freq:"moderate",caution:"",cautionEn:""},
+"羊肉":{cal:258,protein:25,fat:17,carb:0,fiber:0,cat:"protein",defense:["regen","immune"],benefits:"铁锌含量丰富，温补",benefitsEn:"Rich in iron & zinc, warming",goals:["energy","immunity"],portion:"一块(100g)",portionEn:"1 piece (100g)",freq:"moderate",caution:"每周不超过2次",cautionEn:"Max 2x/week"},
+"扇贝":{cal:69,protein:12,fat:0.6,carb:3.4,fiber:0,cat:"protein",defense:["regen","micro"],benefits:"富含锌硒和牛磺酸",benefitsEn:"Rich in zinc, selenium & taurine",goals:["immunity","brain","cardiovascular"],portion:"3-4个(60g)",portionEn:"3-4 scallops (60g)",freq:"often",caution:"海鲜过敏者禁食",cautionEn:"Avoid if seafood allergy"},
+"鹰嘴豆":{cal:364,protein:19,fat:6,carb:61,fiber:17,cat:"protein",defense:["micro","angio"],benefits:"植物蛋白之王，高纤维",benefitsEn:"King of plant protein, high fiber",goals:["gut","weight","cardiovascular"],portion:"半杯(40g)",portionEn:"Half cup (40g)",freq:"often",caution:"",cautionEn:""},
+"黑豆":{cal:341,protein:22,fat:2,carb:62,fiber:16,cat:"protein",defense:["dna","angio","micro"],benefits:"花青素+异黄酮双效",benefitsEn:"Anthocyanins + isoflavones dual effect",goals:["antioxidant","cardiovascular","bone"],portion:"半杯(40g)",portionEn:"Half cup (40g)",freq:"often",caution:"",cautionEn:""},
+"腰果":{cal:553,protein:18,fat:44,carb:30,fiber:3.3,cat:"nut",defense:["immune","regen"],benefits:"锌镁铁三合一",benefitsEn:"Zinc, magnesium & iron triple combo",goals:["immunity","energy","bone"],portion:"一把(15g)",portionEn:"A handful (15g)",freq:"daily",caution:"",cautionEn:""},
+"松子":{cal:673,protein:14,fat:68,carb:13,fiber:3.7,cat:"nut",defense:["angio","regen"],benefits:"松子酸抑制食欲",benefitsEn:"Pinolenic acid suppresses appetite",goals:["weight","cardiovascular","brain"],portion:"一把(10g)",portionEn:"A handful (10g)",freq:"daily",caution:"热量较高",cautionEn:"High calorie"},
+"夏威夷果":{cal:718,protein:8,fat:76,carb:14,fiber:9,cat:"nut",defense:["angio","micro"],benefits:"棕榈油酸护心血管",benefitsEn:"Palmitoleic acid protects cardiovascular",goals:["cardiovascular","brain","skin"],portion:"3-4颗(10g)",portionEn:"3-4 nuts (10g)",freq:"daily",caution:"热量极高",cautionEn:"Very high calorie"},
+"椰子水":{cal:19,protein:0.7,fat:0.2,carb:3.7,fiber:1.1,cat:"beverage",defense:["micro","regen"],benefits:"天然电解质，钾含量高",benefitsEn:"Natural electrolytes, high potassium",goals:["energy","gut"],portion:"一杯(250ml)",portionEn:"1 glass (250ml)",freq:"often",caution:"",cautionEn:""},
+"枸杞茶":{cal:5,protein:0.3,fat:0,carb:1,fiber:0.5,cat:"beverage",defense:["immune","dna","regen"],benefits:"枸杞多糖激活免疫",benefitsEn:"Lycium polysaccharides activate immunity",goals:["immunity","antioxidant","skin","brain"],portion:"一杯(250ml)",portionEn:"1 cup (250ml)",freq:"daily",caution:"",cautionEn:""},
+"菊花茶":{cal:1,protein:0,fat:0,carb:0,fiber:0,cat:"beverage",defense:["immune","angio"],benefits:"菊花黄酮清热明目",benefitsEn:"Chrysanthemum flavonoids clear heat & aid eyes",goals:["inflammation","immunity"],portion:"一杯(250ml)",portionEn:"1 cup (250ml)",freq:"daily",caution:"",cautionEn:""},
+"抹茶":{cal:3,protein:0.3,fat:0,carb:0.5,fiber:0.4,cat:"beverage",defense:["angio","dna","immune","regen"],benefits:"EGCG浓度是绿茶3倍",benefitsEn:"EGCG concentration 3x green tea",goals:["anticancer","antioxidant","brain","weight"],portion:"一杯(250ml)",portionEn:"1 cup (250ml)",freq:"daily",caution:"咖啡因较高",cautionEn:"Higher caffeine content"},
+"味噌":{cal:199,protein:12,fat:6,carb:26,fiber:5.4,cat:"other",defense:["micro","immune"],benefits:"发酵大豆益生菌丰富",benefitsEn:"Fermented soybean rich in probiotics",goals:["gut","immunity","cardiovascular"],portion:"1勺(15g)",portionEn:"1 tbsp (15g)",freq:"daily",caution:"高钠",cautionEn:"High sodium"},
+"海带":{cal:43,protein:1.7,fat:0.6,carb:10,fiber:1.3,cat:"other",defense:["angio","immune","dna"],benefits:"褐藻多糖抗肿瘤",benefitsEn:"Fucoidan anti-tumor",goals:["anticancer","cardiovascular","immunity"],portion:"一份(30g干)",portionEn:"1 serving dry (30g)",freq:"often",caution:"甲状腺疾病者注意碘",cautionEn:"Thyroid patients: watch iodine"},
+"紫菜":{cal:35,protein:5.8,fat:0.3,carb:5.1,fiber:3.7,cat:"other",defense:["immune","dna"],benefits:"碘和多糖体",benefitsEn:"Iodine & polysaccharides",goals:["immunity","anticancer"],portion:"几片(5g干)",portionEn:"A few sheets dry (5g)",freq:"often",caution:"",cautionEn:""},
+"牛蒡":{cal:72,protein:1.5,fat:0.2,carb:17,fiber:3.3,cat:"vegetable",defense:["micro","immune","angio"],benefits:"菊糖益生元+多酚",benefitsEn:"Inulin prebiotic + polyphenols",goals:["gut","immunity","skin"],portion:"半根(80g)",portionEn:"Half root (80g)",freq:"often",caution:"",cautionEn:""},
+"芹菜":{cal:16,protein:0.7,fat:0.2,carb:3,fiber:1.6,cat:"vegetable",defense:["angio","micro"],benefits:"芹菜素降压抗炎",benefitsEn:"Apigenin lowers blood pressure",goals:["cardiovascular","inflammation","weight"],portion:"2-3根(100g)",portionEn:"2-3 stalks (100g)",freq:"daily",caution:"",cautionEn:""}
+};
+Object.assign(FOODS,FOODS_EXTRA2);
 
 const DEF_COLORS={angio:"#4a9e6e",regen:"#4a7eb5",micro:"#8b6cc1",dna:"#d97706",immune:"#dc4a3f"};
 function catLabel(c){return t('cat_'+c)||c}
@@ -1510,17 +1553,127 @@ function renderDayDetail(ds){let af=[];const mf={breakfast:[],lunch:[],snack:[],
 // ═══════════════════════════════════════════
 // Recommend
 // ═══════════════════════════════════════════
-function renderRecommend(){const c=document.getElementById('recommendContent');const goals=PROFILE.goals;const ds2={angio:1,regen:1,micro:1,dna:1,immune:1};const GDM={immunity:["immune","micro"],antioxidant:["dna","angio"],gut:["micro","regen"],cardiovascular:["angio","regen"],anticancer:["angio","dna","immune"],inflammation:["immune","angio"],brain:["regen","dna","angio"],weight:["micro","angio"],skin:["regen","immune","dna"],energy:["regen","micro"],sleep:["micro","regen"],bone:["regen","dna"]};goals.forEach(g=>(GDM[g]||[]).forEach(d=>ds2[d]+=2));
-  // Load meals for currentRecDate
+function renderRecommend(){const c=document.getElementById('recommendContent');const goals=PROFILE.goals;
+  // ── Goal → Defense weight mapping ──
+  const ds2={angio:1,regen:1,micro:1,dna:1,immune:1};
+  const GDM={immunity:["immune","micro"],antioxidant:["dna","angio"],gut:["micro","regen"],cardiovascular:["angio","regen"],anticancer:["angio","dna","immune"],inflammation:["immune","angio"],brain:["regen","dna","angio"],weight:["micro","angio"],skin:["regen","immune","dna"],energy:["regen","micro"],sleep:["micro","regen"],bone:["regen","dna"]};
+  goals.forEach(g=>(GDM[g]||[]).forEach(d=>ds2[d]+=2));
+
+  // ── Eaten foods ──
   const recDateMeals=currentRecDate===currentRecordDate?mealRecords:loadMealsForDate(currentRecDate);
   const eaten=new Set();getMeals().forEach(m=>(recDateMeals[m.id]||[]).forEach(f=>eaten.add(f.name)));
-  const scored=[];const dayHash=simpleHash(currentRecDate);for(const[name,data]of Object.entries(FOODS)){if(!data.defense?.length)continue;let sc=0;data.defense.forEach(d=>sc+=ds2[d]||0);sc+=(data.goals||[]).filter(g=>goals.includes(g)).length*3;if(eaten.has(name))sc-=100;
-  // Strong daily shuffle: use date+name hash to add significant randomization (0~15 points)
-  // This ensures each day's top picks rotate meaningfully
-  const nameHash=simpleHash(currentRecDate+name+dayHash);sc+=(nameHash%150)/10;
-  // Category rotation: boost different categories on different days
-  const cats=['fruit','vegetable','grain','protein','nut','beverage','other'];const boostIdx=dayHash%cats.length;const boostIdx2=(dayHash+3)%cats.length;if(data.cat===cats[boostIdx])sc+=6;if(data.cat===cats[boostIdx2])sc+=4;
-  scored.push({name,sc,...data});}scored.sort((a,b)=>b.sc-a.sc);const cg={};['fruit','vegetable','grain','protein','nut','beverage','other'].forEach(cat=>{scored.forEach(f=>{if(f.cat===cat){if(!cg[cat])cg[cat]=[];if(cg[cat].length<4)cg[cat].push(f);}});});let h=`<div style="margin-bottom:20px"><div style="font-size:20px;font-weight:800;letter-spacing:-.5px">${t('foryou')}</div><div style="font-size:12px;color:var(--text3);margin-top:4px">${t('foryou_sub')} · ${currentRecDate}</div></div>`;['fruit','vegetable','grain','protein','nut','beverage','other'].forEach(cat=>{const foods=cg[cat];if(!foods?.length)return;h+=`<div class="rec-section"><div class="rec-section-title">${catLabel(cat)}</div>`;foods.forEach(f=>{const ie=eaten.has(f.name);const ben=LANG==='en'?(f.benefitsEn||f.benefits):f.benefits;const por=LANG==='en'?(f.portionEn||f.portion):f.portion;h+=`<div class="rec-item" style="${ie?'opacity:.35':''}"><div class="rec-info"><div class="rec-name">${f.name}${ie?' ✓':''}</div><div class="rec-desc">${ben} · ${por||''}</div><div class="rec-pills">${(f.defense||[]).map(d=>`<span class="rec-pill" style="background:${DEF_COLORS[d]}18;color:${DEF_COLORS[d]}">${defName(d)}</span>`).join('')}${(f.goals||[]).filter(g=>goals.includes(g)).map(g=>`<span class="rec-pill" style="background:#ecf7f0;color:#2d6b44">${goalName(g)}</span>`).join('')}</div></div>${!ie?`<div class="rec-add"><button class="btn btn-outline btn-xs" onclick="recAdd('${f.name}')">+ ${t('add')}</button></div>`:''}</div>`;});h+=`</div>`;});h+=`<div class="tips-box"><div class="tips-title">${t('daily_tips')}</div><div class="tips-item">· ${t('tip_bmi').replace('{bmi}',BMI).replace('{status}',BMI_STATUS).replace('{cal}',DAILY_CAL)}</div><div class="tips-item">· ${t('tip_protein').replace('{target}',(PROFILE.weight*1.2).toFixed(0))}</div><div class="tips-item">· ${t('tip_variety')}</div>${BMI<18.5?`<div class="tips-item">· ${t('tip_thin')}</div>`:''}</div>`;c.innerHTML=h;}
+
+  // ── Detect which defenses are already covered today ──
+  const coveredDef=new Set();
+  eaten.forEach(name=>{const fd=FOODS[name];if(fd&&fd.defense)(fd.defense).forEach(d=>coveredDef.add(d));});
+  const missingDef=['angio','regen','micro','dna','immune'].filter(d=>!coveredDef.has(d));
+
+  const dayHash=simpleHash(currentRecDate);
+  const allCats=['fruit','vegetable','grain','protein','nut','beverage','other'];
+
+  // ── Fisher-Yates shuffle seeded by date+salt ──
+  function seededShuffle(arr,salt){
+    const a=[...arr];
+    for(let i=a.length-1;i>0;i--){
+      const j=simpleHash(currentRecDate+salt+i)%(i+1);
+      [a[i],a[j]]=[a[j],a[i]];
+    }
+    return a;
+  }
+
+  // ── Build candidate pool with multi-factor scoring ──
+  const allFoods=[];
+  for(const[name,data]of Object.entries(FOODS)){
+    if(!data.defense?.length)continue;
+    allFoods.push({name,...data});
+  }
+
+  // Shuffle all foods with date seed first — this is the primary diversity driver
+  const shuffled=seededShuffle(allFoods,'rec');
+
+  // Score each food
+  const scored=shuffled.map((f,idx)=>{
+    let sc=0;
+    // 1. Defense system relevance (user goal weighted)
+    f.defense.forEach(d=>sc+=ds2[d]||0);
+    // 2. Direct goal match (+3 each)
+    sc+=(f.goals||[]).filter(g=>goals.includes(g)).length*3;
+    // 3. Already eaten → push to bottom
+    if(eaten.has(f.name))sc-=200;
+    // 4. Gap-filling bonus: foods that cover missing defenses get big boost
+    const gapFill=(f.defense||[]).filter(d=>missingDef.includes(d)).length;
+    sc+=gapFill*5;
+    // 5. Shuffle position adds 0~30 points — much stronger daily rotation
+    sc+=(30-idx*30/shuffled.length);
+    // 6. Day-of-week category rotation: 2 categories get primary/secondary boost
+    const catOrder=seededShuffle(allCats,'catrot');
+    if(f.cat===catOrder[0])sc+=8;
+    else if(f.cat===catOrder[1])sc+=5;
+    else if(f.cat===catOrder[2])sc+=3;
+    // 7. Frequency preference: daily foods get slight edge
+    if(f.freq==='daily')sc+=1;
+    return {...f,sc};
+  });
+
+  scored.sort((a,b)=>b.sc-a.sc);
+
+  // ── Pick top foods per category with guaranteed minimums ──
+  const MAX_PER_CAT=5;
+  const cg={};
+  allCats.forEach(cat=>cg[cat]=[]);
+  scored.forEach(f=>{
+    if(cg[f.cat].length<MAX_PER_CAT)cg[f.cat].push(f);
+  });
+
+  // ── Build "Today's Picks" — top 3 across all categories that aren't eaten ──
+  const todayPicks=scored.filter(f=>!eaten.has(f.name)).slice(0,3);
+
+  // ── Render HTML ──
+  let h=`<div style="margin-bottom:20px"><div style="font-size:20px;font-weight:800;letter-spacing:-.5px">${t('foryou')}</div><div style="font-size:12px;color:var(--text3);margin-top:4px">${t('foryou_sub')} · ${currentRecDate}</div></div>`;
+
+  // Today's Picks section
+  if(todayPicks.length){
+    h+=`<div class="rec-section"><div class="rec-section-title">${t('rec_today_picks')}</div>`;
+    todayPicks.forEach(f=>{
+      const ben=LANG==='en'?(f.benefitsEn||f.benefits):f.benefits;
+      const por=LANG==='en'?(f.portionEn||f.portion):f.portion;
+      h+=`<div class="rec-item" style="border-left:3px solid var(--accent);background:linear-gradient(135deg,rgba(74,158,110,.04),transparent)"><div class="rec-info"><div class="rec-name">${f.name}</div><div class="rec-desc">${ben} · ${por||''}</div><div class="rec-pills">${(f.defense||[]).map(d=>`<span class="rec-pill" style="background:${DEF_COLORS[d]}18;color:${DEF_COLORS[d]}">${defName(d)}</span>`).join('')}${(f.goals||[]).filter(g=>goals.includes(g)).map(g=>`<span class="rec-pill" style="background:#ecf7f0;color:#2d6b44">${goalName(g)}</span>`).join('')}</div></div><div class="rec-add"><button class="btn btn-outline btn-xs" onclick="recAdd('${f.name}')">+ ${t('add')}</button></div></div>`;
+    });
+    h+=`</div>`;
+  }
+
+  // Gap-filling section: if missing defenses, show targeted recommendations
+  if(missingDef.length>0){
+    const gapFoods=scored.filter(f=>!eaten.has(f.name)&&(f.defense||[]).some(d=>missingDef.includes(d)));
+    const seen=new Set(todayPicks.map(f=>f.name));
+    const gapUnique=gapFoods.filter(f=>!seen.has(f.name)).slice(0,4);
+    if(gapUnique.length){
+      h+=`<div class="rec-section"><div class="rec-section-title">${t('rec_fill_gap')}</div>`;
+      gapUnique.forEach(f=>{
+        const ben=LANG==='en'?(f.benefitsEn||f.benefits):f.benefits;
+        const por=LANG==='en'?(f.portionEn||f.portion):f.portion;
+        const gapDefs=(f.defense||[]).filter(d=>missingDef.includes(d));
+        h+=`<div class="rec-item"><div class="rec-info"><div class="rec-name">${f.name}</div><div class="rec-desc">${ben} · ${por||''}</div><div class="rec-pills">${gapDefs.map(d=>`<span class="rec-pill" style="background:${DEF_COLORS[d]}18;color:${DEF_COLORS[d]};border:1px solid ${DEF_COLORS[d]}44">${defName(d)}</span>`).join('')}${(f.goals||[]).filter(g=>goals.includes(g)).map(g=>`<span class="rec-pill" style="background:#ecf7f0;color:#2d6b44">${goalName(g)}</span>`).join('')}</div></div><div class="rec-add"><button class="btn btn-outline btn-xs" onclick="recAdd('${f.name}')">+ ${t('add')}</button></div></div>`;
+      });
+      h+=`</div>`;
+    }
+  }
+
+  // Category sections
+  allCats.forEach(cat=>{
+    const foods=cg[cat];if(!foods?.length)return;
+    h+=`<div class="rec-section"><div class="rec-section-title">${catLabel(cat)}</div>`;
+    foods.forEach(f=>{
+      const ie=eaten.has(f.name);
+      const ben=LANG==='en'?(f.benefitsEn||f.benefits):f.benefits;
+      const por=LANG==='en'?(f.portionEn||f.portion):f.portion;
+      h+=`<div class="rec-item" style="${ie?'opacity:.35':''}"><div class="rec-info"><div class="rec-name">${f.name}${ie?' ✓':''}</div><div class="rec-desc">${ben} · ${por||''}</div><div class="rec-pills">${(f.defense||[]).map(d=>`<span class="rec-pill" style="background:${DEF_COLORS[d]}18;color:${DEF_COLORS[d]}">${defName(d)}</span>`).join('')}${(f.goals||[]).filter(g=>goals.includes(g)).map(g=>`<span class="rec-pill" style="background:#ecf7f0;color:#2d6b44">${goalName(g)}</span>`).join('')}</div></div>${!ie?`<div class="rec-add"><button class="btn btn-outline btn-xs" onclick="recAdd('${f.name}')">+ ${t('add')}</button></div>`:''}</div>`;
+    });
+    h+=`</div>`;
+  });
+
+  h+=`<div class="tips-box"><div class="tips-title">${t('daily_tips')}</div><div class="tips-item">· ${t('tip_bmi').replace('{bmi}',BMI).replace('{status}',BMI_STATUS).replace('{cal}',DAILY_CAL)}</div><div class="tips-item">· ${t('tip_protein').replace('{target}',(PROFILE.weight*1.2).toFixed(0))}</div><div class="tips-item">· ${t('tip_variety')}</div>${BMI<18.5?`<div class="tips-item">· ${t('tip_thin')}</div>`:''}</div>`;
+  c.innerHTML=h;}
 
 function recAdd(name){const hour=new Date().getHours();let mid='snack';if(hour<10)mid='breakfast';else if(hour<14)mid='lunch';else if(hour<17)mid='snack';else mid='dinner';
   // If recommend page is viewing a different date than current record date, load/save that date
